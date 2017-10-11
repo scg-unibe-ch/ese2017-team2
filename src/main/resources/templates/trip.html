@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Form</h1>
+	<form action="#" th:action="@{/trip}" th:object="${trip}"
+		method="post">
+		<p>
+			Start address: <input type="text" th:field="*{startAddress}" />
+		</p>
+		<p>
+			End address: <input type="text" th:field="*{endAddress}" />
+		</p>
+		<p>
+			Duration: <input type="text" th:field="*{duration}" />
+		</p>
+		<p>
+			Animal: <input type="text" th:field="*{animal}" />
+		</p>
+		<p>
+			Count: <input type="text" th:field="*{animalCount}" />
+		</p>
+		<p>
+			<input type="submit" value="Submit" /> <input type="reset"
+				value="Reset" />
+		</p>
+	</form>
+</body>
+</html>

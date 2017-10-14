@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ch.unibe.eseteam2.model.Address;
 import ch.unibe.eseteam2.model.Trip;
 
 @Controller
@@ -17,14 +16,12 @@ public class TripViewController {
 		Trip trip = new Trip();
 		trip.setCustomer("test customer");
 		
-		Address startAddress = new Address();
-		startAddress.setName("test name");
-		startAddress.setStreet("test street");
-		startAddress.setPlz(1234);
-		startAddress.setCity("test city");
-		trip.setStartAddress(startAddress );
-		Address endAddress = new Address();
-		trip.setEndAddress(endAddress );
+		trip.setName_1("test name");
+		trip.setStreet_1("test street");
+		trip.setPlz_1(1234);
+		trip.setCity_1("test city");
+		
+		
 		trip.setAnimal("Horse");
 		trip.setAnimalCount(2);
 		

@@ -11,18 +11,24 @@ import org.hibernate.validator.constraints.Length;
 public class Trip {
 
 	@NotNull
-	@Length(min=2, max=100)
+	@Length(min = 2, max = 100)
 	private String customer;
 
-	private Address startAddress;
-	private Address endAddress;
+	private String name_1;
+	private String street_1;
+	private int plz_1;
+	private String city_1;
+	private String name_2;
+	private String street_2;
+	private int plz_2;
+	private String city_2;
 
 	@NotNull
 	@Future
 	private Date startTime;
 
 	@NotNull
-	@Length(min=2, max=100)
+	@Length(min = 2, max = 100)
 	private String animal;
 
 	@NotNull
@@ -39,20 +45,68 @@ public class Trip {
 		this.customer = customer;
 	}
 
-	public Address getStartAddress() {
-		return startAddress;
+	public String getName_1() {
+		return name_1;
 	}
 
-	public void setStartAddress(Address startAddress) {
-		this.startAddress = startAddress;
+	public void setName_1(String name_1) {
+		this.name_1 = name_1;
 	}
 
-	public Address getEndAddress() {
-		return endAddress;
+	public String getStreet_1() {
+		return street_1;
 	}
 
-	public void setEndAddress(Address endAddress) {
-		this.endAddress = endAddress;
+	public void setStreet_1(String street_1) {
+		this.street_1 = street_1;
+	}
+
+	public int getPlz_1() {
+		return plz_1;
+	}
+
+	public void setPlz_1(int plz_1) {
+		this.plz_1 = plz_1;
+	}
+
+	public String getCity_1() {
+		return city_1;
+	}
+
+	public void setCity_1(String city_1) {
+		this.city_1 = city_1;
+	}
+
+	public String getName_2() {
+		return name_2;
+	}
+
+	public void setName_2(String name_2) {
+		this.name_2 = name_2;
+	}
+
+	public String getStreet_2() {
+		return street_2;
+	}
+
+	public void setStreet_2(String street_2) {
+		this.street_2 = street_2;
+	}
+
+	public int getPlz_2() {
+		return plz_2;
+	}
+
+	public void setPlz_2(int plz_2) {
+		this.plz_2 = plz_2;
+	}
+
+	public String getCity_2() {
+		return city_2;
+	}
+
+	public void setCity_2(String city_2) {
+		this.city_2 = city_2;
 	}
 
 	public Date getStartTime() {
@@ -89,8 +143,8 @@ public class Trip {
 
 	@Override
 	public String toString() {
-		return "Trip [customer=" + customer + ", startAddress=" + startAddress + ", endAddress=" + endAddress + ", startTime=" + startTime + ", animal=" + animal + ", animalCount=" + animalCount
-				+ ", driver=" + driver + "]";
+		return "Trip [customer=" + customer + ", name_1=" + name_1 + ", street_1=" + street_1 + ", plz_1=" + plz_1 + ", city_1=" + city_1 + ", name_2=" + name_2 + ", street_2=" + street_2 + ", plz_2="
+				+ plz_2 + ", city_2=" + city_2 + ", startTime=" + startTime + ", animal=" + animal + ", animalCount=" + animalCount + ", driver=" + driver + "]";
 	}
 
 }

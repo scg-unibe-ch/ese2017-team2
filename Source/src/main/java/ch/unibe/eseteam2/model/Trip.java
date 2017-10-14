@@ -2,17 +2,29 @@ package ch.unibe.eseteam2.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Trip {
 
+	@NotNull
+	@Size(min=2,max=100)
 	private String customer;
 
 	private Address startAddress;
 	private Address endAddress;
 
+	@NotNull
+	@Future
 	private Date startTime;
 
+	@NotNull
 	private String animal;
 
+	@NotNull
+	@Min(1)
 	private int animalCount;
 
 	private Driver driver;

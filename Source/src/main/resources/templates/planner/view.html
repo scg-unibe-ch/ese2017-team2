@@ -7,6 +7,23 @@
 <body>
 	<h1>Trip</h1>
 
+	<p th:text="'Customer: ' + ${trip.customer}" />
+
+	<h2>Start address</h2>
+	<p th:text="'Name: ' + ${trip.startAddress.name}" />
+	<p th:text="'Street: ' + ${trip.startAddress.street}" />
+	<p th:text="'PLZ: ' + ${trip.startAddress.plz}" />
+	<p th:text="'City: ' + ${trip.startAddress.city}" />
+
+	<h2>End address</h2>
+	<p th:text="'Name: ' + ${trip.endAddress.name}" />
+	<p th:text="'Street: ' + ${trip.endAddress.name}" />
+	<p th:text="'PLZ: ' + ${trip.endAddress.name}" />
+	<p th:text="'City: ' + ${trip.endAddress.name}" />
+
+	<p th:text="'Animal: ' + ${trip.animal}" />
+	<p th:text="'Count: ' + ${trip.animalCount}" />
+
 
 	<a href="/planner/list">Cancel</a>
 </body>

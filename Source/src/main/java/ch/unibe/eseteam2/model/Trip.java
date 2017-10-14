@@ -12,6 +12,7 @@ public class Trip {
 	private Date startTime;
 
 	private String animal;
+
 	private int animalCount;
 
 	private Driver driver;

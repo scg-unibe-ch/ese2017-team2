@@ -11,17 +11,19 @@ import ch.unibe.eseteam2.model.Trip;
 @Controller
 public class TripEditController {
 
-	@GetMapping("/tripedit")
+	@GetMapping("/planner/edit")
 	public String tripForm(Model model) {
+		//TODO retrieve trip from database
 		Trip trip = new Trip();
+		
 		model.addAttribute("trip", trip);
-		return "tripedit";
+		return "planner/edit";
 	}
 	
-	@PostMapping("/tripedit")
+	@PostMapping("/planner/edit")
 	public String tripSubmit(@ModelAttribute Trip trip) {
 		//TODO implements this
 				
-		return "";
+		return "planner/edit";
 	}
 }

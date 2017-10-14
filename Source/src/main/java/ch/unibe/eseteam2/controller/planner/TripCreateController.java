@@ -12,17 +12,20 @@ import ch.unibe.eseteam2.model.Trip;
 public class TripCreateController {
 	
 
-	@GetMapping("/tripcreate")
+	@GetMapping("/planner/create")
 	public String tripForm(Model model) {
+		//create empty Trip
 		Trip trip = new Trip();
+		//send Trip
 		model.addAttribute("trip", trip);
-		return "tripcreate";
+		
+		return "planner/create";
 	}
 	
-	@PostMapping("/tripcreate")
+	@PostMapping("/planner/create")
 	public String tripSubmit(@ModelAttribute Trip trip) {
-		//TODO implements this
-				
-		return "tripplanner";
+		//TODO add trip to database
+		
+		return "planner/create";
 	}
 }

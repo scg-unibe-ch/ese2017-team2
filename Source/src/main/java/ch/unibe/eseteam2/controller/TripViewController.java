@@ -11,29 +11,39 @@ public class TripViewController {
 
 	@RequestMapping("/planner/view")
 	public String plannerView(Model model) {
-		
-		//TODO retrieve trip from database
+
+		// TODO retrieve trip from database
 		Trip trip = new Trip();
 		trip.setCustomer("test customer");
-		
+
 		trip.setName_1("test name");
 		trip.setStreet_1("test street");
 		trip.setPlz_1(1234);
 		trip.setCity_1("test city");
-		
-		
+
 		trip.setAnimal("Horse");
 		trip.setAnimalCount(2);
-		
-		
-		
+
 		model.addAttribute("trip", trip);
-		
+
 		return "planner/view";
 	}
 
 	@RequestMapping("/driver/view")
-	public String driverView() {
+	public String driverView(Model model) {
+		// TODO retrieve trip from database
+		Trip trip = new Trip();
+		trip.setCustomer("test customer");
+
+		trip.setName_1("test name");
+		trip.setStreet_1("test street");
+		trip.setPlz_1(1234);
+		trip.setCity_1("test city");
+
+		trip.setAnimal("Horse");
+		trip.setAnimalCount(2);
+
+		model.addAttribute("trip", trip);
 
 		return "driver/view";
 	}

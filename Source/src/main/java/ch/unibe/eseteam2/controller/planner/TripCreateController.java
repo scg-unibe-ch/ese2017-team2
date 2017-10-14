@@ -20,21 +20,20 @@ public class TripCreateController {
 		// send Trip
 		model.addAttribute("trip", trip);
 
-		return "planner/create";
+		return "planner/edit";
 	}
 
 	@PostMapping("/planner/create")
 	public String tripSubmit(@Valid Trip trip, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
-			//There is some invalid input, try again.
-			return "/planner/create";
+			// There is some invalid input, try again.
+			return "/planner/edit";
 		}
 
-		
 		// TODO add trip to database
 
-		//Input is valid, go back.
-		return "redirect:/planner/list";
+		// Input is valid, go back.
+		return "/planner/list";
 	}
 }

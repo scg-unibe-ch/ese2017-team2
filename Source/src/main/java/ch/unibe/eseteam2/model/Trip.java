@@ -1,8 +1,6 @@
 package ch.unibe.eseteam2.model;
 
-import java.util.Date;
-
-import javax.validation.constraints.Future;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -14,18 +12,35 @@ public class Trip {
 	@Length(min = 2, max = 100)
 	private String customer;
 
+	@NotNull
+	@Length(min = 2, max = 100)
 	private String name_1;
+	@NotNull
+	@Length(min = 2, max = 100)
 	private String street_1;
+	@NotNull
+	@Digits(integer = 4, fraction = 0)
 	private int plz_1;
-	private String city_1;
-	private String name_2;
-	private String street_2;
-	private int plz_2;
-	private String city_2;
 
 	@NotNull
-	@Future
-	private Date startTime;
+	@Length(min = 2, max = 100)
+	private String city_1;
+	@NotNull
+	@Length(min = 2, max = 100)
+	private String name_2;
+	@NotNull
+	@Length(min = 2, max = 100)
+	private String street_2;
+	@NotNull
+	@Digits(integer = 4, fraction = 0)
+	private int plz_2;
+	@NotNull
+	@Length(min = 2, max = 100)
+	private String city_2;
+
+	// TODO improve date handling
+	@NotNull
+	private String startTime;
 
 	@NotNull
 	@Length(min = 2, max = 100)
@@ -109,11 +124,11 @@ public class Trip {
 		this.city_2 = city_2;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 

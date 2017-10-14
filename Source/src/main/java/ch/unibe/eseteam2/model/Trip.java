@@ -1,35 +1,51 @@
 package ch.unibe.eseteam2.model;
 
+import java.util.Date;
+
 public class Trip {
-	private String startAddress;
-	private String endAddress;
-	private float duration;
+
+	private String customer;
+
+	private Address startAddress;
+	private Address endAddress;
+
+	private Date startTime;
 
 	private String animal;
 	private int animalCount;
 
-	public String getStartAddress() {
+	private Driver driver;
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public Address getStartAddress() {
 		return startAddress;
 	}
 
-	public void setStartAddress(String startAddress) {
+	public void setStartAddress(Address startAddress) {
 		this.startAddress = startAddress;
 	}
 
-	public String getEndAddress() {
+	public Address getEndAddress() {
 		return endAddress;
 	}
 
-	public void setEndAddress(String endAddress) {
+	public void setEndAddress(Address endAddress) {
 		this.endAddress = endAddress;
 	}
 
-	public float getDuration() {
-		return duration;
+	public Date getStartTime() {
+		return startTime;
 	}
 
-	public void setDuration(float duration) {
-		this.duration = duration;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
 	public String getAnimal() {
@@ -48,9 +64,18 @@ public class Trip {
 		this.animalCount = animalCount;
 	}
 
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
 	@Override
 	public String toString() {
-		return "Trip [startAddress=" + startAddress + ", endAddress=" + endAddress + ", duration=" + duration + ", animal=" + animal + ", animalCount=" + animalCount + "]";
+		return "Trip [customer=" + customer + ", startAddress=" + startAddress + ", endAddress=" + endAddress + ", startTime=" + startTime + ", animal=" + animal + ", animalCount=" + animalCount
+				+ ", driver=" + driver + "]";
 	}
 
 }

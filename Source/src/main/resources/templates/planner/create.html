@@ -10,8 +10,35 @@
 
 	<form action="#" th:action="@{/planner/create}" th:object="${trip}"
 		method="post">
+		<table>
+			<tr>
+				<td>Customer:</td>
+				<td><input type="text" th:field="*{customer}" /></td>
+				<td th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}">Customer
+					Error</td>
+			</tr>
+			<!-- start, end address -->
+			<tr>
+				<td>Animal:</td>
+				<td><input type="text" th:field="*{animal}" /></td>
+				<td th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
+					Error</td>
+			</tr>
+			<tr>
+				<td>Count:</td>
+				<td><input type="text" th:field="*{animalCount}" /></td>
+				<td th:if="${#fields.hasErrors('animalCount')}" th:errors="*{animalCount}">Animal Count
+					Error</td>
+			</tr>
+			<!-- date -->
+			
+			<!-- driver -->
+			
+			<tr>
+				<td><button type="submit">Create</button></td>
+			</tr>
+		</table>
 
-		
 	</form>
 
 	<a href="/planner/list">Cancel</a>

@@ -5,12 +5,13 @@ import java.util.Date;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 public class Trip {
 
 	@NotNull
-	@Size(min=2,max=100)
+	@Length(min=2, max=100)
 	private String customer;
 
 	private Address startAddress;
@@ -21,6 +22,7 @@ public class Trip {
 	private Date startTime;
 
 	@NotNull
+	@Length(min=2, max=100)
 	private String animal;
 
 	@NotNull

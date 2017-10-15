@@ -1,12 +1,21 @@
 package ch.unibe.eseteam2.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+@Entity
 public class Trip {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
 	@NotNull
 	@Length(min = 2, max = 100)
@@ -50,7 +59,16 @@ public class Trip {
 	@Min(1)
 	private int animalCount;
 
-	private Driver driver;
+	// TODO link trip with driver database
+	// private Driver driver;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getCustomer() {
 		return customer;
@@ -148,18 +166,12 @@ public class Trip {
 		this.animalCount = animalCount;
 	}
 
-	public Driver getDriver() {
-		return driver;
-	}
-
-	public void setDriver(Driver driver) {
-		this.driver = driver;
-	}
-
-	@Override
-	public String toString() {
-		return "Trip [customer=" + customer + ", name_1=" + name_1 + ", street_1=" + street_1 + ", plz_1=" + plz_1 + ", city_1=" + city_1 + ", name_2=" + name_2 + ", street_2=" + street_2 + ", plz_2="
-				+ plz_2 + ", city_2=" + city_2 + ", startTime=" + startTime + ", animal=" + animal + ", animalCount=" + animalCount + ", driver=" + driver + "]";
-	}
+	// public Driver getDriver() {
+	// return driver;
+	// }
+	//
+	// public void setDriver(Driver driver) {
+	// this.driver = driver;
+	// }
 
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Registration</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    
+    <h1>Register</h1>
+    
+    <form>
+	
+        <p>
+            Name: <input type="text" name="Name" placeholder="" size="30" maxlength="100"/> 
+        </p>
+        
+        <p>
+            E-mail: <input type="text" name="E-mail" placeholder=""  size="30" maxlength="100"/>
+        </p>
+        
+        <p>
+            Code: <input type="text" name="Code"  placeholder="" size="30" maxlength="100"/>
+        </p>
+        
+        <input type="radio" name="Feedback" value="Driver" checked="checked" />Driver
+		<input type="radio" name="Feedback" value="Logistician" checked="checked" />Logistician
+        
+        <p>
+            Password: <input type="text" name="Password" placeholder=""  size="30" maxlength="100"/>
+        </p>
+        
+        <p>
+            Password confirmation: <input type="text" name="Password" placeholder=""  size="30" maxlength="100"/>
+        </p>
+
+        <p> 
+            <button type="button">SUBMIT</button>
+        </p>
+        
+    </form>
+	
+</body>
+</html>

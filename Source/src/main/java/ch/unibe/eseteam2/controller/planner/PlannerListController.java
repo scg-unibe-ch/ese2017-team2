@@ -43,9 +43,6 @@ public class PlannerListController {
 		} else if (action.equals("delete")) {
 			deleteTrip(id);
 
-		} else if (action.equals("create")) {
-
-			return "redirect:/planner/create";
 		} else {
 			// TODO handle invalid action
 		}
@@ -67,9 +64,5 @@ public class PlannerListController {
 		}
 
 		tripRepository.delete(id);
-
 	}
-
-	
-
 }

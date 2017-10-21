@@ -11,8 +11,8 @@
 
 
 
-	<form action="#" th:action="@{/planner/list}" method="post">
-		<button type="submit" name="action" value="create">Create new
+	<form action="/planner/create" method="get">
+		<button type="submit">Create new
 			trip</button>
 
 	</form>
@@ -69,18 +69,6 @@
 	<h2>Trips in successful state</h2>
 
 	<form></form>
-
-
-
-	<!-- DEBUG -->
-	<!-- TODO add parameters to indicate the selected trip -->
-	<p>
-		<a href="/planner/edit"> Edit Trip </a>
-	</p>
-	<p>
-		<a href="/planner/view"> View Trip </a>
-	</p>
-	<!-- DEBUG -->
 
 </body>
 </html>

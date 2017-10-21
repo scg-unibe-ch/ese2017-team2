@@ -31,12 +31,13 @@ public class TripEditController {
 
 	@PostMapping("/planner/edit")
 	public String postMapping(@Valid Trip trip, BindingResult bindingResult) {
+
 		// TODO save trip in database
 		if (bindingResult.hasErrors()) {
 			// There is some invalid input, try again.
 			return "/planner/edit";
 		}
-		
+
 		
 		return "redirect:/planner/list";
 	}

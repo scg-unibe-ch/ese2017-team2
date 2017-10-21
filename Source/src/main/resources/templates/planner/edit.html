@@ -6,100 +6,137 @@
 </head>
 <body>
 
-	<h1>Create new Trip</h1>
+	<h1>Edit Trip</h1>
 
 	<form action="#" th:action="@{/planner/create}" th:object="${trip}"
 		method="post">
+		<fieldset>
+			<table>
+				<tr>
+					<td>Customer:</td>
+					<td><input type="text" th:field="*{customer}" /></td>
+					<td th:if="${#fields.hasErrors('customer')}"
+						th:errors="*{customer}">Customer Error</td>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset>
+
+			<h2>Start address</h2>
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" th:field="*{name_1}" /></td>
+					<td th:if="${#fields.hasErrors('name_1')}" th:errors="*{name_1}">Name_1
+						Error</td>
+				</tr>
+				<tr>
+					<td>Street:</td>
+					<td><input type="text" th:field="*{street_1}" /></td>
+					<td th:if="${#fields.hasErrors('street_1')}"
+						th:errors="*{street_1}">Street_1 Error</td>
+				</tr>
+				<tr>
+					<td>PLZ:</td>
+					<td><input type="text" th:field="*{plz_1}" /></td>
+					<td th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
+						Error</td>
+				</tr>
+				<tr>
+					<td>City:</td>
+					<td><input type="text" th:field="*{city_1}" /></td>
+					<td th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
+						Error</td>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset>
+			<h2>Destination address</h2>
+			<table>
+
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" th:field="*{name_2}" /></td>
+					<td th:if="${#fields.hasErrors('name_2')}" th:errors="*{name_2}">Name_2
+						Error</td>
+				</tr>
+				<tr>
+					<td>Street:</td>
+					<td><input type="text" th:field="*{street_2}" /></td>
+					<td th:if="${#fields.hasErrors('street_2')}"
+						th:errors="*{street_2}">Street_2 Error</td>
+				</tr>
+				<tr>
+					<td>PLZ:</td>
+					<td><input type="text" th:field="*{plz_2}" /></td>
+					<td th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_2
+						Error</td>
+				</tr>
+				<tr>
+					<td>City:</td>
+					<td><input type="text" th:field="*{city_2}" /></td>
+					<td th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
+						Error</td>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset>
+			<table>
+				<tr>
+					<td>Animal:</td>
+					<td><input type="text" th:field="*{animal}" /></td>
+					<td th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
+						Error</td>
+				</tr>
+				<tr>
+					<td>Count:</td>
+					<td><input type="text" th:field="*{animalCount}" /></td>
+					<td th:if="${#fields.hasErrors('animalCount')}"
+						th:errors="*{animalCount}">Animal Count Error</td>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset>
+			<table>
+
+				<tr>
+					<td>Date:</td>
+					<td><input type="text" th:field="*{startTime}" /></td>
+					<td th:if="${#fields.hasErrors('startTime')}"
+						th:errors="*{startTime}">Start Time Error</td>
+				</tr>
+				<tr>
+					<td>Time:</td>
+					<td><input type="text" th:field="*{startTime}" /></td>
+					<td th:if="${#fields.hasErrors('startTime')}"
+						th:errors="*{startTime}">Start Time Error</td>
+				</tr>
+				<!-- driver -->
+			</table>
+		</fieldset>
+		<fieldset>
+			<table>
+				<tr>
+					<td>Driver:</td>
+					<td><select>
+							<option>test</option>
+
+					</select></td>
+				</tr>
+			</table>
+		</fieldset>
 		<table>
 			<tr>
-				<td>Customer:</td>
-				<td><input type="text" th:field="*{customer}" /></td>
-				<td th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}">Customer
-					Error</td>
-			</tr>
-			<tr>
-				<td>Start address:</td>
-			</tr>
-			<tr>
-				<td>Name:</td>
-				<td><input type="text" th:field="*{name_1}" /></td>
-				<td th:if="${#fields.hasErrors('name_1')}" th:errors="*{name_1}">Name_1
-					Error</td>
-			</tr>
-			<tr>
-				<td>Street:</td>
-				<td><input type="text" th:field="*{street_1}" /></td>
-				<td th:if="${#fields.hasErrors('street_1')}" th:errors="*{street_1}">Street_1
-					Error</td>
-			</tr>
-			<tr>
-				<td>PLZ:</td>
-				<td><input type="text" th:field="*{plz_1}" /></td>
-				<td th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
-					Error</td>
-			</tr>
-			<tr>
-				<td>City:</td>
-				<td><input type="text" th:field="*{city_1}" /></td>
-				<td th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
-					Error</td>
-			</tr>
-
-			<tr>
-				<td>End address:</td>
-			</tr>
-			<tr>
-				<td>Name:</td>
-				<td><input type="text" th:field="*{name_2}" /></td>
-				<td th:if="${#fields.hasErrors('name_2')}" th:errors="*{name_2}">Name_2
-					Error</td>
-			</tr>
-			<tr>
-				<td>Street:</td>
-				<td><input type="text" th:field="*{street_2}" /></td>
-				<td th:if="${#fields.hasErrors('street_2')}" th:errors="*{street_2}">Street_2
-					Error</td>
-			</tr>
-			<tr>
-				<td>PLZ:</td>
-				<td><input type="text" th:field="*{plz_2}" /></td>
-				<td th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_2
-					Error</td>
-			</tr>
-			<tr>
-				<td>City:</td>
-				<td><input type="text" th:field="*{city_2}" /></td>
-				<td th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
-					Error</td>
-			</tr>
-
-			<tr>
-				<td>Animal:</td>
-				<td><input type="text" th:field="*{animal}" /></td>
-				<td th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
-					Error</td>
-			</tr>
-			<tr>
-				<td>Count:</td>
-				<td><input type="text" th:field="*{animalCount}" /></td>
-				<td th:if="${#fields.hasErrors('animalCount')}"
-					th:errors="*{animalCount}">Animal Count Error</td>
-			</tr>
-			<tr>
-				<td>Start Time:</td>
-				<td><input type="text" th:field="*{startTime}" /></td>
-				<td th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}">Start Time
-					Error</td>
-			</tr>
-			<!-- driver -->
-
-			<tr>
+				<td><a href="/planner/list">Cancel</a></td>
 				<td><button type="submit">Save</button></td>
 			</tr>
 		</table>
-
 	</form>
 
-	<a href="/planner/list">Cancel</a>
+
 </body>
 </html>

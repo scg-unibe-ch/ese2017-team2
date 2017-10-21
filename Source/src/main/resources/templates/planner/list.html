@@ -11,13 +11,14 @@
 
 
 
-	<form>
-		<button type="submit" name="action" value="create">Create new trip</button>
+	<form action="#" th:action="@{/planner/list}" method="post">
+		<button type="submit" name="action" value="create">Create new
+			trip</button>
 
 	</form>
 	<h2>Trips in editing state</h2>
 
-	<form>
+	<form action="#" th:action="@{/planner/list}" method="post">
 		<button type="submit" name="action" value="edit">Edit</button>
 		<button type="submit" name="action" value="delete">Delete</button>
 		<br></br>
@@ -29,22 +30,15 @@
 				<th>Driver</th>
 				<th>Date</th>
 			</tr>
-			<tr>
-				<td><input type="radio" name="select" value="1"></input></td>
-				<td>customer1</td>
-				<td>animal</td>
-				<td>driver</td>
-				<td>01.01.2018</td>
-			</tr>
-			<tr>
-				<td><input type="radio" name="select" value="2"></input></td>
-				<td>customer1</td>
-				<td>animal</td>
-				<td>driver</td>
-				<td>01.01.2018</td>
+			<tr th:each="trip : ${tripList}">
+				<td><input type="radio" name="select" th:value="${trip.id}"
+					required="required"></input></td>
+				<td th:text="${trip.customer}">customer</td>
+				<td th:text="${trip.animal}">customer</td>
+				<!-- 				<td th:text="${trip.driver}">customer</td> -->
+				<!-- 				<td th:text="${trip.date}">customer</td> -->
 
 			</tr>
-
 
 		</table>
 

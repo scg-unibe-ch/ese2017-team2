@@ -166,6 +166,12 @@ public class Trip {
 		this.animalCount = animalCount;
 	}
 
+	@Override
+	public String toString() {
+		return "Trip [id=" + id + ", customer=" + customer + ", name_1=" + name_1 + ", street_1=" + street_1 + ", plz_1=" + plz_1 + ", city_1=" + city_1 + ", name_2=" + name_2 + ", street_2="
+				+ street_2 + ", plz_2=" + plz_2 + ", city_2=" + city_2 + ", startTime=" + startTime + ", animal=" + animal + ", animalCount=" + animalCount + "]";
+	}
+
 	// public Driver getDriver() {
 	// return driver;
 	// }
@@ -173,5 +179,7 @@ public class Trip {
 	// public void setDriver(Driver driver) {
 	// this.driver = driver;
 	// }
+	
+	
 
 }

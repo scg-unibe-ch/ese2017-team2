@@ -1,10 +1,12 @@
 package ch.unibe.eseteam2.controller.planner;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,29 +20,24 @@ public class TripEditController {
 	private TripRepository tripRepository;
 
 	@GetMapping("/planner/edit")
-	public String tripForm(@RequestParam Long id, Model model) {
-		// TODO retrieve trip from database
-		// Trip trip = new Trip();
-		// trip.setCustomer("test customer");
-		//
-		// trip.setName_1("test name");
-		// trip.setStreet_1("test street");
-		// trip.setPlz_1(1234);
-		// trip.setCity_1("test city");
-		//
-		// trip.setAnimal("Horse");
-		// trip.setAnimalCount(2);
+	public String getMapping(@RequestParam Long id, Model model) {
 
 		Trip trip = tripRepository.findOne(id);
 		// TODO test for null or exceptions
 
 		model.addAttribute("trip", trip);
-		return "planner/edit";
+		return "/planner/edit";
 	}
 
 	@PostMapping("/planner/edit")
-	public String tripSubmit(@ModelAttribute Trip trip) {
+	public String postMapping(@Valid Trip trip, BindingResult bindingResult) {
 		// TODO save trip in database
-		return "planner/edit";
+		if (bindingResult.hasErrors()) {
+			// There is some invalid input, try again.
+			return "/planner/edit";
+		}
+		
+		
+		return "redirect:/planner/list";
 	}
 }

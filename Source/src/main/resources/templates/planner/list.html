@@ -5,9 +5,78 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<p>
-		<a href="/planner/create"> Create new Trip </a>
-	</p>
+	<!-- 	<p> -->
+	<!-- 		<a href="/planner/create"> Create new Trip </a> -->
+	<!-- 	</p> -->
+
+
+
+	<form>
+		<button type="submit" name="create">Create new trip</button>
+
+	</form>
+	<h2>Trips in editing state</h2>
+
+	<form>
+		<button type="submit" name="action" value="edit">Edit</button>
+		<button type="submit" name="action" value="delete">Delete</button>
+		<br>
+		<table>
+			<tr>
+				<th></th>
+				<th>Customer</th>
+				<th>Animal</th>
+				<th>Driver</th>
+				<th>Date</th>
+			</tr>
+			<tr>
+				<td><input type="radio" name="select" value=1></td>
+				<td>customer1</td>
+				<td>animal</td>
+				<td>driver</td>
+				<td>01.01.2018</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="select" value=2></td>
+				<td>customer1</td>
+				<td>animal</td>
+				<td>driver</td>
+				<td>01.01.2018</td>
+
+			</tr>
+
+
+		</table>
+
+
+
+	</form>
+
+
+	<h2>Trips in unsuccessful state</h2>
+
+	<form></form>
+
+	<h2>Trips in expired state</h2>
+
+	<form></form>
+
+	<h2>Trips in assigned state</h2>
+
+	<form></form>
+
+
+	<h2>Trips in active state</h2>
+
+	<form></form>
+
+
+
+	<h2>Trips in successful state</h2>
+
+	<form></form>
+
+
 
 	<!-- DEBUG -->
 	<!-- TODO add parameters to indicate the selected trip -->

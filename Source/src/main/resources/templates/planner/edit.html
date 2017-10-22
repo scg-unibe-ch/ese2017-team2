@@ -120,13 +120,14 @@
 			<table>
 				<tr>
 					<td>Driver:</td>
-					<td><select>
-							<option>none</option>
-							<option th:each="driver : ${driverList}" th:text="${driver.name}"
-								th:value="${driver.id}"></option>
-							<!-- <option th:field="*{driver}" th:each="driver : ${driverList}" th:value="${driver}" th:text="${driver.name}"></option> -->
+					<td><select name="driverId">
+							<option th:value="null">none</option>
+							<option th:each="driver : ${driverList}" th:value="${driver.id}"
+								th:text="${driver.name}"></option>
 
 					</select></td>
+					<td th:if="${#fields.hasErrors('driver')}" th:errors="*{driver}">Driver
+						Error</td>
 				</tr>
 			</table>
 		</fieldset>

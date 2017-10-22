@@ -1,11 +1,14 @@
 package ch.unibe.eseteam2.model;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -65,25 +68,26 @@ public class Trip {
 
 	private TripState tripState;
 
-	// TODO link trip with driver database
-//	@OneToOne
-//	@JoinColumn(table="driver")
-//	private Driver driver;
+	@OneToOne
+	@JoinColumn()
+	private Driver driver;
 
 	private Date date;
 
-//	public Driver getDriver() {
-//		return driver;
-//	}
-//
-//	public void setDriver(Driver driver) {
-//		this.driver = driver;
-//
-//		this.updateState();
-//	}
-	
-	public void setDate(String dateString) {
-		//TODO implement date input
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		if (driver != null) {
+			this.driver = driver;
+			this.updateState();
+		}
+
+	}
+
+	public void setDate(Date date) {
+		// TODO implement date input
 	}
 
 	public Date getDate() {
@@ -99,9 +103,9 @@ public class Trip {
 	}
 
 	public void updateState() {
-//		if (this.tripState == TripState.editing && this.driver != null) {
-//			this.tripState = TripState.assigned;
-//		}
+		if (this.tripState == TripState.editing && this.driver != null) {
+			this.tripState = TripState.assigned;
+		}
 
 		if (hasStarted()) {
 			if (this.tripState == TripState.assigned) {
@@ -118,7 +122,9 @@ public class Trip {
 		if (this.date == null) {
 			return false;
 		}
-		// TODO test if date has been passed
+		if (this.date.before(Calendar.getInstance().getTime())) {
+			return true;
+		}
 
 		return false;
 	}

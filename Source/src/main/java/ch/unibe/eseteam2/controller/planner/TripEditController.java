@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
@@ -20,7 +21,7 @@ public class TripEditController {
 
 	@Autowired
 	private TripRepository tripRepository;
-	
+
 	@Autowired
 	private DriverRepository driverRepository;
 
@@ -40,13 +41,22 @@ public class TripEditController {
 	}
 
 	@PostMapping("/planner/edit/{id}")
-	public String postMapping(@PathVariable Long id, @Valid Trip trip, BindingResult bindingResult) {
-		// bindingResult.addError(new FieldError(objectName, field,
-		// defaultMessage));
-		// bindingResult.addError(new ObjectError(objectName, defaultMessage));
+	public String postMapping(@PathVariable Long id, @RequestParam(name = "driverId", required = false) Long driverId, @Valid Trip trip, BindingResult bindingResult, Model model) {
 		
-		
+		if(driverId!=null) {
+			Driver driver = driverRepository.findOne(driverId);
+			if(driver!=null) {
+				trip.setDriver(driver);				
+			}else {
+				//TODO handle error
+				// bindingResult.addError(new FieldError(objectName, field,
+				// defaultMessage));
+				// bindingResult.addError(new ObjectError(objectName, defaultMessage));
+			}
+		}
+
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("driverList", getDriverList());
 
 			// There is some invalid input, try again.
 			return "/planner/edit";

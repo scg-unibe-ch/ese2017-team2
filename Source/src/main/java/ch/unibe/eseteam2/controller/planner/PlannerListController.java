@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ch.unibe.eseteam2.model.Trip;
+import ch.unibe.eseteam2.model.TripState;
 import ch.unibe.eseteam2.model.dao.TripRepository;
 
 @Controller
@@ -27,16 +29,34 @@ public class PlannerListController {
 	public String postForm(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = false) Long id, Model model) {
 
 		if (action.equals("edit")) {
+			Trip trip = this.tripRepository.findOne(id);
+			if (trip == null) {
+				// trip does not exist
+				// TODO error handling
+			} else if (!trip.canEdit()) {
+				// TODO error handling
+			} else {
+				return "redirect:/planner/edit/" + id;
+			}
+
+		} else if (action.equals("delete")) {
+			Trip trip = this.tripRepository.findOne(id);
+			if (trip == null) {
+				// TODO handle error
+			} else if (!trip.canDelete()) {
+				// TODO handle error
+			} else {
+				deleteTrip(id);
+			}
+
+		} else if (action.equals("view")) {
 			if (!tripRepository.exists(id)) {
 				// trip does not exist
 				// TODO error handling
 			}
-
-			return "redirect:/planner/edit/" + id;
-		} else if (action.equals("delete")) {
-			deleteTrip(id);
-
+			return "redirect:/planner/view/" + id;
 		} else {
+
 			// TODO handle invalid action
 		}
 
@@ -46,14 +66,13 @@ public class PlannerListController {
 	}
 
 	private Model addTripLists(Model model) {
-		// TODO select trips by state
+		model.addAttribute("tripsEditing", tripRepository.findByTripState(TripState.editing));
+		model.addAttribute("tripsAssigned", tripRepository.findByTripState(TripState.assigned));
+		model.addAttribute("tripsExpired", tripRepository.findByTripState(TripState.expired));
+		model.addAttribute("tripsActive", tripRepository.findByTripState(TripState.active));
+		model.addAttribute("tripsSuccessful", tripRepository.findByTripState(TripState.successful));
+		model.addAttribute("tripsUnsuccessful", tripRepository.findByTripState(TripState.unsuccessful));
 
-		model.addAttribute("tripsEditing", tripRepository.findAll());
-		// model.addAttribute("tripsAssigned", tripRepository.findAll());
-		// model.addAttribute("tripsActive", tripRepository.findAll());
-		// model.addAttribute("tripsExpired", tripRepository.findAll());
-		// model.addAttribute("tripsSuccessful", tripRepository.findAll());
-		// model.addAttribute("tripsUnsuccessful", tripRepository.findAll());
 		return model;
 	}
 

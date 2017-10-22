@@ -74,6 +74,14 @@ public class Trip {
 
 	private Date date;
 
+	public boolean canDelete() {
+		return this.tripState == TripState.editing || this.tripState == TripState.expired || this.tripState == TripState.unsuccessful;
+	}
+
+	public boolean canEdit() {
+		return !(this.tripState == TripState.successful || this.tripState == TripState.active);
+	}
+
 	public Driver getDriver() {
 		return driver;
 	}

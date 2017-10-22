@@ -12,8 +12,7 @@
 
 
 	<form action="/planner/create" method="get">
-		<button type="submit">Create new
-			trip</button>
+		<button type="submit">Create new trip</button>
 
 	</form>
 	<h2>Trips in editing state</h2>
@@ -41,29 +40,126 @@
 		</table>
 	</form>
 
-
-	<h2>Trips in unsuccessful state</h2>
-
-	<form></form>
-
 	<h2>Trips in expired state</h2>
 
-	<form></form>
+	<form action="#" th:action="@{/planner/list}" method="post">
+		<button type="submit" name="action" value="edit">Edit</button>
+		<button type="submit" name="action" value="delete">Delete</button>
+		<br></br>
+		<table>
+			<tr>
+				<th></th>
+				<th>Customer</th>
+				<th>Animal</th>
+				<th>Driver</th>
+				<th>Date</th>
+			</tr>
+			<tr th:each="trip : ${tripsExpired}">
+				<td><input type="radio" name="select" th:value="${trip.id}"
+					required="required"></input></td>
+				<td th:text="${trip.customer}">customer</td>
+				<td th:text="${trip.animal}">customer</td>
+				<!-- 				<td th:text="${trip.driver}">customer</td> -->
+				<!-- 				<td th:text="${trip.date}">customer</td> -->
+			</tr>
+		</table>
+	</form>
 
 	<h2>Trips in assigned state</h2>
 
-	<form></form>
-
-
+	<form action="#" th:action="@{/planner/list}" method="post">
+		<button type="submit" name="action" value="edit">Edit</button>
+		<br></br>
+		<table>
+			<tr>
+				<th></th>
+				<th>Customer</th>
+				<th>Animal</th>
+				<th>Driver</th>
+				<th>Date</th>
+			</tr>
+			<tr th:each="trip : ${tripsAssigned}">
+				<td><input type="radio" name="select" th:value="${trip.id}"
+					required="required"></input></td>
+				<td th:text="${trip.customer}">customer</td>
+				<td th:text="${trip.animal}">customer</td>
+				<!-- 				<td th:text="${trip.driver}">customer</td> -->
+				<!-- 				<td th:text="${trip.date}">customer</td> -->
+			</tr>
+		</table>
+	</form>
 	<h2>Trips in active state</h2>
 
-	<form></form>
+	<form action="#" th:action="@{/planner/list}" method="post">
+		<button type="submit" name="action" value="view">View</button>
+		<br></br>
+		<table>
+			<tr>
+				<th></th>
+				<th>Customer</th>
+				<th>Animal</th>
+				<th>Driver</th>
+				<th>Date</th>
+			</tr>
+			<tr th:each="trip : ${tripsActive}">
+				<td><input type="radio" name="select" th:value="${trip.id}"
+					required="required"></input></td>
+				<td th:text="${trip.customer}">customer</td>
+				<td th:text="${trip.animal}">customer</td>
+				<!-- 				<td th:text="${trip.driver}">customer</td> -->
+				<!-- 				<td th:text="${trip.date}">customer</td> -->
+			</tr>
+		</table>
+	</form>
 
+	<h2>Trips in unsuccessful state</h2>
 
+	<form action="#" th:action="@{/planner/list}" method="post">
+		<button type="submit" name="action" value="edit">Edit</button>
+		<button type="submit" name="action" value="delete">Delete</button>
+		<br></br>
+		<table>
+			<tr>
+				<th></th>
+				<th>Customer</th>
+				<th>Animal</th>
+				<th>Driver</th>
+				<th>Date</th>
+			</tr>
+			<tr th:each="trip : ${tripUnsuccesful}">
+				<td><input type="radio" name="select" th:value="${trip.id}"
+					required="required"></input></td>
+				<td th:text="${trip.customer}">customer</td>
+				<td th:text="${trip.animal}">customer</td>
+				<!-- 				<td th:text="${trip.driver}">customer</td> -->
+				<!-- 				<td th:text="${trip.date}">customer</td> -->
+			</tr>
+		</table>
+	</form>
 
 	<h2>Trips in successful state</h2>
 
-	<form></form>
+	<form action="#" th:action="@{/planner/list}" method="post">
+		<button type="submit" name="action" value="view">View</button>
+		<br></br>
+		<table>
+			<tr>
+				<th></th>
+				<th>Customer</th>
+				<th>Animal</th>
+				<th>Driver</th>
+				<th>Date</th>
+			</tr>
+			<tr th:each="trip : ${tripsSuccessful}">
+				<td><input type="radio" name="select" th:value="${trip.id}"
+					required="required"></input></td>
+				<td th:text="${trip.customer}">customer</td>
+				<td th:text="${trip.animal}">customer</td>
+				<!-- 				<td th:text="${trip.driver}">customer</td> -->
+				<!-- 				<td th:text="${trip.date}">customer</td> -->
+			</tr>
+		</table>
+	</form>
 
 </body>
 </html>

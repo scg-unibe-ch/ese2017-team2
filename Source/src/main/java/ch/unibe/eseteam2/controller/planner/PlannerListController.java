@@ -26,7 +26,7 @@ public class PlannerListController {
 	}
 
 	@PostMapping()
-	public String postForm(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = false) Long id, Model model) {
+	public String postForm(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = true) Long id, Model model) {
 
 		if (action.equals("edit")) {
 			Trip trip = this.tripRepository.findOne(id);

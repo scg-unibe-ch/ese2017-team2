@@ -30,7 +30,9 @@ public class TripEditController {
 	public String getMapping(@PathVariable Long id, Model model) {
 
 		Trip trip = tripRepository.findOne(id);
-		// TODO test for null or exceptions
+		if (trip == null) {
+			// TODO error handling
+		}
 
 		model.addAttribute("trip", trip);
 		model.addAttribute("driverList", getDriverList());
@@ -47,13 +49,17 @@ public class TripEditController {
 		if (driverId != null) {
 			Driver driver = driverRepository.findOne(driverId);
 			if (driver != null) {
-				// TODO test state of driver (maybe in driver class and throw
+				// TODO test state of trip (maybe in trip class and throw
 				// exception)
 				trip.setDriver(driver);
 			} else {
 				// TODO handle error
 				bindingResult.addError(new FieldError("trip", "driver", "Could not find selected driver in the database."));
 			}
+		}
+
+		if (!trip.canEdit()) {
+			// TODO error handling
 		}
 
 		if (bindingResult.hasErrors()) {

@@ -5,12 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<!-- 	<p> -->
-	<!-- 		<a href="/planner/create"> Create new Trip </a> -->
-	<!-- 	</p> -->
-
-
-
 	<form action="/planner/create" method="get">
 		<button type="submit">Create new trip</button>
 
@@ -34,8 +28,8 @@
 					required="required"></input></td>
 				<td th:text="${trip.customer}">customer</td>
 				<td th:text="${trip.animal}">customer</td>
-				<!-- 				<td th:text="${trip.driver}">customer</td> -->
-				<!-- 				<td th:text="${trip.date}">customer</td> -->
+				<td th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
+				<td th:text="${trip.date}">customer</td>
 			</tr>
 		</table>
 	</form>
@@ -59,8 +53,8 @@
 					required="required"></input></td>
 				<td th:text="${trip.customer}">customer</td>
 				<td th:text="${trip.animal}">customer</td>
-				<!-- 				<td th:text="${trip.driver}">customer</td> -->
-				<!-- 				<td th:text="${trip.date}">customer</td> -->
+				<td th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
+				<td th:text="${trip.date}">customer</td>
 			</tr>
 		</table>
 	</form>
@@ -83,8 +77,8 @@
 					required="required"></input></td>
 				<td th:text="${trip.customer}">customer</td>
 				<td th:text="${trip.animal}">customer</td>
-				<!-- 				<td th:text="${trip.driver}">customer</td> -->
-				<!-- 				<td th:text="${trip.date}">customer</td> -->
+				<td th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
+				<td th:text="${trip.date}">customer</td>
 			</tr>
 		</table>
 	</form>
@@ -106,8 +100,8 @@
 					required="required"></input></td>
 				<td th:text="${trip.customer}">customer</td>
 				<td th:text="${trip.animal}">customer</td>
-				<!-- 				<td th:text="${trip.driver}">customer</td> -->
-				<!-- 				<td th:text="${trip.date}">customer</td> -->
+				<td th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
+				<td th:text="${trip.date}">customer</td>
 			</tr>
 		</table>
 	</form>
@@ -131,8 +125,8 @@
 					required="required"></input></td>
 				<td th:text="${trip.customer}">customer</td>
 				<td th:text="${trip.animal}">customer</td>
-				<!-- 				<td th:text="${trip.driver}">customer</td> -->
-				<!-- 				<td th:text="${trip.date}">customer</td> -->
+				<td th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
+				<td th:text="${trip.date}">customer</td>
 			</tr>
 		</table>
 	</form>
@@ -155,8 +149,8 @@
 					required="required"></input></td>
 				<td th:text="${trip.customer}">customer</td>
 				<td th:text="${trip.animal}">customer</td>
-				<!-- 				<td th:text="${trip.driver}">customer</td> -->
-				<!-- 				<td th:text="${trip.date}">customer</td> -->
+				<td th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
+				<td th:text="${trip.date}">customer</td>
 			</tr>
 		</table>
 	</form>

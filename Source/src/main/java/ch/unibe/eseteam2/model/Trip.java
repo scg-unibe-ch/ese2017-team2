@@ -96,6 +96,8 @@ public class Trip {
 
 	public void setDate(Date date) {
 		// TODO implement date input
+
+		updateState();
 	}
 
 	public Date getDate() {
@@ -121,6 +123,10 @@ public class Trip {
 			}
 			if (this.tripState == TripState.editing) {
 				this.tripState = TripState.expired;
+			}
+		} else {
+			if (this.tripState == TripState.expired) {
+				this.tripState = TripState.assigned;
 			}
 		}
 

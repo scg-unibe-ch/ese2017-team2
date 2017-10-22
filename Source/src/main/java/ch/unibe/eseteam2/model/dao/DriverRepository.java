@@ -6,6 +6,4 @@ import ch.unibe.eseteam2.model.Driver;
 
 public interface DriverRepository extends CrudRepository<Driver, Long>{
 
-	// TODO change back
-
 }

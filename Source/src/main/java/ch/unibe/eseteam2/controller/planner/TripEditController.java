@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.dao.TripRepository;
@@ -19,8 +19,8 @@ public class TripEditController {
 	@Autowired
 	private TripRepository tripRepository;
 
-	@GetMapping("/planner/edit")
-	public String getMapping(@RequestParam Long id, Model model) {
+	@GetMapping("/planner/edit/{id}")
+	public String getMapping(@PathVariable Long id, Model model) {
 
 		Trip trip = tripRepository.findOne(id);
 		// TODO test for null or exceptions
@@ -29,8 +29,8 @@ public class TripEditController {
 		return "/planner/edit";
 	}
 
-	@PostMapping("/planner/edit")
-	public String postMapping(@Valid Trip trip, BindingResult bindingResult) {
+	@PostMapping("/planner/edit/{id}")
+	public String postMapping(@PathVariable Long id, @Valid Trip trip, BindingResult bindingResult) {
 
 		// TODO save trip in database
 		if (bindingResult.hasErrors()) {
@@ -38,6 +38,7 @@ public class TripEditController {
 			return "/planner/edit";
 		}
 
+		tripRepository.save(trip);
 		
 		return "redirect:/planner/list";
 	}

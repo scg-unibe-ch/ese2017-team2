@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.eseteam2.model.Trip;
@@ -29,17 +30,16 @@ public class PlannerListController {
 	}
 
 	@PostMapping("/planner/list")
-	public String postForm(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = false) Long id, RedirectAttributes redirectAttributes) {
+	public ModelAndView postForm(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = false) Long id, RedirectAttributes redirectAttributes) {
 
 		if (action.equals("edit")) {
-			System.out.println("edit trip " + id);
 			if (!tripRepository.exists(id)) {
 				// trip does not exist
 				// TODO error handling
 			}
-			redirectAttributes.addAttribute("id", id);
+			// redirectAttributes.addAttribute("id", id);
 
-			return "redirect:/planner/edit";
+			return new ModelAndView("redirect:/planner/edit/" + id);
 		} else if (action.equals("delete")) {
 			deleteTrip(id);
 
@@ -48,7 +48,7 @@ public class PlannerListController {
 		}
 
 		redirectAttributes.addAttribute("tripList", getEditing());
-		return "redirect:/planner/list";
+		return new ModelAndView("/planner/list", "tripList", getEditing());
 	}
 
 	private Iterable<Trip> getEditing() {
@@ -56,7 +56,6 @@ public class PlannerListController {
 	}
 
 	private void deleteTrip(Long id) {
-		System.out.println("delete trip " + id);
 
 		if (!tripRepository.exists(id)) {
 			// trip does not exist

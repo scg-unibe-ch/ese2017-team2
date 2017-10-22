@@ -121,7 +121,10 @@
 				<tr>
 					<td>Driver:</td>
 					<td><select>
-							<option>test</option>
+							<option>none</option>
+							<option th:each="driver : ${driverList}" th:text="${driver.name}"
+								th:value="${driver.id}"></option>
+							<!-- <option th:field="*{driver}" th:each="driver : ${driverList}" th:value="${driver}" th:text="${driver.name}"></option> -->
 
 					</select></td>
 				</tr>

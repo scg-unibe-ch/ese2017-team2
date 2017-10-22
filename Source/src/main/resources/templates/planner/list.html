@@ -30,20 +30,15 @@
 				<th>Driver</th>
 				<th>Date</th>
 			</tr>
-			<tr th:each="trip : ${tripList}">
+			<tr th:each="trip : ${tripsEditing}">
 				<td><input type="radio" name="select" th:value="${trip.id}"
 					required="required"></input></td>
 				<td th:text="${trip.customer}">customer</td>
 				<td th:text="${trip.animal}">customer</td>
 				<!-- 				<td th:text="${trip.driver}">customer</td> -->
 				<!-- 				<td th:text="${trip.date}">customer</td> -->
-
 			</tr>
-
 		</table>
-
-
-
 	</form>
 
 

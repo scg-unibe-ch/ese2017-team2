@@ -1,10 +1,12 @@
 package ch.unibe.eseteam2.model;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -28,7 +30,8 @@ public class Trip {
 	@Length(min = 2, max = 100)
 	private String street_1;
 	@NotNull
-	@Digits(integer = 4, fraction = 0)
+	@Min(1000)
+	@Max(9999)
 	private int plz_1;
 
 	@NotNull
@@ -41,7 +44,8 @@ public class Trip {
 	@Length(min = 2, max = 100)
 	private String street_2;
 	@NotNull
-	@Digits(integer = 4, fraction = 0)
+	@Min(1000)
+	@Max(9999)
 	private int plz_2;
 	@NotNull
 	@Length(min = 2, max = 100)
@@ -59,8 +63,65 @@ public class Trip {
 	@Min(1)
 	private int animalCount;
 
+	private TripState tripState;
+
 	// TODO link trip with driver database
-	// private Driver driver;
+//	@OneToOne
+//	@JoinColumn(table="driver")
+//	private Driver driver;
+
+	private Date date;
+
+//	public Driver getDriver() {
+//		return driver;
+//	}
+//
+//	public void setDriver(Driver driver) {
+//		this.driver = driver;
+//
+//		this.updateState();
+//	}
+	
+	public void setDate(String dateString) {
+		//TODO implement date input
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+
+	public Trip() {
+		this.tripState = TripState.editing;
+	}
+
+	public TripState getTripState() {
+		return tripState;
+	}
+
+	public void updateState() {
+//		if (this.tripState == TripState.editing && this.driver != null) {
+//			this.tripState = TripState.assigned;
+//		}
+
+		if (hasStarted()) {
+			if (this.tripState == TripState.assigned) {
+				this.tripState = TripState.active;
+			}
+			if (this.tripState == TripState.editing) {
+				this.tripState = TripState.expired;
+			}
+		}
+
+	}
+
+	private boolean hasStarted() {
+		if (this.date == null) {
+			return false;
+		}
+		// TODO test if date has been passed
+
+		return false;
+	}
 
 	public Long getId() {
 		return id;
@@ -179,7 +240,5 @@ public class Trip {
 	// public void setDriver(Driver driver) {
 	// this.driver = driver;
 	// }
-	
-	
 
 }

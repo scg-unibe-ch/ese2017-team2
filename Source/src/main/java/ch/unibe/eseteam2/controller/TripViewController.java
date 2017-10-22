@@ -14,7 +14,7 @@ public class TripViewController {
 
 		// TODO retrieve trip from database
 		Trip trip = new Trip();
-		trip.setCustomer("test customer");
+		// trip.setCustomer("test customer");
 
 		trip.setName_1("test name");
 		trip.setStreet_1("test street");
@@ -33,7 +33,7 @@ public class TripViewController {
 	public String driverView(Model model) {
 		// TODO retrieve trip from database
 		Trip trip = new Trip();
-		trip.setCustomer("test customer");
+		// trip.setCustomer("test customer");
 
 		trip.setName_1("test name");
 		trip.setStreet_1("test street");

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.TripState;
 import ch.unibe.eseteam2.model.dao.TripRepository;
 
@@ -17,6 +18,7 @@ public class DriverListController {
 
 	@GetMapping("/driver/list")
 	public String getMapping(Model model) {
+		updateTripStates();
 		addTripLists(model);
 		return "driver/list";
 	}
@@ -34,10 +36,21 @@ public class DriverListController {
 			// TODO handle invalid action
 		}
 		
+		updateTripStates();
+		addTripLists(model);
+		
 		return "driver/list";
 	}
 
+	private void updateTripStates() {
+		for (Trip trip : tripRepository.findAll()) {
+			trip.updateState();
+			tripRepository.save(trip);
+		}
+	}
+
 	private Model addTripLists(Model model) {
+		//TODO change these to use "tripRepository.findByDriverAndTripState(driver, tripState)".
 		model.addAttribute("tripsAssigned", tripRepository.findByTripState(TripState.assigned));
 		model.addAttribute("tripsExpired", tripRepository.findByTripState(TripState.expired));
 		model.addAttribute("tripsActive", tripRepository.findByTripState(TripState.active));

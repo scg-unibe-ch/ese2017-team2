@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<td>PLZ:</td>
-					<td><input type="text" th:field="*{plz_1}" /></td>
+					<td><input type="number" th:field="*{plz_1}" /></td>
 					<td th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
 						Error</td>
 				</tr>
@@ -68,7 +68,7 @@
 				</tr>
 				<tr>
 					<td>PLZ:</td>
-					<td><input type="text" th:field="*{plz_2}" /></td>
+					<td><input type="number" th:field="*{plz_2}" /></td>
 					<td th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_2
 						Error</td>
 				</tr>
@@ -91,7 +91,7 @@
 				</tr>
 				<tr>
 					<td>Count:</td>
-					<td><input type="text" th:field="*{animalCount}" /></td>
+					<td><input type="number" th:field="*{animalCount}" /></td>
 					<td th:if="${#fields.hasErrors('animalCount')}"
 						th:errors="*{animalCount}">Animal Count Error</td>
 				</tr>
@@ -102,31 +102,12 @@
 			<table>
 
 				<tr>
-					<td>Date:</td>
+					<td>Date and Time:</td>
 					<td><input type="datetime-local" th:field="*{date}" /></td>
-					<td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Start
-						Time Error</td>
+					<td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date
+						and Time Error</td>
 				</tr>
-<!-- 				<tr> -->
-<!-- 					<td>Time:</td> -->
-<!-- 					<td><input type="text" th:field="*{startTime}" /></td> -->
-<!-- 					<td th:if="${#fields.hasErrors('startTime')}" -->
-<!-- 						th:errors="*{startTime}">Start Time Error</td> -->
-<!-- 				</tr> -->
 
-				<!-- 				<tr> -->
-				<!-- 					<td>Date:</td> -->
-				<!-- 					<td><input type="text" th:field="*{startTime}" /></td> -->
-				<!-- 					<td th:if="${#fields.hasErrors('startTime')}" -->
-				<!-- 						th:errors="*{startTime}">Start Time Error</td> -->
-				<!-- 				</tr> -->
-				<!-- 				<tr> -->
-				<!-- 					<td>Time:</td> -->
-				<!-- 					<td><input type="text" th:field="*{startTime}" /></td> -->
-				<!-- 					<td th:if="${#fields.hasErrors('startTime')}" -->
-				<!-- 						th:errors="*{startTime}">Start Time Error</td> -->
-				<!-- 				</tr> -->
-				<!-- driver -->
 			</table>
 		</fieldset>
 		<fieldset>

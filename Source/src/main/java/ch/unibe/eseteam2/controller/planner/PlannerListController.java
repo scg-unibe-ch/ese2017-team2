@@ -20,7 +20,7 @@ public class PlannerListController {
 
 	@GetMapping()
 	public String getList(Model model) {
-
+		updateTripStates();
 		addTripLists(model);
 		return "planner/list";
 	}
@@ -60,9 +60,17 @@ public class PlannerListController {
 			// TODO handle invalid action
 		}
 
+		updateTripStates();
 		addTripLists(model);
 
 		return "/planner/list";
+	}
+
+	private void updateTripStates() {
+		for (Trip trip : tripRepository.findAll()) {
+			trip.updateState();
+			tripRepository.save(trip);
+		}
 	}
 
 	private Model addTripLists(Model model) {

@@ -1,7 +1,7 @@
 package ch.unibe.eseteam2.model;
 
-import java.sql.Date;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Trip {
@@ -55,8 +58,6 @@ public class Trip {
 	private String city_2;
 
 	// TODO improve date handling
-	@NotNull
-	private String startTime;
 
 	@NotNull
 	@Length(min = 2, max = 100)
@@ -72,6 +73,8 @@ public class Trip {
 	@JoinColumn()
 	private Driver driver;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 
 	public boolean canDelete() {
@@ -82,6 +85,26 @@ public class Trip {
 		return !(this.tripState == TripState.successful || this.tripState == TripState.active);
 	}
 
+	public void updateState() {
+		if (this.tripState == TripState.editing && this.driver != null) {
+			this.tripState = TripState.assigned;
+		}
+		
+		if (hasStarted()) {
+			if (this.tripState == TripState.assigned) {
+				this.tripState = TripState.active;
+			}
+			if (this.tripState == TripState.editing) {
+				this.tripState = TripState.expired;
+			}
+		} else {
+			if (this.tripState == TripState.expired) {
+				this.tripState = TripState.assigned;
+			}
+		}
+		
+	}
+	
 	public Driver getDriver() {
 		return driver;
 	}
@@ -96,6 +119,7 @@ public class Trip {
 
 	public void setDate(Date date) {
 		// TODO implement date input
+		this.date = date;
 
 		updateState();
 	}
@@ -110,26 +134,6 @@ public class Trip {
 
 	public TripState getTripState() {
 		return tripState;
-	}
-
-	public void updateState() {
-		if (this.tripState == TripState.editing && this.driver != null) {
-			this.tripState = TripState.assigned;
-		}
-
-		if (hasStarted()) {
-			if (this.tripState == TripState.assigned) {
-				this.tripState = TripState.active;
-			}
-			if (this.tripState == TripState.editing) {
-				this.tripState = TripState.expired;
-			}
-		} else {
-			if (this.tripState == TripState.expired) {
-				this.tripState = TripState.assigned;
-			}
-		}
-
 	}
 
 	private boolean hasStarted() {
@@ -223,14 +227,6 @@ public class Trip {
 		this.city_2 = city_2;
 	}
 
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
 	public String getAnimal() {
 		return animal;
 	}
@@ -250,15 +246,7 @@ public class Trip {
 	@Override
 	public String toString() {
 		return "Trip [id=" + id + ", customer=" + customer + ", name_1=" + name_1 + ", street_1=" + street_1 + ", plz_1=" + plz_1 + ", city_1=" + city_1 + ", name_2=" + name_2 + ", street_2="
-				+ street_2 + ", plz_2=" + plz_2 + ", city_2=" + city_2 + ", startTime=" + startTime + ", animal=" + animal + ", animalCount=" + animalCount + "]";
+				+ street_2 + ", plz_2=" + plz_2 + ", city_2=" + city_2 + ", animal=" + animal + ", animalCount=" + animalCount + ", tripState=" + tripState + ", driver=" + driver + ", date=" + date
+				+ "]";
 	}
-
-	// public Driver getDriver() {
-	// return driver;
-	// }
-	//
-	// public void setDriver(Driver driver) {
-	// this.driver = driver;
-	// }
-
 }

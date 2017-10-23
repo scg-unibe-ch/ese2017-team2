@@ -103,16 +103,29 @@
 
 				<tr>
 					<td>Date:</td>
-					<td><input type="text" th:field="*{startTime}" /></td>
-					<td th:if="${#fields.hasErrors('startTime')}"
-						th:errors="*{startTime}">Start Time Error</td>
+					<td><input type="datetime-local" th:field="*{date}" /></td>
+					<td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Start
+						Time Error</td>
 				</tr>
-				<tr>
-					<td>Time:</td>
-					<td><input type="text" th:field="*{startTime}" /></td>
-					<td th:if="${#fields.hasErrors('startTime')}"
-						th:errors="*{startTime}">Start Time Error</td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td>Time:</td> -->
+<!-- 					<td><input type="text" th:field="*{startTime}" /></td> -->
+<!-- 					<td th:if="${#fields.hasErrors('startTime')}" -->
+<!-- 						th:errors="*{startTime}">Start Time Error</td> -->
+<!-- 				</tr> -->
+
+				<!-- 				<tr> -->
+				<!-- 					<td>Date:</td> -->
+				<!-- 					<td><input type="text" th:field="*{startTime}" /></td> -->
+				<!-- 					<td th:if="${#fields.hasErrors('startTime')}" -->
+				<!-- 						th:errors="*{startTime}">Start Time Error</td> -->
+				<!-- 				</tr> -->
+				<!-- 				<tr> -->
+				<!-- 					<td>Time:</td> -->
+				<!-- 					<td><input type="text" th:field="*{startTime}" /></td> -->
+				<!-- 					<td th:if="${#fields.hasErrors('startTime')}" -->
+				<!-- 						th:errors="*{startTime}">Start Time Error</td> -->
+				<!-- 				</tr> -->
 				<!-- driver -->
 			</table>
 		</fieldset>

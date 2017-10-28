@@ -15,10 +15,7 @@
 		<fieldset>
 			<button type="submit" name="action" value="edit">Edit</button>
 			<button type="submit" name="action" value="delete">Delete</button>
-			
-			<p th:if="${#fields.hasErrors('global')}"
-				th:errors="*{global}"></p>
-				
+			<br></br>	
 			<table>
 				<tr>
 					<th></th>
@@ -45,10 +42,7 @@
 		<fieldset>
 			<button type="submit" name="action" value="edit">Edit</button>
 			<button type="submit" name="action" value="delete">Delete</button>
-			
-			<p th:if="${#fields.hasErrors('global')}"
-				th:errors="*{global}"></p>
-				
+			<br></br>	
 			<table>
 				<tr>
 					<th></th>
@@ -74,10 +68,7 @@
 	<form action="#" th:object="${tripsAssigned}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="edit">Edit</button>
-			
-			<p th:if="${#fields.hasErrors('global')}"
-				th:errors="*{global}"></p>
-				
+			<br></br>	
 			<table>
 				<tr>
 					<th></th>
@@ -102,10 +93,7 @@
 	<form action="#" th:object="${tripsActive}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="view">View</button>
-			
-			<p th:if="${#fields.hasErrors('global')}"
-				th:errors="*{global}"></p>
-				
+			<br></br>	
 			<table>
 				<tr>
 					<th></th>
@@ -132,10 +120,7 @@
 		<fieldset>
 			<button type="submit" name="action" value="edit">Edit</button>
 			<button type="submit" name="action" value="delete">Delete</button>
-			
-			<p th:if="${#fields.hasErrors('global')}"
-				th:errors="*{global}"></p>
-				
+			<br></br>	
 			<table>
 				<tr>
 					<th></th>
@@ -161,10 +146,7 @@
 	<form action="#" th:object="${tripsSuccessful}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="view">View</button>
-			
-			<p th:if="${#fields.hasErrors('global')}"
-				th:errors="*{global}"></p>
-				
+			<br></br>	
 			<table>
 				<tr>
 					<th></th>

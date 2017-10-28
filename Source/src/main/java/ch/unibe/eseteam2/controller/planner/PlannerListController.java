@@ -3,7 +3,6 @@ package ch.unibe.eseteam2.controller.planner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +26,12 @@ public class PlannerListController {
 	}
 
 	@PostMapping()
-	public String postForm(@RequestParam(value = "action", required = false) String action, @RequestParam(value = "select", required = false) Long id, BindingResult bindingResult, Model model) {
+	public String postForm(@RequestParam(value = "action", required = false) String action, @RequestParam(value = "select", required = false) Long id, Model model) {
 
 		try {
+			if (action == null) {
+				throw new Exception("No action specified.");
+			}
 			if (action.equals("edit")) {
 
 				return redirectEdit(id, action);
@@ -47,7 +49,8 @@ public class PlannerListController {
 			}
 
 		} catch (Exception e) {
-			bindingResult.reject(e.getMessage());
+			// TODO display error message.
+			// bindingResult.reject(e.getMessage());
 		}
 
 		tripService.updateTripStates();

@@ -8,6 +8,9 @@
 
 	<h1>Edit Trip</h1>
 	<form th:object="${trip}" method="post">
+		
+		<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p>
+	
 		<fieldset>
 			<table>
 				<tr>

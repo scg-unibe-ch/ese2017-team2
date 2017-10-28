@@ -19,13 +19,13 @@ public class TripService {
 			tripRepository.save(trip);
 		}
 	}
-	
-	
+
 	/**
 	 * Deletes a given trip.
 	 * 
 	 * @param trip
-	 * @throws IllegalArgumentException in case the given trip is {@literal null}.
+	 * @throws IllegalArgumentException
+	 *             in case the given trip is {@literal null}.
 	 */
 	public void deleteTrip(Trip trip) {
 		tripRepository.delete(trip);
@@ -34,20 +34,26 @@ public class TripService {
 	/**
 	 * Retrieves a trip by its id.
 	 * 
-	 * @param id must not be {@literal null}.
+	 * @param id
+	 *            must not be {@literal null}.
 	 * @return the trip with the given id or {@literal null} if none found
-	 * @throws IllegalArgumentException if {@code id} is {@literal null}
+	 * @throws IllegalArgumentException
+	 *             if {@code id} is {@literal null}
 	 */
-	public Trip findTrip(Long id){
+	public Trip findTrip(Long id) {
 		return tripRepository.findOne(id);
 	}
-	
-	public Iterable<Trip> findTrip(TripState state) {
+
+	public Iterable<Trip> findTrips(TripState state) {
 		return tripRepository.findByTripState(state);
 	}
 
-	public Iterable<Trip> findTrip(Driver driver, TripState state) {
+	public Iterable<Trip> findTrips(Driver driver, TripState state) {
 		return tripRepository.findByDriverAndTripState(driver, state);
+	}
+
+	public void save(Trip trip) {
+		tripRepository.save(trip);
 	}
 
 }

@@ -58,75 +58,55 @@ public class PlannerListController {
 		return "/planner/list";
 	}
 
-	private String redirectEdit(Long id, String action) throws TripSelectException {
+	private String redirectEdit(Long id, String action) throws Exception {
 		Trip trip = findTrip(id, action);
 
 		if (!trip.canEdit()) {
-			throw new TripSelectException(action, "Selected trip can not be edited.");
+			throw new Exception("Selected trip can not be edited.");
 		}
 
 		return "redirect:/planner/edit/" + id;
 	}
 
-	private String redirectView(Long id, String action) throws TripSelectException {
+	private String redirectView(Long id, String action) throws Exception {
 		findTrip(id, action);
 
 		return "redirect:/planner/edit/" + id;
 	}
 
-	private void deleteTrip(Long id, String action) throws TripSelectException {
+	private void deleteTrip(Long id, String action) throws Exception {
 		Trip trip = findTrip(id, action);
 
 		if (!trip.canDelete()) {
-			throw new TripSelectException(action, "Not allowed to delete selected trip.");
+			throw new Exception("Not allowed to delete selected trip.");
 		}
 
 		tripService.deleteTrip(trip);
 	}
 
-	private Trip findTrip(Long id, String action) throws TripSelectException {
+	private Trip findTrip(Long id, String action) throws Exception {
 		Trip trip;
 
 		if (id == null) {
-			throw new TripSelectException(action, "No trip selected.");
+			throw new Exception("No trip selected.");
 		}
 
 		trip = this.tripService.findTrip(id);
 
 		if (trip == null) {
-			throw new TripSelectException(action, "Selected trip can not be found in database.");
+			throw new Exception("Selected trip can not be found in database.");
 		}
 		return trip;
 	}
 
 	private Model addTripLists(Model model) {
-		model.addAttribute("tripsEditing", tripService.findTrip(TripState.editing));
-		model.addAttribute("tripsAssigned", tripService.findTrip(TripState.assigned));
-		model.addAttribute("tripsExpired", tripService.findTrip(TripState.expired));
-		model.addAttribute("tripsActive", tripService.findTrip(TripState.active));
-		model.addAttribute("tripsSuccessful", tripService.findTrip(TripState.successful));
-		model.addAttribute("tripsUnsuccessful", tripService.findTrip(TripState.unsuccessful));
+		model.addAttribute("tripsEditing", tripService.findTrips(TripState.editing));
+		model.addAttribute("tripsAssigned", tripService.findTrips(TripState.assigned));
+		model.addAttribute("tripsExpired", tripService.findTrips(TripState.expired));
+		model.addAttribute("tripsActive", tripService.findTrips(TripState.active));
+		model.addAttribute("tripsSuccessful", tripService.findTrips(TripState.successful));
+		model.addAttribute("tripsUnsuccessful", tripService.findTrips(TripState.unsuccessful));
 
 		return model;
-	}
-}
-
-class TripSelectException extends Exception {
-	private static final long serialVersionUID = 8814065565116231943L;
-
-	private String action;
-	private String message;
-
-	public TripSelectException(String action, String message) {
-		this.action = action;
-		this.message = message;
-	}
-
-	public String getAction() {
-		return action;
-	}
-
-	public String getMessage() {
-		return message;
 	}
 }

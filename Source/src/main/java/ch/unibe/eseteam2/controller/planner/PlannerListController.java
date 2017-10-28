@@ -3,94 +3,127 @@ package ch.unibe.eseteam2.controller.planner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ch.unibe.eseteam2.controller.service.TripService;
 import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.TripState;
-import ch.unibe.eseteam2.model.dao.TripRepository;
 
 @Controller
 @RequestMapping("/planner/list")
 public class PlannerListController {
 	@Autowired
-	private TripRepository tripRepository;
+	private TripService tripService;
 
 	@GetMapping()
 	public String getList(Model model) {
-		updateTripStates();
+		tripService.updateTripStates();
 		addTripLists(model);
 		return "planner/list";
 	}
 
 	@PostMapping()
-	public String postForm(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = true) Long id, Model model) {
+	public String postForm(@RequestParam(value = "action", required = false) String action, @RequestParam(value = "select", required = false) Long id, BindingResult bindingResult, Model model) {
 
-		if (action.equals("edit")) {
-			Trip trip = this.tripRepository.findOne(id);
-			if (trip == null) {
-				// trip does not exist
-				// TODO error handling
-			} else if (!trip.canEdit()) {
-				// TODO error handling
+		try {
+			if (action.equals("edit")) {
+
+				return redirectEdit(id, action);
+
+			} else if (action.equals("delete")) {
+
+				deleteTrip(id, action);
+
+			} else if (action.equals("view")) {
+
+				return redirectView(id, action);
+
 			} else {
-				return "redirect:/planner/edit/" + id;
+				throw new Exception("Invalid action.");
 			}
 
-		} else if (action.equals("delete")) {
-			Trip trip = this.tripRepository.findOne(id);
-			if (trip == null) {
-				// TODO handle error
-			} else if (!trip.canDelete()) {
-				// TODO handle error
-			} else {
-				deleteTrip(id);
-			}
-
-		} else if (action.equals("view")) {
-			if (!tripRepository.exists(id)) {
-				// trip does not exist
-				// TODO error handling
-			}
-			return "redirect:/planner/view/" + id;
-		} else {
-
-			// TODO handle invalid action
+		} catch (Exception e) {
+			bindingResult.reject(e.getMessage());
 		}
 
-		updateTripStates();
+		tripService.updateTripStates();
 		addTripLists(model);
-
 		return "/planner/list";
 	}
 
-	private void updateTripStates() {
-		for (Trip trip : tripRepository.findAll()) {
-			trip.updateState();
-			tripRepository.save(trip);
+	private String redirectEdit(Long id, String action) throws TripSelectException {
+		Trip trip = findTrip(id, action);
+
+		if (!trip.canEdit()) {
+			throw new TripSelectException(action, "Selected trip can not be edited.");
 		}
+
+		return "redirect:/planner/edit/" + id;
+	}
+
+	private String redirectView(Long id, String action) throws TripSelectException {
+		findTrip(id, action);
+
+		return "redirect:/planner/edit/" + id;
+	}
+
+	private void deleteTrip(Long id, String action) throws TripSelectException {
+		Trip trip = findTrip(id, action);
+
+		if (!trip.canDelete()) {
+			throw new TripSelectException(action, "Not allowed to delete selected trip.");
+		}
+
+		tripService.deleteTrip(trip);
+	}
+
+	private Trip findTrip(Long id, String action) throws TripSelectException {
+		Trip trip;
+
+		if (id == null) {
+			throw new TripSelectException(action, "No trip selected.");
+		}
+
+		trip = this.tripService.findTrip(id);
+
+		if (trip == null) {
+			throw new TripSelectException(action, "Selected trip can not be found in database.");
+		}
+		return trip;
 	}
 
 	private Model addTripLists(Model model) {
-		model.addAttribute("tripsEditing", tripRepository.findByTripState(TripState.editing));
-		model.addAttribute("tripsAssigned", tripRepository.findByTripState(TripState.assigned));
-		model.addAttribute("tripsExpired", tripRepository.findByTripState(TripState.expired));
-		model.addAttribute("tripsActive", tripRepository.findByTripState(TripState.active));
-		model.addAttribute("tripsSuccessful", tripRepository.findByTripState(TripState.successful));
-		model.addAttribute("tripsUnsuccessful", tripRepository.findByTripState(TripState.unsuccessful));
+		model.addAttribute("tripsEditing", tripService.findTrip(TripState.editing));
+		model.addAttribute("tripsAssigned", tripService.findTrip(TripState.assigned));
+		model.addAttribute("tripsExpired", tripService.findTrip(TripState.expired));
+		model.addAttribute("tripsActive", tripService.findTrip(TripState.active));
+		model.addAttribute("tripsSuccessful", tripService.findTrip(TripState.successful));
+		model.addAttribute("tripsUnsuccessful", tripService.findTrip(TripState.unsuccessful));
 
 		return model;
 	}
+}
 
-	private void deleteTrip(Long id) {
+class TripSelectException extends Exception {
+	private static final long serialVersionUID = 8814065565116231943L;
 
-		if (!tripRepository.exists(id)) {
-			// trip does not exist
-			// TODO error handling
-		}
+	private String action;
+	private String message;
 
-		tripRepository.delete(id);
+	public TripSelectException(String action, String message) {
+		this.action = action;
+		this.message = message;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public String getMessage() {
+		return message;
 	}
 }

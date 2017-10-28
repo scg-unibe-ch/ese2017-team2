@@ -11,11 +11,14 @@
 	</form>
 	<h2>Trips in editing state</h2>
 
-	<form action="#" th:action="@{/planner/list}" method="post">
+	<form action="#" th:object="${tripsEditing}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="edit">Edit</button>
 			<button type="submit" name="action" value="delete">Delete</button>
-			<br></br>
+			
+			<p th:if="${#fields.hasErrors('global')}"
+				th:errors="*{global}"></p>
+				
 			<table>
 				<tr>
 					<th></th>
@@ -38,11 +41,14 @@
 
 	<h2>Trips in expired state</h2>
 
-	<form action="#" th:action="@{/planner/list}" method="post">
+	<form action="#" th:object="${tripsExpired}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="edit">Edit</button>
 			<button type="submit" name="action" value="delete">Delete</button>
-			<br></br>
+			
+			<p th:if="${#fields.hasErrors('global')}"
+				th:errors="*{global}"></p>
+				
 			<table>
 				<tr>
 					<th></th>
@@ -65,10 +71,13 @@
 
 	<h2>Trips in assigned state</h2>
 
-	<form action="#" th:action="@{/planner/list}" method="post">
+	<form action="#" th:object="${tripsAssigned}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="edit">Edit</button>
-			<br></br>
+			
+			<p th:if="${#fields.hasErrors('global')}"
+				th:errors="*{global}"></p>
+				
 			<table>
 				<tr>
 					<th></th>
@@ -90,10 +99,13 @@
 	</form>
 	<h2>Trips in active state</h2>
 
-	<form action="#" th:action="@{/planner/list}" method="post">
+	<form action="#" th:object="${tripsActive}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="view">View</button>
-			<br></br>
+			
+			<p th:if="${#fields.hasErrors('global')}"
+				th:errors="*{global}"></p>
+				
 			<table>
 				<tr>
 					<th></th>
@@ -116,11 +128,14 @@
 
 	<h2>Trips in unsuccessful state</h2>
 
-	<form action="#" th:action="@{/planner/list}" method="post">
+	<form action="#" th:object="${tripsUnsuccessful}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="edit">Edit</button>
 			<button type="submit" name="action" value="delete">Delete</button>
-			<br></br>
+			
+			<p th:if="${#fields.hasErrors('global')}"
+				th:errors="*{global}"></p>
+				
 			<table>
 				<tr>
 					<th></th>
@@ -129,7 +144,7 @@
 					<th>Driver</th>
 					<th>Date</th>
 				</tr>
-				<tr th:each="trip : ${tripUnsuccesful}">
+				<tr th:each="trip : ${tripsUnsuccessful}">
 					<td><input type="radio" name="select" th:value="${trip.id}"
 						required="required"></input></td>
 					<td th:text="${trip.customer}">customer</td>
@@ -143,10 +158,13 @@
 
 	<h2>Trips in successful state</h2>
 
-	<form action="#" th:action="@{/planner/list}" method="post">
+	<form action="#" th:object="${tripsSuccessful}" th:action="@{/planner/list}" method="post">
 		<fieldset>
 			<button type="submit" name="action" value="view">View</button>
-			<br></br>
+			
+			<p th:if="${#fields.hasErrors('global')}"
+				th:errors="*{global}"></p>
+				
 			<table>
 				<tr>
 					<th></th>

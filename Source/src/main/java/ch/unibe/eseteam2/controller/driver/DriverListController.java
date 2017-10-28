@@ -7,18 +7,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ch.unibe.eseteam2.model.Trip;
+import ch.unibe.eseteam2.controller.service.DriverService;
+import ch.unibe.eseteam2.controller.service.TripService;
+import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.TripState;
-import ch.unibe.eseteam2.model.dao.TripRepository;
+import ch.unibe.eseteam2.security.UserSecurityService;
 
 @Controller
 public class DriverListController {
 	@Autowired
-	private TripRepository tripRepository;
+	private TripService tripService;
+
+	@Autowired
+	private DriverService driverService;
+
+	@Autowired
+	private UserSecurityService userSecurityService;
 
 	@GetMapping("/driver/list")
 	public String getMapping(Model model) {
-		updateTripStates();
+		tripService.updateTripStates();
 		addTripLists(model);
 		return "driver/list";
 	}
@@ -26,36 +34,30 @@ public class DriverListController {
 	@PostMapping("/driver/list")
 	public String postMapping(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = true) Long id, Model model) {
 		if (action.equals("view")) {
-			if (!tripRepository.exists(id)) {
-				// trip does not exist
-				// TODO error handling
-			}
+
+			// TODO error handling
+
 			return "redirect:/planner/view/" + id;
 		} else {
 
 			// TODO handle invalid action
 		}
-		
-		updateTripStates();
+
+		tripService.updateTripStates();
 		addTripLists(model);
-		
+
 		return "driver/list";
 	}
 
-	private void updateTripStates() {
-		for (Trip trip : tripRepository.findAll()) {
-			trip.updateState();
-			tripRepository.save(trip);
-		}
-	}
-
 	private Model addTripLists(Model model) {
-		//TODO change these to use "tripRepository.findByDriverAndTripState(driver, tripState)".
-		model.addAttribute("tripsAssigned", tripRepository.findByTripState(TripState.assigned));
-		model.addAttribute("tripsExpired", tripRepository.findByTripState(TripState.expired));
-		model.addAttribute("tripsActive", tripRepository.findByTripState(TripState.active));
-		model.addAttribute("tripsSuccessful", tripRepository.findByTripState(TripState.successful));
-		model.addAttribute("tripsUnsuccessful", tripRepository.findByTripState(TripState.unsuccessful));
+
+		Driver driver = driverService.findDriver(userSecurityService.getAuthenticatedUser().getUsername());
+
+		model.addAttribute("tripsAssigned", tripService.findTrips(driver, TripState.assigned));
+		model.addAttribute("tripsExpired", tripService.findTrips(driver, TripState.expired));
+		model.addAttribute("tripsActive", tripService.findTrips(driver, TripState.active));
+		model.addAttribute("tripsSuccessful", tripService.findTrips(driver, TripState.successful));
+		model.addAttribute("tripsUnsuccessful", tripService.findTrips(driver, TripState.unsuccessful));
 
 		return model;
 	}

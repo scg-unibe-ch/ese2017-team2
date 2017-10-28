@@ -8,6 +8,8 @@
 
 	<h1>Create new Trip</h1>
 	<form th:object="${trip}" method="post">
+	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+		
 		<fieldset>
 			<table>
 				<tr>

@@ -10,16 +10,20 @@ import ch.unibe.eseteam2.model.dao.DriverRepository;
 public class DriverService {
 	@Autowired
 	private DriverRepository driverRepository;
-	
+
 	public Driver findDriver(Long id) {
 		return driverRepository.findOne(id);
 	}
-	
-	public Iterable<Driver> findDrivers(){
+
+	public Iterable<Driver> findDrivers() {
 		return driverRepository.findAll();
 	}
 
 	public void save(Driver driver) {
 		driverRepository.save(driver);
+	}
+
+	public Driver findDriver(String name) {
+		return driverRepository.findByName(name);
 	}
 }

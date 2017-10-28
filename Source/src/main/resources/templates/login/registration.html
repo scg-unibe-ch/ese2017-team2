@@ -19,7 +19,7 @@
 			th:field="*{password}" size="30" maxlength="100" /> <br />
 		<p th:each="error: ${#fields.errors('password')}" th:text="${error}">Validation
 			error</p>
-
+		
 		<br /> <a href="/">Login</a>
 		<button type="submit">Register</button>
 	</form>

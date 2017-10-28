@@ -18,4 +18,8 @@ public class DriverService {
 	public Iterable<Driver> findDrivers(){
 		return driverRepository.findAll();
 	}
+
+	public void save(Driver driver) {
+		driverRepository.save(driver);
+	}
 }

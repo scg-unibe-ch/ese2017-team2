@@ -5,39 +5,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    
-    <h1>Register</h1>
-    
-    <form action="/action_page.php">
-	
-            Name:<br>
-            <input type="text" name="Name" placeholder="" size="30" maxlength="100"/> 
-            <br>
-        
-            E-mail:<br>
-            <input type="text" name="E-mail" placeholder=""  size="30" maxlength="100"/>
-            <br>
-        
-            Code:<br>
-            <input type="text" name="Code"  placeholder="" size="30" maxlength="100"/>
-            <br><br>
-        
-        	<input type="radio" name="Feedback" value="Driver" checked="checked" />Driver
-			<input type="radio" name="Feedback" value="Logistician" checked="checked" />Logistician
-            <br><br>
-        
-       		Password:<br>
-            <input type="password" name="Password" placeholder=""  size="30" maxlength="100"/>
-            <br>
-            
-            Password confirmation:<br>
-            <input type="password" name="Password" placeholder=""  size="30" maxlength="100"/>
-            <br><br>
-       
-            <button type="submit">SUBMIT</button>
-        
-        
-    </form>
-	
+
+	<h1>Register</h1>
+
+	<form th:action="@{/user}" th:object="${user}" method="post">
+
+		Username:<br /> <input type="text" placeholder="Username"
+			th:field="*{username}" size="30" maxlength="100" />
+		<p th:each="error: ${#fields.errors('username')}" th:text="${error}">Validation
+			error</p>
+
+		<br /> Password:<br /> <input type="password" placeholder="Password"
+			th:field="*{password}" size="30" maxlength="100" /> <br />
+		<p th:each="error: ${#fields.errors('password')}" th:text="${error}">Validation
+			error</p>
+
+		<br /> <a href="/">Login</a>
+		<button type="submit">Register</button>
+	</form>
+
+
 </body>
 </html>

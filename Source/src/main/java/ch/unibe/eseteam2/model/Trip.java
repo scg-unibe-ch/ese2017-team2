@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -26,45 +27,43 @@ public class Trip {
 	private Long id;
 
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String customer;
 
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String name_1;
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String street_1;
 	@NotNull
-	@Min(1000)
-	@Max(9999)
+	@Min(value = 1000, message = "has to be greater than or equal to 1000.")
+	@Max(value = 9999, message = "has to be less than or equal to 9999.")
 	private int plz_1;
 
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String city_1;
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String name_2;
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String street_2;
 	@NotNull
-	@Min(1000)
-	@Max(9999)
+	@Min(value = 1000, message = "has to be greater than or equal to 1000.")
+	@Max(value = 9999, message = "has to be less than or equal to 9999.")
 	private int plz_2;
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String city_2;
 
-	// TODO improve date handling
-
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String animal;
 
 	@NotNull
-	@Min(1)
+	@Min(value = 1, message = "has to be at least 1.")
 	private int animalCount;
 
 	private TripState tripState;
@@ -75,6 +74,7 @@ public class Trip {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
+	@Future(message="has to be in the future.")
 	private Date date;
 
 	public boolean canDelete() {
@@ -89,7 +89,7 @@ public class Trip {
 		if (this.tripState == TripState.editing && this.driver != null) {
 			this.tripState = TripState.assigned;
 		}
-		
+
 		if (hasStarted()) {
 			if (this.tripState == TripState.assigned) {
 				this.tripState = TripState.active;
@@ -102,9 +102,9 @@ public class Trip {
 				this.tripState = TripState.assigned;
 			}
 		}
-		
+
 	}
-	
+
 	public Driver getDriver() {
 		return driver;
 	}

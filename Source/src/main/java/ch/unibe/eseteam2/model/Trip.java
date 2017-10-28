@@ -73,8 +73,8 @@ public class Trip {
 	private Driver driver;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	@Temporal(TemporalType.TIMESTAMP)
-	@Future(message="has to be in the future.")
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Future(message = "has to be in the future.")
 	private Date date;
 
 	public boolean canDelete() {
@@ -118,7 +118,6 @@ public class Trip {
 	}
 
 	public void setDate(Date date) {
-		// TODO implement date input
 		this.date = date;
 
 		updateState();
@@ -249,4 +248,5 @@ public class Trip {
 				+ street_2 + ", plz_2=" + plz_2 + ", city_2=" + city_2 + ", animal=" + animal + ", animalCount=" + animalCount + ", tripState=" + tripState + ", driver=" + driver + ", date=" + date
 				+ "]";
 	}
+
 }

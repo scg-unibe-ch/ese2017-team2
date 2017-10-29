@@ -71,7 +71,7 @@ public class PlannerListController {
 	private String redirectView(Long id, String action) throws Exception {
 		tripService.findTrip(id);
 
-		return "redirect:/planner/edit/" + id;
+		return "redirect:/planner/view/" + id;
 	}
 
 	private void deleteTrip(Long id, String action) throws Exception {

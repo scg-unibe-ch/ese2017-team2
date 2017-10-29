@@ -6,35 +6,41 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ch.unibe.eseteam2.controller.form.TripViewForm;
+import ch.unibe.eseteam2.controller.service.TripService;
 import ch.unibe.eseteam2.model.Trip;
-import ch.unibe.eseteam2.model.dao.TripRepository;
 
 @Controller
 public class TripViewController {
 	@Autowired
-	private TripRepository tripRepository;
+	private TripService tripService;
 
 	@RequestMapping("/planner/view/{id}")
 	public String plannerView(@PathVariable Long id, Model model) {
-		Trip trip = tripRepository.findOne(id);
-		if (trip == null) {
-			// TODO error handling
+		try {
+			displayTrip(id, model);
+		} catch (Exception e) {
+			// TODO Display error message
 		}
-
-		model.addAttribute("trip", trip);
 
 		return "planner/view";
 	}
 
 	@RequestMapping("/driver/view/{id}")
 	public String driverView(@PathVariable Long id, Model model) {
-		Trip trip = tripRepository.findOne(id);
-		if (trip == null) {
-			// TODO error handling
+		try {
+			displayTrip(id, model);
+		} catch (Exception e) {
+			// TODO Display error message
 		}
 
-		model.addAttribute("trip", trip);
-
 		return "driver/view";
+	}
+
+	private void displayTrip(Long id, Model model) throws Exception {
+		Trip trip = tripService.findTrip(id);
+
+		model.addAttribute("trip", new TripViewForm(trip));
+
 	}
 }

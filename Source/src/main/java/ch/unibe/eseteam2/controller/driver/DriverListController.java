@@ -33,11 +33,19 @@ public class DriverListController {
 
 	@PostMapping("/driver/list")
 	public String postMapping(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = true) Long id, Model model) {
-		if (action.equals("view")) {
+		if (action == null) {
+			// TODO error handling
+
+		} else if (action.equals("view")) {
 
 			// TODO error handling
 
-			return "redirect:/planner/view/" + id;
+			return "redirect:/driver/view/" + id;
+		} else if (action.equals("confirm")) {
+			// TODO error handling
+
+			return "redirect:/driver/confirm/" + id;
+
 		} else {
 
 			// TODO handle invalid action

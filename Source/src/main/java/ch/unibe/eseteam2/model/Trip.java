@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -74,8 +73,11 @@ public class Trip {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Temporal(value = TemporalType.TIMESTAMP)
-	@Future(message = "has to be in the future.")
+//	@Future(message = "has to be in the future.")
 	private Date date;
+	
+	
+	private String feedback;
 
 	public boolean canDelete() {
 		return this.tripState == TripState.editing || this.tripState == TripState.expired || this.tripState == TripState.unsuccessful;
@@ -131,8 +133,20 @@ public class Trip {
 		this.tripState = TripState.editing;
 	}
 
+	public void setTripState(TripState tripState) {
+		this.tripState = tripState;
+	}
+
 	public TripState getTripState() {
 		return tripState;
+	}
+	
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
 	}
 
 	private boolean hasStarted() {

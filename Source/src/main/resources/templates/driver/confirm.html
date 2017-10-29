@@ -8,17 +8,23 @@
     
     <h1>Trip confirmation</h1>
 	
-    <form>
+    <form th:object="${form}" method="post">
         
         The trip was:
-		<input type="radio" name="Feedback" value="Successful" checked="checked" />Successful
-		<input type="radio" name="Feedback" value="Unsuccessful" checked="checked" />Unsuccessful
-        <br><br>
+        <input type="radio" th:field="*{success}" value="true"/>Successful
+		<input type="radio" th:field="*{success}" value="false"/>Unsuccessful
+       	
+		<br />
+        <br />
         
-        Feedback:<br /><textarea name="Feedback" rows="6" cols="25"> </textarea>
-        <br><br>
-
-        <button type="button">SUBMIT</button>
+        Feedback:
+        <span th:if="${#fields.hasErrors('feedback')}" th:errors="*{feedback}" >Feedback Error</span>
+        <br />
+        <textarea name="Feedback" rows="6" cols="25" th:field="*{feedback}"> </textarea>
+        
+		<br />
+        <a href="/driver/list">Cancel</a>
+        <button type="submit">Save</button>
 
     </form>
 	

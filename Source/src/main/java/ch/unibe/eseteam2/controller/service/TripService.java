@@ -31,17 +31,20 @@ public class TripService {
 		tripRepository.delete(trip);
 	}
 
-	/**
-	 * Retrieves a trip by its id.
-	 * 
-	 * @param id
-	 *            must not be {@literal null}.
-	 * @return the trip with the given id or {@literal null} if none found
-	 * @throws IllegalArgumentException
-	 *             if {@code id} is {@literal null}
-	 */
-	public Trip findTrip(Long id) {
-		return tripRepository.findOne(id);
+
+	public Trip findTrip(Long id) throws Exception {
+		Trip trip;
+
+		if (id == null) {
+			throw new Exception("Trip id is null.");
+		}
+
+		trip = tripRepository.findOne(id);
+
+		if (trip == null) {
+			throw new Exception("Trip can not be found in database.");
+		}
+		return trip;
 	}
 
 	public Iterable<Trip> findTrips(TripState state) {

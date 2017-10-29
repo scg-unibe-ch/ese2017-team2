@@ -30,10 +30,14 @@ public class TripEditController {
 	@GetMapping("/planner/edit/{id}")
 	public String getMapping(@PathVariable Long id, Model model) {
 
-		Trip trip = tripService.findTrip(id);
-		if (trip == null) {
-			// TODO error handling
+		Trip trip;
+		try {
+			trip = tripService.findTrip(id);
+		} catch (Exception e) {
+			//TODO display error message, maybe error page?
+			return "redirect:/planner/list";
 		}
+		
 
 		model.addAttribute("trip", trip);
 		model.addAttribute("driverList", driverService.findDrivers());

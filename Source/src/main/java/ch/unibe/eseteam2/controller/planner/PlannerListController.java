@@ -59,7 +59,7 @@ public class PlannerListController {
 	}
 
 	private String redirectEdit(Long id, String action) throws Exception {
-		Trip trip = findTrip(id, action);
+		Trip trip = tripService.findTrip(id);
 
 		if (!trip.canEdit()) {
 			throw new Exception("Selected trip can not be edited.");
@@ -69,13 +69,13 @@ public class PlannerListController {
 	}
 
 	private String redirectView(Long id, String action) throws Exception {
-		findTrip(id, action);
+		tripService.findTrip(id);
 
 		return "redirect:/planner/edit/" + id;
 	}
 
 	private void deleteTrip(Long id, String action) throws Exception {
-		Trip trip = findTrip(id, action);
+		Trip trip = tripService.findTrip(id);
 
 		if (!trip.canDelete()) {
 			throw new Exception("Not allowed to delete selected trip.");
@@ -84,20 +84,7 @@ public class PlannerListController {
 		tripService.deleteTrip(trip);
 	}
 
-	private Trip findTrip(Long id, String action) throws Exception {
-		Trip trip;
-
-		if (id == null) {
-			throw new Exception("No trip selected.");
-		}
-
-		trip = this.tripService.findTrip(id);
-
-		if (trip == null) {
-			throw new Exception("Selected trip can not be found in database.");
-		}
-		return trip;
-	}
+	
 
 	private Model addTripLists(Model model) {
 		model.addAttribute("tripsEditing", tripService.findTrips(TripState.editing));

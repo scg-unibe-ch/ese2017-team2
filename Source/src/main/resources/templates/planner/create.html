@@ -1,139 +1,166 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<style>
+
+.border-class
+{
+  border:outset;
+  margin:20px;
+  padding:20px;
+}
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <title>Trip editor</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-
-	<h1>Create new Trip</h1>
-	<form th:object="${trip}" method="post">
+<body style="background-color:#3f5d20;">
+	
+	
+	<div class="row justify-content-center align-right">
+  <div class="container">
+	<div class="row">
+   <div class="container" id="formContainer">
+	<form th:object="${trip}" method="post" class= "border-class" style="background-color:white;">
 	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-		
-		<fieldset>
-			<table>
-				<tr>
-					<td>Customer:</td>
-					<td><input type="text" th:field="*{customer}" /></td>
-					<td th:if="${#fields.hasErrors('customer')}"
-						th:errors="*{customer}">Customer Error</td>
-				</tr>
-			</table>
-		</fieldset>
+	
+	
+					<h1 align="center">Create new Trip</h1> <br />
+					<div class="form-group" align="center">
+					 <div class="col-4" align ="center">
+					 <label for="inputemail">Costumer:</label>
+					<input type="text" class="form-control" th:field="*{customer}" />
+					<label  th:if="${#fields.hasErrors('customer')}"
+						th:errors="*{customer}">Customer Error</label>
+					</div>
+					</div>
+					<br />
 
-		<fieldset>
-
-			<h2>Start address</h2>
-			<table>
-				<tr>
-					<td>Name:</td>
-					<td><input type="text" th:field="*{name_1}" /></td>
-					<td th:if="${#fields.hasErrors('name_1')}" th:errors="*{name_1}">Name_1
-						Error</td>
-				</tr>
-				<tr>
-					<td>Street:</td>
-					<td><input type="text" th:field="*{street_1}" /></td>
-					<td th:if="${#fields.hasErrors('street_1')}"
-						th:errors="*{street_1}">Street_1 Error</td>
-				</tr>
-				<tr>
-					<td>PLZ:</td>
-					<td><input type="number" th:field="*{plz_1}" /></td>
-					<td th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
-						Error</td>
-				</tr>
-				<tr>
-					<td>City:</td>
-					<td><input type="text" th:field="*{city_1}" /></td>
-					<td th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
-						Error</td>
-				</tr>
-			</table>
-		</fieldset>
-
-		<fieldset>
-			<h2>Destination address</h2>
-			<table>
-
-				<tr>
-					<td>Name:</td>
-					<td><input type="text" th:field="*{name_2}" /></td>
-					<td th:if="${#fields.hasErrors('name_2')}" th:errors="*{name_2}">Name_2
-						Error</td>
-				</tr>
-				<tr>
-					<td>Street:</td>
-					<td><input type="text" th:field="*{street_2}" /></td>
-					<td th:if="${#fields.hasErrors('street_2')}"
-						th:errors="*{street_2}">Street_2 Error</td>
-				</tr>
-				<tr>
-					<td>PLZ:</td>
-					<td><input type="number" th:field="*{plz_2}" /></td>
-					<td th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_2
-						Error</td>
-				</tr>
-				<tr>
-					<td>City:</td>
-					<td><input type="text" th:field="*{city_2}" /></td>
-					<td th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
-						Error</td>
-				</tr>
-			</table>
-		</fieldset>
-
-		<fieldset>
-			<table>
-				<tr>
-					<td>Animal:</td>
-					<td><input type="text" th:field="*{animal}" /></td>
-					<td th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
-						Error</td>
-				</tr>
-				<tr>
-					<td>Count:</td>
-					<td><input type="number" th:field="*{animalCount}" /></td>
-					<td th:if="${#fields.hasErrors('animalCount')}"
-						th:errors="*{animalCount}">Animal Count Error</td>
-				</tr>
-			</table>
-		</fieldset>
-
-		<fieldset>
-			<table>
-
-				<tr>
-					<td>Date and Time:</td>
-					<td><input type="datetime-local" th:field="*{date}" /></td>
-					<td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date
-						and Time Error</td>
-				</tr>
-			</table>
-		</fieldset>
-		<fieldset>
-			<table>
-				<tr>
-					<td>Driver:</td>
-					<td><select name="driverId">
+	<div class="form-row">
+	<div class="col-4">
+       <label for="inputEmail4">Animal:</label>
+       <input type="text" class="form-control" th:field="*{animal}"/>
+    	<label th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
+						Error> </label>
+    </div>
+    <div class="col-2">
+    <label for="inputEmail4">Count:</label>
+      <input type="text" class="form-control" th:field="*{animalCount}" />
+    	<label th:if="${#fields.hasErrors('animalCount')}" th:errors="*{animalCount}">Animal Count
+						Error> </label>
+    </div>
+    </div>
+   
+    
+    
+    
+    <div class="form-row">
+	<div class="col-4">
+      <label for="inputEmail4">Date and Time:</label>
+      <input type="datetime-local" class="form-control" th:field="*{date}" />
+    	<label th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date and Time
+						Error> </label>
+    </div>
+    <div class="col-2">
+    <label for="inputEmail4">Driver:</label>
+      <select name="driverId" class="form-control">
 							<option th:value="null">none</option>
 							<option th:each="driver : ${driverList}" th:value="${driver.id}"
 								th:text="${driver.name}"></option>
+		</select>
+    	<label th:if="${#fields.hasErrors('driver')}" th:errors="*{driver}">Driver
+						Error> </label>
+    </div>
+    </div>
+ 
+ 
+ 			<br /><br />
+			<h5>Start address</h5>
+			<div class="form-row">
+			<div class="col-4">
+   			<label for="inputAddress">Name:</label>
+    		<input type="text" class="form-control" th:field="*{name_1}"/>
+  			<label th:if="${#fields.hasErrors('name_1')}" th:errors="*{name_1}">Name_1 Error</label>
+			
+		</div>
 
-					</select></td>
-					<td th:if="${#fields.hasErrors('driver')}" th:errors="*{driver}">Driver
-						Error</td>
-				</tr>
-			</table>
-		</fieldset>
-		<table>
-			<tr>
-				<td><a href="/planner/list">Cancel</a></td>
-				<td><button type="submit">Save</button></td>
-			</tr>
-		</table>
+	<div class="col-4">
+    <label for="inputAddress">Street:</label>
+    <input type="text" class="form-control" id="inputAddress" th:field="*{street_1}"/>
+  	<label  th:if="${#fields.hasErrors('street_1')}"
+						th:errors="*{street_1}">Street_1 Error> </label>
+  
+  </div>
+  </div>
+
+  
+  
+				
+	<div class="form-row">
+    <div class="col-4">
+      <label for="inputEmail4">City:</label>
+      <input type="text" class="form-control" th:field="*{city_1}"/>
+    	<label th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
+						Error> </label>
+    </div>
+    <div class="col-2">
+    <label for="inputEmail4">PLZ:</label>
+      <input type="text" class="form-control" th:field="*{plz_1}" />
+    	<label th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
+						Error> </label>
+    </div>
+    </div>
+    
+    
+    
+    <br /> <br />
+    <h5>End address</h5>
+			<div class="form-row">
+			<div class="col-4">
+   			<label for="inputAddress">Name:</label>
+    		<input type="text" class="form-control" th:field="*{name_2}"/>
+  			<label th:if="${#fields.hasErrors('name_2')}" th:errors="*{name_2}">Name_2 Error</label>
+			
+ 		</div>
+ 
+	<div class="col-4">
+    <label for="inputAddress">Street:</label>
+    <input type="text" class="form-control"  th:field="*{street_2}"/>
+  	<label  th:if="${#fields.hasErrors('street_2')}" th:errors="*{street_2}"> Street_2 
+						Error> </label>
+  
+  </div>
+  </div>
+ 
+  
+  
+				
+	<div class="form-row">
+    <div class="col-4">
+      <label for="inputEmail4">City:</label>
+      <input type="text" class="form-control" th:field="*{city_2}"/>
+    	<label th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
+						Error> </label>
+    </div>
+    <div class="col-2">
+    <label for="inputEmail4">PLZ:</label>
+      <input type="text" class="form-control" th:field="*{plz_2}" />
+    	<label th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_1
+						Error> </label>
+    </div>
+    </div>
+    
+				<br /> <br />
+				<button type="submit" class="btn btn-outline-secondary">Save</button>
+				<a href="/planner/list" class="btn btn-outline-secondary">Cancel</a>
+				
 	</form>
-
-
+	</div>
+	</div>
+	</div>
+	</div>
 </body>
 </html>

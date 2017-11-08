@@ -2,168 +2,218 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <style>
-
-.border-class
-{
-  border:outset;
-  margin:20px;
-  padding:20px;
+.border-class {
+	border: outset;
+	margin: 20px;
+	padding: 20px;
 }
 </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
 <title>Trip editor</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body style="background-color:#3f5d20;">
-	
-	
+<body style="background-color: #3f5d20;">
+
+
 	<div class="row justify-content-center align-right">
-  <div class="container">
-	<div class="row">
-   <div class="container" id="formContainer">
-	<form th:object="${trip}" method="post" class= "border-class" style="background-color:white;">
-	
-	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p>
-	
+		<div class="container">
+			<div class="row">
+				<div class="container" id="formContainer">
+					<form th:object="${trip}" method="post" class="border-class"
+						style="background-color: white;">
 
-	
-	
-					<h1 align="center">Edit Trip</h1> <br />
-					<div class="form-group" align="center">
-					 <div class="col-4" align ="center">
-					 <label for="inputemail">Customer:</label>
-					<input type="text" class="form-control" th:field="*{customer}" />
-					<label  th:if="${#fields.hasErrors('customer')}"
-						th:errors="*{customer}">Customer Error</label>
-					</div>
-					</div>
-					<br />
+						<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p>
 
-	<div class="form-row">
-	<div class="col-4">
-       <label for="inputEmail4">Animal:</label>
-       <input type="text" class="form-control" th:field="*{animal}"/>
-    	<label th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
-						Error> </label>
-    </div>
-    <div class="col-2">
-    <label for="inputEmail4">Count:</label>
-      <input type="text" class="form-control" th:field="*{animalCount}" />
-    	<label th:if="${#fields.hasErrors('animalCount')}" th:errors="*{animalCount}">Animal Count
-						Error> </label>
-    </div>
-    </div>
-   
-    
-    
-    
-    <div class="form-row">
-	<div class="col-4">
-      <label for="inputEmail4">Date and Time:</label>
-      <input type="datetime-local" class="form-control" th:field="*{date}" />
-    	<label th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date and Time
-						Error> </label>
-    </div>
-    <div class="col-2">
-    <label for="inputEmail4">Driver:</label>
-      <select name="driverId" class="form-control">
-							<option th:value="null">none</option>
-							<option th:each="driver : ${driverList}" th:value="${driver.id}"
-								th:text="${driver.name}"></option>
-		</select>
-    	<label th:if="${#fields.hasErrors('driver')}" th:errors="*{driver}">Driver
-						Error> </label>
-    </div>
-    </div>
- 
- 
- 			<br /><br />
-			<h5>Start address</h5>
-			<div class="form-row">
-			<div class="col-4">
-   			<label for="inputAddress">Name:</label>
-    		<input type="text" class="form-control" th:field="*{name_1}"/>
-  			<label th:if="${#fields.hasErrors('name_1')}" th:errors="*{name_1}">Name_1 Error</label>
-			
+
+
+
+						<h1 align="center">Edit Trip</h1>
+						<br />
+						<div class="form-group" align="center">
+							<div class="col-4" align="center">
+								<label for="inputemail">Customer:</label> <input type="text"
+									class="form-control" th:field="*{customer}" /> <label
+									th:if="${#fields.hasErrors('customer')}"
+									th:errors="*{customer}">Customer Error</label>
+							</div>
+						</div>
+						<br />
+
+						<div class="form-row">
+							<div class="col-4">
+								<label for="inputEmail4">Animal:</label> <input type="text"
+									class="form-control" th:field="*{animal}" /> <label
+									th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
+									Error> </label>
+							</div>
+							<div class="col-2">
+								<label for="inputEmail4">Count:</label> <input type="text"
+									class="form-control" th:field="*{animalCount}" /> <label
+									th:if="${#fields.hasErrors('animalCount')}"
+									th:errors="*{animalCount}">Animal Count Error> </label>
+							</div>
+						</div>
+
+
+
+
+						<div class="form-row">
+							<div class="col-4">
+								<label for="inputEmail4">Date and Time:</label> <input
+									type="datetime-local" class="form-control" th:field="*{date}" />
+								<label th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date
+									and Time Error> </label>
+							</div>
+							<div class="col-2">
+								<label for="inputEmail4">Driver:</label> <select name="driverId"
+									class="form-control">
+									<option th:value="null">none</option>
+									<option th:each="driver : ${driverList}"
+										th:value="${driver.id}" th:text="${driver.name}"></option>
+								</select> <label th:if="${#fields.hasErrors('driver')}"
+									th:errors="*{driver}">Driver Error> </label>
+							</div>
+						</div>
+
+
+						<br /> <br />
+						<h5>Start address</h5>
+						<div class="form-row">
+							<div class="col-4">
+								<label for="inputAddress">First name:</label> <input type="text"
+									class="form-control" th:field="*{name_1}" /> <label
+									th:if="${#fields.hasErrors('name_1')}" th:errors="*{name_1}">First
+									name_1 Error</label>
+
+							</div>
+
+							<div class="col-4">
+								<label for="inputAddress">Last name:</label> <input type="text"
+									class="form-control" th:field="*{name_1}" /> <label
+									th:if="${#fields.hasErrors('name_1')}" th:errors="*{name_1}">Last
+									name_1 Error</label>
+
+							</div>
+						</div>
+
+
+						<div class="form-row">
+							<div class="col-4">
+								<label for="inputAddress">Street:</label> <input type="text"
+									class="form-control" id="inputAddress" th:field="*{street_1}" />
+								<label th:if="${#fields.hasErrors('street_1')}"
+									th:errors="*{street_1}">Street_1 Error> </label>
+
+							</div>
+
+							<div class="col-4">
+								<label for="inputAddress">Number:</label> <input type="text"
+									class="form-control" id="inputAddress" th:field="*{street_1}" />
+								<label th:if="${#fields.hasErrors('street_1')}"
+									th:errors="*{street_1}">Number_1 Error> </label>
+
+							</div>
+						</div>
+
+
+
+
+						<div class="form-row">
+							<div class="col-4">
+								<label for="inputEmail4">City:</label> <input type="text"
+									class="form-control" th:field="*{city_1}" /> <label
+									th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
+									Error> </label>
+							</div>
+							<div class="col-2">
+								<label for="inputEmail4">PLZ:</label> <input type="text"
+									class="form-control" th:field="*{plz_1}" /> <label
+									th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
+									Error> </label>
+							</div>
+						</div>
+
+
+
+						<br /> <br />
+						<h5>End address</h5>
+						<div class="form-row">
+							<div class="col-4">
+								<label for="inputAddress">First name:</label> <input type="text"
+									class="form-control" th:field="*{name_2}" /> <label
+									th:if="${#fields.hasErrors('name_2')}" th:errors="*{name_2}">First
+									name_2 Error</label>
+
+							</div>
+
+							<div class="col-4">
+								<label for="inputAddress">Last name:</label> <input type="text"
+									class="form-control" th:field="*{name_2}" /> <label
+									th:if="${#fields.hasErrors('name_2')}" th:errors="*{name_2}">Last
+									name_2 Error</label>
+
+							</div>
+						</div>
+
+
+						<div class="form-row">
+							<div class="col-4">
+								<label for="inputAddress">Street:</label> <input type="text"
+									class="form-control" th:field="*{street_2}" /> <label
+									th:if="${#fields.hasErrors('street_2')}"
+									th:errors="*{street_2}"> Street_2 Error> </label>
+
+							</div>
+
+							<div class="col-4">
+								<label for="inputAddress">Number:</label> <input type="text"
+									class="form-control" th:field="*{street_2}" /> <label
+									th:if="${#fields.hasErrors('street_2')}"
+									th:errors="*{street_2}"> Number_2 Error> </label>
+
+							</div>
+						</div>
+
+
+
+
+						<div class="form-row">
+							<div class="col-4">
+								<label for="inputEmail4">City:</label> <input type="text"
+									class="form-control" th:field="*{city_2}" /> <label
+									th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
+									Error> </label>
+							</div>
+							<div class="col-2">
+								<label for="inputEmail4">PLZ:</label> <input type="text"
+									class="form-control" th:field="*{plz_2}" /> <label
+									th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_2
+									Error> </label>
+							</div>
+						</div>
+
+						<br /> <br />
+						<button type="submit" class="btn btn-outline-secondary">Save</button>
+						<a href="/planner/list" class="btn btn-outline-secondary">Cancel</a>
+
+					</form>
+				</div>
+			</div>
 		</div>
-
-	<div class="col-4">
-    <label for="inputAddress">Street:</label>
-    <input type="text" class="form-control" id="inputAddress" th:field="*{street_1}"/>
-  	<label  th:if="${#fields.hasErrors('street_1')}"
-						th:errors="*{street_1}">Street_1 Error> </label>
-  
-  </div>
-  </div>
-
-  
-  
-				
-	<div class="form-row">
-    <div class="col-4">
-      <label for="inputEmail4">City:</label>
-      <input type="text" class="form-control" th:field="*{city_1}"/>
-    	<label th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
-						Error> </label>
-    </div>
-    <div class="col-2">
-    <label for="inputEmail4">PLZ:</label>
-      <input type="text" class="form-control" th:field="*{plz_1}" />
-    	<label th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
-						Error> </label>
-    </div>
-    </div>
-    
-    
-    
-    <br /> <br />
-    <h5>End address</h5>
-			<div class="form-row">
-			<div class="col-4">
-   			<label for="inputAddress">Name:</label>
-    		<input type="text" class="form-control" th:field="*{name_2}"/>
-  			<label th:if="${#fields.hasErrors('name_2')}" th:errors="*{name_2}">Name_2 Error</label>
-			
- 		</div>
- 
-	<div class="col-4">
-    <label for="inputAddress">Street:</label>
-    <input type="text" class="form-control"  th:field="*{street_2}"/>
-  	<label  th:if="${#fields.hasErrors('street_2')}" th:errors="*{street_2}"> Street_2 
-						Error> </label>
-  
-  </div>
-  </div>
- 
-  
-  
-				
-	<div class="form-row">
-    <div class="col-4">
-      <label for="inputEmail4">City:</label>
-      <input type="text" class="form-control" th:field="*{city_2}"/>
-    	<label th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
-						Error> </label>
-    </div>
-    <div class="col-2">
-    <label for="inputEmail4">PLZ:</label>
-      <input type="text" class="form-control" th:field="*{plz_2}" />
-    	<label th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_1
-						Error> </label>
-    </div>
-    </div>
-    
-				<br /> <br />
-				<button type="submit" class="btn btn-outline-secondary">Save</button>
-				<a href="/planner/list" class="btn btn-outline-secondary">Cancel</a>
-				
-	</form>
-	</div>
-	</div>
-	</div>
 	</div>
 </body>
 </html>

@@ -52,7 +52,7 @@ img {
 					<div class="form-row">
 						<div class="col-6">
 							<label for="exampleInputEmail1">First name:</label> <input
-								type="text" id="username" class="form-control" name="first name"
+								type="text" id="username" class="form-control" name="username"
 								placeholder="First name" th:field="*{username}" size="30"
 								maxlength="100" />
 							<p th:each="error: ${#fields.errors('username')}"
@@ -62,7 +62,7 @@ img {
 
 						<div class="col-6">
 							<label for="exampleInputEmail1">Last name:</label> <input
-								type="text" id="username" class="form-control" name="last name"
+								type="text" id="username" class="form-control" name="username"
 								placeholder="Last name" th:field="*{username}" size="30"
 								maxlength="100" />
 							<p th:each="error: ${#fields.errors('username')}"
@@ -78,7 +78,7 @@ img {
 
 					<div class="form-group">
 						<label for="exampleInputEmail1">E-mail address:</label> <input
-							type="text" id="username" class="form-control" name="e-mail"
+							type="text" id="username" class="form-control" name="username"
 							placeholder="E-mail address" th:field="*{username}" size="30"
 							maxlength="100" />
 						<p th:each="error: ${#fields.errors('username')}"
@@ -88,7 +88,7 @@ img {
 
 					<div class="form-group">
 						<label for="exampleInputEmail1">Address:</label> <input
-							type="text" id="username" class="form-control" name="address"
+							type="text" id="username" class="form-control" name="username"
 							placeholder="Address" th:field="*{username}" size="30"
 							maxlength="100" />
 						<p th:each="error: ${#fields.errors('username')}"

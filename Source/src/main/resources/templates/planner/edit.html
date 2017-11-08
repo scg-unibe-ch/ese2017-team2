@@ -34,7 +34,7 @@
 					<h1 align="center">Edit Trip</h1> <br />
 					<div class="form-group" align="center">
 					 <div class="col-4" align ="center">
-					 <label for="inputemail">Costumer:</label>
+					 <label for="inputemail">Customer:</label>
 					<input type="text" class="form-control" th:field="*{customer}" />
 					<label  th:if="${#fields.hasErrors('customer')}"
 						th:errors="*{customer}">Customer Error</label>

@@ -79,7 +79,7 @@ img {
 					<div class="form-group">
 						<label for="exampleInputEmail1">E-mail address:</label> <input
 							type="text" id="username" class="form-control" name="username"
-							placeholder="E-mail address" th:field="*{username}" size="30"
+							placeholder="email@example.com" th:field="*{username}" size="30"
 							maxlength="100" />
 						<p th:each="error: ${#fields.errors('username')}"
 							th:text="${error}">Validation error</p>
@@ -106,6 +106,8 @@ img {
 							th:text="${error}">Validation error</p>
 
 					</div>
+					
+
 
 
 					<button type="submit" class="btn btn-outline-secondary">Register</button>

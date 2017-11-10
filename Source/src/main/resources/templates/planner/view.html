@@ -1,38 +1,88 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<style>
+.border-class {
+	border: outset;
+	margin: 20px;
+	padding: 20px;
+}
+</style>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
 <title>Trip editor</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-	<h1>Trip</h1>
+<body style="background-color: #3f5d20;">
 
-	<p th:text="'Customer: ' + ${trip.customer}" />
-
-	<h2>Start address</h2>
-	<p th:text="'Name: ' + ${trip.name_1}" />
-	<p th:text="'Street: ' + ${trip.street_1}" />
-	<p th:text="'PLZ: ' + ${trip.plz_1}" />
-	<p th:text="'City: ' + ${trip.city_1}" />
-
-	<h2>End address</h2>
-	<p th:text="'Name: ' + ${trip.name_2}" />
-	<p th:text="'Street: ' + ${trip.street_2}" />
-	<p th:text="'PLZ: ' + ${trip.plz_2}" />
-	<p th:text="'City: ' + ${trip.city_2}" />
-
-	<p th:text="'Animal: ' + ${trip.animal}" />
-	<p th:text="'Count: ' + ${trip.animalCount}" />
-
-	<p th:text="'Date: ' + ${trip.date}" />
-	<p th:text="'Driver: ' + ${trip.driver}" />
-
-	<p th:text="'State: ' + ${trip.tripState}" />
-	<p th:text="'Feedback: ' + ${trip.feedback}" />
+	<div class="row justify-content-center align-right">
+		<div class="container">
+			<div class="row">
+				<div class="container" id="formContainer">
+					<form class="border-class" style="background-color: white;">
+						<h1 align="center">Trip</h1>
+						<br />
 
 
+						<div class="row">
+							<div class="col-sm-4">
+								<h5>Details</h5>
+								<p th:text="'Customer: ' + ${trip.customer}" />
+								<p th:text="'Animal: ' + ${trip.animal}" />
+								<p th:text="'Count: ' + ${trip.animalCount}" />
+								<p th:text="'Date: ' + ${trip.date}" />
+								<p th:text="'Driver: ' + ${trip.driver}" />
+								<p th:text="'State: ' + ${trip.tripState}" />
+								<p th:text="'Feedback: ' + ${trip.feedback}" />
+							</div>
 
 
-	<a href="/planner/list">back</a>
+							<div class="col-sm-4">
+								<h5>Start address</h5>
+								<p th:text="'First name: ' + ${trip.name_1}" />
+								<p th:text="'Last name: ' + ${trip.name_1}" />
+								<p th:text="'Street: ' + ${trip.street_1}" />
+								<p th:text="'Number: ' + ${trip.street_1}" />
+								<p th:text="'City: ' + ${trip.city_1}" />
+								<p th:text="'PLZ: ' + ${trip.plz_1}" />
+							</div>
+
+							<div class="col-sm-4">
+								<h5>End address</h5>
+								<p th:text="'First name: ' + ${trip.name_2}" />
+								<p th:text="'Last name: ' + ${trip.name_2}" />
+								<p th:text="'Street: ' + ${trip.street_2}" />
+								<p th:text="'Number: ' + ${trip.street_2}" />
+								<p th:text="'City: ' + ${trip.city_2}" />
+								<p th:text="'PLZ: ' + ${trip.plz_2}" />
+							</div>
+						</div>
+
+
+
+
+
+						<div class="text-right">
+							<a href="/planner/list"
+								class="btn btn-outline-secondary pull-right">Back</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

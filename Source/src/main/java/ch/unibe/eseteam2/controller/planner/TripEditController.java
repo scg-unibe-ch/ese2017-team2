@@ -80,13 +80,17 @@ public class TripEditController {
 		trip.setAnimal(form.getAnimal());
 		trip.setAnimalCount(form.getAnimalCount());
 
-		trip.setName_1(form.getFirstname_1());
+		trip.setFirstname_1(form.getFirstname_1());
+		trip.setLastname_1(form.getLastname_1());
 		trip.setStreet_1(form.getStreet_1());
+		trip.setNumber_1(form.getNumber_1());
 		trip.setCity_1(form.getCity_1());
 		trip.setPlz_1(form.getPlz_1());
 
-		trip.setName_2(form.getFirstname_2());
+		trip.setFirstname_2(form.getFirstname_2());
+		trip.setLastname_2(form.getLastname_2());
 		trip.setStreet_2(form.getStreet_2());
+		trip.setNumber_2(form.getNumber_2());
 		trip.setCity_2(form.getCity_2());
 		trip.setPlz_2(form.getPlz_2());
 

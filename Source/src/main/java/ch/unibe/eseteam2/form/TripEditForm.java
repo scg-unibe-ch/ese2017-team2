@@ -84,24 +84,24 @@ public class TripEditForm {
 		this.date = trip.getDate();
 		this.driver = trip.getDriver();
 
-		this.firstname_1 = trip.getName_1();
-		// this.lastname_1;
+		this.firstname_1 = trip.getFirstname_1();
+		this.lastname_1 = trip.getLastname_1();
 		this.street_1 = trip.getStreet_1();
-		// this.number_1;
+		this.number_1 = trip.getNumber_1();
 		this.city_1 = trip.getCity_1();
 		this.plz_1 = trip.getPlz_1();
 
-		this.firstname_2 = trip.getName_2();
-		// this.lastname_2;
+		this.firstname_2 = trip.getFirstname_2();
+		this.lastname_2 = trip.getLastname_2();
 		this.street_2 = trip.getStreet_2();
-		// this.number_2;
+		this.number_2 = trip.getNumber_2();
 		this.city_2 = trip.getCity_2();
 		this.plz_2 = trip.getPlz_2();
 
 	}
-	
+
 	public TripEditForm() {
-		
+
 	}
 
 	public String getCustomer() {

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Vehicle list</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	Vehicle list:
+	<table>
+		<tr th:each="vehicle : ${vehicleList}">
+			<td th:text="${vehicle.name}">name</td>
+			<!-- 			<td th:text="${vehicle.count}">customer</td> -->
+			<td><img th:each="i : ${ #numbers.sequence(1,vehicle.count) }"
+				th:alt="${vehicle.image}" th:src="'/images/' + ${vehicle.image}"></img></td>
+		</tr>
+	</table>
+</body>
+</html>

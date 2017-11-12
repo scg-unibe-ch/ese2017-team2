@@ -43,8 +43,8 @@ public class UserController {
 	@PostMapping(path = "")
 	public ModelAndView create(@RequestParam String username, @RequestParam String password) {
 		// TODO move to a better place
-		if (!userDetailsManager.userExists("admin")) {
-			User admin = new User("admin", "anitrans", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
+		if (!userDetailsManager.userExists("admin@anitrans.ch")) {
+			User admin = new User("admin@anitrans.ch", "anitrans", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
 			userDetailsManager.createUser(admin);
 		}
 

@@ -81,9 +81,10 @@
 							<div class="col-2">
 								<label for="inputEmail4">Driver:</label> <select name="driverId"
 									class="form-control">
-									<option th:value="null">none</option>
-									<option th:each="driver : ${driverList}"
-										th:value="${driver.id}" th:text="${driver.name}"></option>
+									<option th:value="null" th:selected="*{driver} == null ? true : false">none</option>
+									<option th:each="d : ${driverList}"
+										th:value="${d.id}" th:text="${d.name}"
+										th:selected=" (*{driver} != null) ? (${d.id} == *{driver.id} ? true : false) : false"></option>
 								</select> <label th:if="${#fields.hasErrors('driver')}"
 									th:errors="*{driver}">Driver Error> </label>
 							</div>

@@ -73,11 +73,37 @@ public class Trip {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Temporal(value = TemporalType.TIMESTAMP)
-//	@Future(message = "has to be in the future.")
+	// @Future(message = "has to be in the future.")
 	private Date date;
-	
-	
+
 	private String feedback;
+
+	public Trip(String customer, String animal, int animalCount, Date date, String name_1, String street_1, int plz_1, String city_1, String name_2, String street_2, int plz_2, String city_2) {
+		this.customer = customer;
+
+		this.animal = animal;
+		this.animalCount = animalCount;
+
+		this.date = date;
+
+		this.name_1 = name_1;
+		this.street_1 = street_1;
+		this.plz_1 = plz_1;
+		this.city_1 = city_1;
+
+		this.name_2 = name_2;
+		this.street_2 = street_2;
+		this.plz_2 = plz_2;
+		this.city_2 = city_2;
+
+		this.tripState = TripState.editing;
+
+		this.updateState();
+	}
+
+	public Trip() {
+		this.tripState = TripState.editing;
+	}
 
 	public boolean canDelete() {
 		return this.tripState == TripState.editing || this.tripState == TripState.expired || this.tripState == TripState.unsuccessful;
@@ -101,7 +127,7 @@ public class Trip {
 			}
 		} else {
 			if (this.tripState == TripState.expired) {
-				this.tripState = TripState.assigned;
+				this.tripState = TripState.editing;
 			}
 		}
 
@@ -129,10 +155,6 @@ public class Trip {
 		return this.date;
 	}
 
-	public Trip() {
-		this.tripState = TripState.editing;
-	}
-
 	public void setTripState(TripState tripState) {
 		this.tripState = tripState;
 	}
@@ -140,7 +162,7 @@ public class Trip {
 	public TripState getTripState() {
 		return tripState;
 	}
-	
+
 	public String getFeedback() {
 		return feedback;
 	}

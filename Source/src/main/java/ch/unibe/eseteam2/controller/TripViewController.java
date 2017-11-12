@@ -18,7 +18,7 @@ public class TripViewController {
 	@RequestMapping("/planner/view/{id}")
 	public String plannerView(@PathVariable Long id, Model model) {
 		try {
-			displayTrip(id, model);
+			addAttributes(id, model);
 		} catch (Exception e) {
 			// TODO Display error message
 		}
@@ -29,7 +29,7 @@ public class TripViewController {
 	@RequestMapping("/driver/view/{id}")
 	public String driverView(@PathVariable Long id, Model model) {
 		try {
-			displayTrip(id, model);
+			addAttributes(id, model);
 		} catch (Exception e) {
 			// TODO Display error message
 		}
@@ -37,7 +37,7 @@ public class TripViewController {
 		return "driver/view";
 	}
 
-	private void displayTrip(Long id, Model model) throws Exception {
+	private void addAttributes(Long id, Model model) throws Exception {
 		Trip trip = tripService.findTrip(id);
 
 		model.addAttribute("trip", new TripViewForm(trip));

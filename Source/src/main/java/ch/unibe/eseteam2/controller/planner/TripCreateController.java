@@ -52,7 +52,7 @@ public class TripCreateController {
 	}
 
 	private Trip createTrip(TripCreateForm form, Long driverId, BindingResult bindingResult) {
-
+		//TODO maybe change this to use setters
 		Trip trip = new Trip(form.getCustomer(), form.getAnimal(), form.getAnimalCount(), form.getDate(), form.getFirstname_1(), form.getStreet_1(), form.getPlz_1(), form.getCity_1(),
 				form.getFirstname_2(), form.getStreet_2(), form.getPlz_2(), form.getCity_2());
 

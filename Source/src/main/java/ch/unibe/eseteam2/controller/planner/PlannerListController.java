@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ch.unibe.eseteam2.controller.service.TripService;
 import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.TripState;
+import ch.unibe.eseteam2.service.TripService;
 
 @Controller
 @RequestMapping("/planner/list")

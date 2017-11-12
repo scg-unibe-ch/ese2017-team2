@@ -1,4 +1,4 @@
-package ch.unibe.eseteam2.controller.form;
+package ch.unibe.eseteam2.form;
 
 import org.hibernate.validator.constraints.Length;
 

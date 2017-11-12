@@ -1,4 +1,4 @@
-package ch.unibe.eseteam2.controller.service;
+package ch.unibe.eseteam2.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

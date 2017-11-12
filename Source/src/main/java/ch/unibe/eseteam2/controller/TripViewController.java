@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ch.unibe.eseteam2.controller.form.TripViewForm;
-import ch.unibe.eseteam2.controller.service.TripService;
+import ch.unibe.eseteam2.form.TripViewForm;
 import ch.unibe.eseteam2.model.Trip;
+import ch.unibe.eseteam2.service.TripService;
 
 @Controller
 public class TripViewController {

@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ch.unibe.eseteam2.controller.service.DriverService;
 import ch.unibe.eseteam2.model.Driver;
+import ch.unibe.eseteam2.service.DriverService;
 
 @Controller
 @RequestMapping(path = "/user")

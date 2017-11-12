@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ch.unibe.eseteam2.controller.service.DriverService;
-import ch.unibe.eseteam2.controller.service.TripService;
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
+import ch.unibe.eseteam2.service.DriverService;
+import ch.unibe.eseteam2.service.TripService;
 
 @Controller
 public class TripEditController {

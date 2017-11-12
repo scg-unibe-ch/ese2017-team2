@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ch.unibe.eseteam2.controller.form.ConfirmationForm;
-import ch.unibe.eseteam2.controller.service.TripService;
+import ch.unibe.eseteam2.form.ConfirmationForm;
 import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.TripState;
+import ch.unibe.eseteam2.service.TripService;
 
 @Controller
 @RequestMapping("/driver/confirm/")

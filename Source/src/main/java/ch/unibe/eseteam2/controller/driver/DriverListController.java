@@ -32,23 +32,25 @@ public class DriverListController {
 	}
 
 	@PostMapping("/driver/list")
-	public String postMapping(@RequestParam(value = "action", required = true) String action, @RequestParam(value = "select", required = true) Long id, Model model) {
-		if (action == null) {
-			// TODO error handling
+	public String postMapping(@RequestParam(value = "action", required = false) String action, @RequestParam(value = "select", required = false) Long id, Model model) {
+		try {
+			if (action == null) {
+				throw new Exception("No action specified.");
 
-		} else if (action.equals("view")) {
+			} else if (action.equals("view")) {
 
-			// TODO error handling
+				return redirectView(id);
 
-			return "redirect:/driver/view/" + id;
-		} else if (action.equals("confirm")) {
-			// TODO error handling
+			} else if (action.equals("confirm")) {
 
-			return "redirect:/driver/confirm/" + id;
+				return redirectConfirm(id);
 
-		} else {
-
-			// TODO handle invalid action
+			} else {
+				throw new Exception("Invalid action.");
+			}
+		} catch (Exception e) {
+			// TODO display error message.
+			// bindingResult.reject(e.getMessage());
 		}
 
 		tripService.updateTripStates();
@@ -57,12 +59,23 @@ public class DriverListController {
 		return "driver/list";
 	}
 
+	private String redirectView(Long id) throws Exception {
+		tripService.findTrip(id);
+
+		return "redirect:/driver/view/" + id;
+	}
+
+	private String redirectConfirm(Long id) throws Exception {
+		tripService.findTrip(id);
+
+		return "redirect:/driver/confirm/" + id;
+	}
+
 	private Model addTripLists(Model model) {
 
 		Driver driver = driverService.findDriver(userSecurityService.getAuthenticatedUser().getUsername());
 
 		model.addAttribute("tripsAssigned", tripService.findTrips(driver, TripState.assigned));
-		model.addAttribute("tripsExpired", tripService.findTrips(driver, TripState.expired));
 		model.addAttribute("tripsActive", tripService.findTrips(driver, TripState.active));
 		model.addAttribute("tripsSuccessful", tripService.findTrips(driver, TripState.successful));
 		model.addAttribute("tripsUnsuccessful", tripService.findTrips(driver, TripState.unsuccessful));

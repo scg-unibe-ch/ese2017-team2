@@ -34,15 +34,15 @@ public class PlannerListController {
 			}
 			if (action.equals("edit")) {
 
-				return redirectEdit(id, action);
+				return redirectEdit(id);
 
 			} else if (action.equals("delete")) {
 
-				deleteTrip(id, action);
+				deleteTrip(id);
 
 			} else if (action.equals("view")) {
 
-				return redirectView(id, action);
+				return redirectView(id);
 
 			} else {
 				throw new Exception("Invalid action.");
@@ -58,7 +58,7 @@ public class PlannerListController {
 		return "/planner/list";
 	}
 
-	private String redirectEdit(Long id, String action) throws Exception {
+	private String redirectEdit(Long id) throws Exception {
 		Trip trip = tripService.findTrip(id);
 
 		if (!trip.canEdit()) {
@@ -68,13 +68,13 @@ public class PlannerListController {
 		return "redirect:/planner/edit/" + id;
 	}
 
-	private String redirectView(Long id, String action) throws Exception {
+	private String redirectView(Long id) throws Exception {
 		tripService.findTrip(id);
 
 		return "redirect:/planner/view/" + id;
 	}
 
-	private void deleteTrip(Long id, String action) throws Exception {
+	private void deleteTrip(Long id) throws Exception {
 		Trip trip = tripService.findTrip(id);
 
 		if (!trip.canDelete()) {
@@ -83,8 +83,6 @@ public class PlannerListController {
 
 		tripService.deleteTrip(trip);
 	}
-
-	
 
 	private Model addTripLists(Model model) {
 		model.addAttribute("tripsEditing", tripService.findTrips(TripState.editing));

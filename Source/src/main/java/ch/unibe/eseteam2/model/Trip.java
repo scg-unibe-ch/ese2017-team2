@@ -14,7 +14,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,7 +42,6 @@ public class Trip {
 	private String street_1;
 
 	@NotNull
-	@Pattern(regexp = "\\d+[A-Za-z]?")
 	private String number_1;
 
 	@NotNull
@@ -64,7 +62,6 @@ public class Trip {
 	@Length(min = 2, max = 100)
 	private String street_2;
 	@NotNull
-	@Pattern(regexp = "\\d[A-Za-z]?")
 	private String number_2;
 	@NotNull
 	@Min(value = 1000)

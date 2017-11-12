@@ -45,7 +45,6 @@ public class ConfirmationController {
 		}
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("form", form);
 			return "driver/confirm";
 		}
 

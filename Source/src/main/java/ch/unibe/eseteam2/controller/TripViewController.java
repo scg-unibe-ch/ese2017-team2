@@ -40,7 +40,8 @@ public class TripViewController {
 	private void addAttributes(Long id, Model model) throws Exception {
 		Trip trip = tripService.findTrip(id);
 
-		model.addAttribute("trip", new TripViewForm(trip));
-
+		// TODO check why this is not working.
+		// model.addAttribute("trip", new TripViewForm(trip));
+		model.addAttribute("trip", trip);
 	}
 }

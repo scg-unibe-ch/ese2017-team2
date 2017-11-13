@@ -105,10 +105,7 @@ public class TripEditController {
 	}
 
 	private void addDriver(Trip trip, Long driverId, BindingResult bindingResult) {
-		if (trip.getTripState() == TripState.assigned) {
-			bindingResult.addError(new FieldError("trip", "driver", "Can not change driver of an assigned trip."));
-			return;
-		}
+		
 		if (driverId == null) {
 			return;
 		}

@@ -49,8 +49,7 @@ public class DriverListController {
 				throw new Exception("Invalid action.");
 			}
 		} catch (Exception e) {
-			// TODO display error message.
-			// bindingResult.reject(e.getMessage());
+			model.addAttribute("error", e.getMessage());
 		}
 
 		tripService.updateTripStates();

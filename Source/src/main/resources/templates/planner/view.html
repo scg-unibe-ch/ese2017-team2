@@ -28,7 +28,37 @@
 </head>
 <body style="background-color: #3f5d20;">
 
-	<div class="row justify-content-center align-right">
+	<!-- Hide errorModal if there is no error: -->
+	<div th:remove="${error} == null ? all : none">
+		<!-- Open errorModal on page load: -->
+		<script type="text/javascript">
+			$(window).on('load', function() {
+				$('#errorModal').modal('show');
+			});
+		</script>
+	</div>
+
+	<!-- Bootstrap Modal that displays an error message: -->
+	<div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+		aria-labelledby="errorModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="errorModalLabel">Error</h5>
+				</div>
+				<div class="modal-body">
+
+					<label th:text="${error}"></label>
+
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" role="button" href="/planner/list">Okay</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:remove="${trip} == null ? all : none" class="row justify-content-center align-right">
 		<div class="container">
 			<div class="row">
 				<div class="container" id="formContainer">

@@ -29,6 +29,7 @@ public class PlannerListController {
 	public String postForm(@RequestParam(value = "action", required = false) String action, @RequestParam(value = "select", required = false) Long id, Model model) {
 
 		try {
+
 			if (action == null) {
 				throw new Exception("No action specified.");
 			}
@@ -49,8 +50,7 @@ public class PlannerListController {
 			}
 
 		} catch (Exception e) {
-			// TODO display error message.
-			// bindingResult.reject(e.getMessage());
+			model.addAttribute("error", e.getMessage());
 		}
 
 		tripService.updateTripStates();

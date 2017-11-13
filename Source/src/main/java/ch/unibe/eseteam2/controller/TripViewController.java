@@ -20,9 +20,8 @@ public class TripViewController {
 		try {
 			addAttributes(id, model);
 		} catch (Exception e) {
-			// TODO Display error message
-
-			return "redirect:/planner/list";
+			
+			model.addAttribute("error", e.getMessage());
 		}
 
 		return "planner/view";
@@ -33,9 +32,9 @@ public class TripViewController {
 		try {
 			addAttributes(id, model);
 		} catch (Exception e) {
-			// TODO Display error message
-
-			return "redirect:/driver/list";
+			
+			model.addAttribute("error", e.getMessage());
+			
 		}
 
 		return "driver/view";
@@ -43,9 +42,6 @@ public class TripViewController {
 
 	private void addAttributes(Long id, Model model) throws Exception {
 		Trip trip = tripService.findTrip(id);
-		if (trip == null) {
-			throw new Exception();
-		}
 
 		model.addAttribute("trip", new TripViewForm(trip));
 	}

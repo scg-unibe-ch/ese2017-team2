@@ -36,7 +36,7 @@ public class TripService {
 		Trip trip;
 
 		if (id == null) {
-			throw new Exception("Trip id is null.");
+			throw new Exception("No trip selected.");
 		}
 
 		trip = tripRepository.findOne(id);

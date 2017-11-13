@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ch.unibe.eseteam2.form.TripEditForm;
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
-import ch.unibe.eseteam2.model.TripState;
 import ch.unibe.eseteam2.service.DriverService;
 import ch.unibe.eseteam2.service.TripService;
 
@@ -33,21 +31,19 @@ public class TripEditController {
 	@GetMapping("/planner/edit/{id}")
 	public String getMapping(@PathVariable Long id, Model model) {
 
-		Trip trip;
 		try {
-			trip = tripService.findTrip(id);
+			Trip trip = tripService.findTrip(id);
+			model.addAttribute("trip", new TripEditForm(trip));
+
 		} catch (Exception e) {
-			// TODO display error message, maybe error page?
-			return "redirect:/planner/list";
+			model.addAttribute("error", e.getMessage());
 		}
 
-		model.addAttribute("trip", new TripEditForm(trip));
 		model.addAttribute("driverList", driverService.findDrivers());
 
 		return "/planner/edit";
 	}
 
-	
 	@PostMapping("/planner/edit/{id}")
 	public String postMapping(@PathVariable Long id, @RequestParam(name = "driverId", required = false) Long driverId, @Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult,
 			Model model) {
@@ -55,20 +51,22 @@ public class TripEditController {
 		Trip trip;
 		try {
 			trip = tripService.findTrip(id);
+			if (!trip.canEdit()) {
+				throw new Exception("Trip is in the state " + trip.getTripState() + " and can not be edited.");
+			}
+			updateTrip(trip, form, driverId, bindingResult);
+			
+			
 		} catch (Exception e) {
-			// TODO display error message, maybe error page?
-			return "redirect:/planner/list";
+			model.addAttribute("error", e.getMessage());
+
+			return "/planner/edit";
 		}
 
-		if (!trip.canEdit()) {
-			bindingResult.addError(new ObjectError("trip", "Trip can not be edited."));
-		}
-
-		updateTrip(trip, form, driverId, bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("driverList", driverService.findDrivers());
-			
+
 			// There is some invalid input, try again.
 			return "/planner/edit";
 		}
@@ -105,7 +103,7 @@ public class TripEditController {
 	}
 
 	private void addDriver(Trip trip, Long driverId, BindingResult bindingResult) {
-		
+
 		if (driverId == null) {
 			return;
 		}
@@ -114,7 +112,7 @@ public class TripEditController {
 			bindingResult.addError(new FieldError("trip", "driver", "Could not find selected driver in the database."));
 			return;
 		}
-		
+
 		trip.setDriver(driver);
 
 	}

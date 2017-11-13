@@ -28,8 +28,39 @@
 </head>
 <body style="background-color: #3f5d20;">
 
+	<!-- Hide errorModal if there is no error: -->
+	<div th:remove="${error} == null ? all : none">
+		<!-- Open errorModal on page load: -->
+		<script type="text/javascript">
+			$(window).on('load', function() {
+				$('#errorModal').modal('show');
+			});
+		</script>
+	</div>
 
-	<div class="row justify-content-center align-right">
+	<!-- Bootstrap Modal that displays an error message: -->
+	<div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+		aria-labelledby="errorModalLabel" aria-hidden="true"
+		data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="errorModalLabel">Error</h5>
+				</div>
+				<div class="modal-body">
+
+					<label th:text="${error}"></label>
+
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" role="button" href="/planner/list">Okay</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:remove="${trip} == null ? all : none"
+		class="row justify-content-center align-right">
 		<div class="container">
 			<div class="row">
 				<div class="container" id="formContainer">
@@ -37,9 +68,6 @@
 						style="background-color: white;">
 
 						<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p>
-
-
-
 
 						<h1 align="center">Edit Trip</h1>
 						<br />
@@ -81,9 +109,10 @@
 							<div class="col-2">
 								<label for="inputEmail4">Driver:</label> <select name="driverId"
 									class="form-control">
-									<option th:value="null" th:selected="*{driver} == null ? true : false">none</option>
-									<option th:each="d : ${driverList}"
-										th:value="${d.id}" th:text="${d.name}"
+									<option th:value="null"
+										th:selected="*{driver} == null ? true : false">none</option>
+									<option th:each="d : ${driverList}" th:value="${d.id}"
+										th:text="${d.name}"
 										th:selected=" (*{driver} != null) ? (${d.id} == *{driver.id} ? true : false) : false"></option>
 								</select> <label th:if="${#fields.hasErrors('driver')}"
 									th:errors="*{driver}">Driver Error> </label>

@@ -26,6 +26,15 @@ public class ConfirmationController {
 
 	@GetMapping("{id}")
 	public String getMapping(@PathVariable Long id, Model model) {
+		
+		try {
+			tripService.findTrip(id);
+			
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "driver/confirm";
+		}
+		
 		model.addAttribute("form", new ConfirmationForm());
 		return "driver/confirm";
 	}
@@ -39,20 +48,20 @@ public class ConfirmationController {
 			if (trip.getTripState() != TripState.active) {
 				throw new Exception("Trip is not in active state.");
 			}
+			updateTrip(trip, form);
+			
 		} catch (Exception e) {
-			// TODO display error message, maybe error page?
-			return "redirect:/driver/list";
+			model.addAttribute("error", e.getMessage());
+			return "driver/confirm";
 		}
 
 		if (bindingResult.hasErrors()) {
 			return "driver/confirm";
 		}
 
-		updateTrip(trip, form);
-		
 		return "redirect:/driver/list";
 	}
-	
+
 	private void updateTrip(Trip trip, ConfirmationForm form) {
 		if (form.isSuccess()) {
 			trip.setTripState(TripState.successful);
@@ -61,7 +70,7 @@ public class ConfirmationController {
 		}
 
 		trip.setFeedback(form.getFeedback());
-		
+
 		tripService.save(trip);
 
 	}

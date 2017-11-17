@@ -61,24 +61,48 @@
 		</div>
 	</div>
 
+
 	<div th:remove="${form} == null ? all : none">
-		<h1>Trip confirmation</h1>
 
-		<form th:object="${form}" method="post">
+		<div class="row justify-content-center align-right">
+			<div class="container">
+				<div class="row">
+					<div class="container" id="formContainer">
+						<form th:object="${form}" method="post" class="border-class"
+							style="background-color: white;">
 
-			The trip was: <input type="radio" th:field="*{success}" value="true" />Successful
-			<input type="radio" th:field="*{success}" value="false" />Unsuccessful
+							<h1 align="center">Trip confirmation</h1>
 
-			<br /> <br /> Feedback: <span
-				th:if="${#fields.hasErrors('feedback')}" th:errors="*{feedback}">Feedback
-				Error</span> <br />
-			<textarea name="Feedback" rows="6" cols="25" th:field="*{feedback}"> </textarea>
+							<div class="form-group" align="center">
+								<div class="col-4" align="center">
 
-			<br /> <a href="/driver/list">Cancel</a>
-			<button type="submit">Save</button>
+									The trip was: <input type="radio" th:field="*{success}"
+										value="true" />Successful <input type="radio"
+										th:field="*{success}" value="false" />Unsuccessful
+								</div>
+							</div>
 
-		</form>
 
+							<div class="form-group" align="center">
+								<div class="col-4" align="center">
+
+									Feedback: <span th:if="${#fields.hasErrors('feedback')}"
+										th:errors="*{feedback}">Feedback Error</span> <br />
+
+									<textarea name="Feedback" rows="4" cols="40"
+										th:field="*{feedback}"> </textarea>
+
+									<br />
+									<button type="submit" class="btn btn-outline-success">Save</button>
+									<a href="/driver/list" class="btn btn-outline-danger">Cancel</a>
+
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </body>

@@ -71,7 +71,7 @@ img {
 
 
 	<div class="row justify-content-center align-middle">
-		<div class="col-4">
+		<div class="col-5">
 			<div class="container" id="formContainer">
 
 
@@ -81,9 +81,9 @@ img {
 
 					<h3>Register</h3>
 
-					<h5>Address</h5>
+					
 					<div class="form-row">
-						<div class="col-4">
+						<div class="col-6">
 
 							<label for="inputAddress">First name:</label> <input type="text"
 								class="form-control" th:field="*{firstname}" /> <label
@@ -92,7 +92,7 @@ img {
 
 						</div>
 
-						<div class="col-4">
+						<div class="col-6">
 							<label for="inputAddress">Last name:</label> <input type="text"
 								class="form-control" th:field="*{lastname}" /> <label
 								th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Last
@@ -103,14 +103,14 @@ img {
 
 
 					<div class="form-row">
-						<div class="col-4">
+						<div class="col-6">
 							<label for="inputAddress">Street:</label> <input type="text"
 								class="form-control" id="inputAddress" th:field="*{street}" />
 							<label th:if="${#fields.hasErrors('street')}"
 								th:errors="*{street}">Street Error> </label>
 						</div>
 
-						<div class="col-2">
+						<div class="col-3">
 							<label for="inputAddress">Number:</label> <input type="text"
 								class="form-control" id="inputAddress" th:field="*{number}" />
 							<label th:if="${#fields.hasErrors('number')}"
@@ -121,13 +121,13 @@ img {
 
 
 					<div class="form-row">
-						<div class="col-4">
+						<div class="col-6">
 							<label for="inputEmail4">City:</label> <input type="text"
 								class="form-control" th:field="*{city}" /> <label
 								th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City
 								Error> </label>
 						</div>
-						<div class="col-2">
+						<div class="col-3">
 							<label for="inputEmail4">PLZ:</label> <input type="text"
 								class="form-control" th:field="*{plz}" /> <label
 								th:if="${#fields.hasErrors('plz')}" th:errors="*{plz}">PLZ

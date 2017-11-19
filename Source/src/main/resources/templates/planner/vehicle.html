@@ -65,8 +65,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link"
-					href="/planner/list">Trips</a>
+				<li class="nav-item"><a class="nav-link" href="/planner/list">Trips</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Drivers</a></li>
 				<li class="nav-item active"><a class="nav-link"
@@ -77,21 +76,36 @@
 			</form>
 		</div>
 	</nav>
-	<br /> Available vehicles:
+	<br /> 
+	Available vehicles:
 	<table>
+		<tr>
+			<th>Name</th>
+			<th>Total count</th>
+			<th>Available</th>
+			<th>Image</th>
+		</tr>
 		<tr th:each="vehicle : ${availableVehicleList}">
 			<td th:text="${vehicle.name}">name</td>
-			<td th:text="${vehicle.count}">customer</td>
+			<td th:text="${vehicle.count}">count</td>
+			<td th:text="${vehicle.available}"></td>
 			<td><img th:alt="${vehicle.image}"
 				th:src="'/images/' + ${vehicle.image}"></img></td>
 		</tr>
 	</table>
-
+	
 	All vehicles:
 	<table>
+		<tr>
+			<th>Name</th>
+			<th>Total count</th>
+			<th>Available</th>
+			<th>Image</th>
+		</tr>
 		<tr th:each="vehicle : ${vehicleList}">
 			<td th:text="${vehicle.name}">name</td>
-			<td th:text="${vehicle.count}">customer</td>
+			<td th:text="${vehicle.count}">count</td>
+			<td th:text="${vehicle.available}"></td>
 			<td><img th:alt="${vehicle.image}"
 				th:src="'/images/' + ${vehicle.image}"></img></td>
 		</tr>

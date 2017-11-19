@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.unibe.eseteam2.form.TripEditForm;
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
+import ch.unibe.eseteam2.model.Vehicle;
 import ch.unibe.eseteam2.service.DriverService;
 import ch.unibe.eseteam2.service.TripService;
+import ch.unibe.eseteam2.service.VehicleService;
 
 @Controller
 public class TripEditController {
@@ -28,25 +29,27 @@ public class TripEditController {
 	@Autowired
 	private DriverService driverService;
 
+	@Autowired
+	private VehicleService vehicleService;
+
 	@GetMapping("/planner/edit/{id}")
 	public String getMapping(@PathVariable Long id, Model model) {
-
+		Trip trip = null;
 		try {
-			Trip trip = tripService.findTrip(id);
+			trip = tripService.findTrip(id);
 			model.addAttribute("trip", new TripEditForm(trip));
 
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-
+		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles(trip));
 		model.addAttribute("driverList", driverService.findDrivers());
 
 		return "/planner/edit";
 	}
 
 	@PostMapping("/planner/edit/{id}")
-	public String postMapping(@PathVariable Long id, @RequestParam(name = "driverId", required = false) Long driverId, @Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult,
-			Model model) {
+	public String postMapping(@PathVariable Long id, @Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult, Model model) {
 
 		Trip trip;
 		try {
@@ -54,18 +57,17 @@ public class TripEditController {
 			if (!trip.canEdit()) {
 				throw new Exception("Trip is in the state " + trip.getTripState() + " and can not be edited.");
 			}
-			updateTrip(trip, form, driverId, bindingResult);
-			
-			
+			updateTrip(trip, form, bindingResult);
+
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 
 			return "/planner/edit";
 		}
 
-
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("driverList", driverService.findDrivers());
+			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles(trip));
 
 			// There is some invalid input, try again.
 			return "/planner/edit";
@@ -76,7 +78,7 @@ public class TripEditController {
 		return "redirect:/planner/list";
 	}
 
-	private void updateTrip(Trip trip, TripEditForm form, Long driverId, BindingResult bindingResult) {
+	private void updateTrip(Trip trip, TripEditForm form, BindingResult bindingResult) {
 		trip.setCustomer(form.getCustomer());
 		trip.setAnimal(form.getAnimal());
 		trip.setAnimalCount(form.getAnimalCount());
@@ -99,11 +101,35 @@ public class TripEditController {
 			trip.setDate(form.getDate());
 		}
 
-		addDriver(trip, driverId, bindingResult);
+		addDriver(form, trip, bindingResult);
+		addVehicle(form, trip, bindingResult);
 	}
 
-	private void addDriver(Trip trip, Long driverId, BindingResult bindingResult) {
+	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult) {
+		Long vehicleId = form.getVehicleId();
+		if (vehicleId == null) {
+			try {
+				trip.setVehicle(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return;
+		}
+		Vehicle vehicle = vehicleService.findVehicle(vehicleId);
+		if (vehicle == null) {
+			bindingResult.addError(new FieldError("trip", "vehicle", "Could not find selected vehicle in the database."));
+			return;
+		}
 
+		try {
+			trip.setVehicle(vehicle);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void addDriver(TripEditForm form, Trip trip, BindingResult bindingResult) {
+		Long driverId = form.getDriverId();
 		if (driverId == null) {
 			return;
 		}

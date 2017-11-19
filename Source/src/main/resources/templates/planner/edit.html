@@ -107,18 +107,29 @@
 									and Time Error> </label>
 							</div>
 							<div class="col-2">
-								<label for="inputEmail4">Driver:</label> <select name="driverId"
+								<label for="inputEmail4">Driver:</label> <select th:field="*{driverId}"
 									class="form-control">
 									<option th:value="null"
-										th:selected="*{driver} == null ? true : false">none</option>
+										th:selected="*{driverId} == null ? true : false">none</option>
 									<option th:each="d : ${driverList}" th:value="${d.id}"
 										th:text="${d.name}"
-										th:selected=" (*{driver} != null) ? (${d.id} == *{driver.id} ? true : false) : false"></option>
-								</select> <label th:if="${#fields.hasErrors('driver')}"
-									th:errors="*{driver}">Driver Error> </label>
+										th:selected=" (*{driverId} != null) ? (${d.id} == *{driverId} ? true : false) : false"></option>
+								</select> <label th:if="${#fields.hasErrors('driverId')}"
+									th:errors="*{driverId}">Driver Error> </label>
 							</div>
 						</div>
 
+						<div class="form-row">
+							<div class="col-2">
+								<label for="inputEmail4">Vehicle:</label> <select
+									th:field="*{vehicleId}" class="form-control">
+									<option th:value="null">none</option>
+									<option th:each="vehicle : ${vehicleList}"
+										th:value="${vehicle.id}" th:text="${vehicle.name}"></option>
+								</select> <label th:if="${#fields.hasErrors('vehicleId')}"
+									th:errors="*{vehicleId}">Vehicle Error> </label> <br /> <br />
+							</div>
+						</div>
 
 						<br /> <br />
 						<h5>Start address</h5>

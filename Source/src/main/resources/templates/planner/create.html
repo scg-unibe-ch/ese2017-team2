@@ -77,34 +77,45 @@
 									and Time Error> </label>
 							</div>
 							<div class="col-2">
-								<label for="inputEmail4">Driver:</label> <select name="driverId"
-									class="form-control">
+								<label for="inputEmail4">Driver:</label> <select
+									th:field="*{driverId}" class="form-control">
 									<option th:value="null">none</option>
 									<option th:each="driver : ${driverList}"
 										th:value="${driver.id}" th:text="${driver.name}"></option>
-								</select> <label th:if="${#fields.hasErrors('driver')}"
-									th:errors="*{driver}">Driver Error> </label>
+								</select> <label th:if="${#fields.hasErrors('driverId')}"
+									th:errors="*{driverId}">Driver Error> </label>
 							</div>
 						</div>
 
 
-						<br /> <br />
+						<div class="form-row">
+							<div class="col-2">
+								<label for="inputEmail4">Vehicle:</label> <select
+									th:field="*{vehicleId}" class="form-control">
+									<option th:value="null">none</option>
+									<option th:each="vehicle : ${vehicleList}"
+										th:value="${vehicle.id}" th:text="${vehicle.name}"></option>
+								</select> <label th:if="${#fields.hasErrors('vehicleId')}"
+									th:errors="*{vehicleId}">Vehicle Error> </label> <br /> <br />
+							</div>
+						</div>
+
 						<h5>Start address</h5>
 						<div class="form-row">
 							<div class="col-4">
 
 								<label for="inputAddress">First name:</label> <input type="text"
 									class="form-control" th:field="*{firstname_1}" /> <label
-									th:if="${#fields.hasErrors('firstname_1')}" th:errors="*{firstname_1}">First
-									name_1 Error</label>
+									th:if="${#fields.hasErrors('firstname_1')}"
+									th:errors="*{firstname_1}">First name_1 Error</label>
 
 							</div>
 
 							<div class="col-4">
 								<label for="inputAddress">Last name:</label> <input type="text"
 									class="form-control" th:field="*{lastname_1}" /> <label
-									th:if="${#fields.hasErrors('lastname_1')}" th:errors="*{lastname_1}">Last
-									name_1 Error</label>
+									th:if="${#fields.hasErrors('lastname_1')}"
+									th:errors="*{lastname_1}">Last name_1 Error</label>
 
 							</div>
 						</div>
@@ -153,16 +164,16 @@
 							<div class="col-4">
 								<label for="inputAddress">First name:</label> <input type="text"
 									class="form-control" th:field="*{firstname_2}" /> <label
-									th:if="${#fields.hasErrors('firstname_2')}" th:errors="*{firstname_2}">First
-									name_2 Error</label>
+									th:if="${#fields.hasErrors('firstname_2')}"
+									th:errors="*{firstname_2}">First name_2 Error</label>
 
 							</div>
 
 							<div class="col-4">
 								<label for="inputAddress">Last name:</label> <input type="text"
 									class="form-control" th:field="*{lastname_2}" /> <label
-									th:if="${#fields.hasErrors('lastname_2')}" th:errors="*{lastname_2}">Last
-									name_2 Error</label>
+									th:if="${#fields.hasErrors('lastname_2')}"
+									th:errors="*{lastname_2}">Last name_2 Error</label>
 
 							</div>
 						</div>

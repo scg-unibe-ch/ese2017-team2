@@ -29,6 +29,7 @@ public class TripService {
 	 */
 	public void deleteTrip(Trip trip) {
 		tripRepository.delete(trip);
+		trip.onDelete();
 	}
 
 

@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -82,8 +82,10 @@ public class Trip {
 	private TripState tripState;
 
 	@OneToOne
-	@JoinColumn()
 	private Driver driver;
+
+	@ManyToOne
+	private Vehicle vehicle;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Temporal(value = TemporalType.TIMESTAMP)
@@ -114,17 +116,27 @@ public class Trip {
 		this.plz_2 = plz_2;
 		this.city_2 = city_2;
 
-		this.tripState = TripState.editing;
+		setTripState(TripState.editing);
 
 		this.updateState();
 	}
 
 	public Trip() {
-		this.tripState = TripState.editing;
+		setTripState(TripState.editing);
 	}
 
 	public boolean canDelete() {
 		return this.tripState == TripState.editing || this.tripState == TripState.expired || this.tripState == TripState.unsuccessful;
+	}
+
+	public void onDelete() {
+		if (this.vehicle != null) {
+			try {
+				this.vehicle.unassign(this);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public boolean canEdit() {
@@ -132,21 +144,45 @@ public class Trip {
 	}
 
 	public void updateState() {
-		if (this.tripState == TripState.editing && this.driver != null) {
-			this.tripState = TripState.assigned;
-		}
-
-		if (hasStarted()) {
-			if (this.tripState == TripState.assigned) {
-				this.tripState = TripState.active;
+		switch (this.tripState) {
+		case active:
+			break;
+		case assigned:
+			if (this.driver != null && this.vehicle != null) {
+				if (this.hasStarted()) {
+					this.setTripState(TripState.active);
+					this.updateState();
+				}
+			} else {
+				this.setTripState(TripState.editing);
+				this.updateState();
 			}
-			if (this.tripState == TripState.editing) {
-				this.tripState = TripState.expired;
+			break;
+		case editing:
+			if (this.driver != null && this.vehicle != null) {
+				this.setTripState(TripState.assigned);
 			}
-		} else {
-			if (this.tripState == TripState.expired) {
-				this.tripState = TripState.editing;
+			if (this.hasStarted()) {
+				this.setTripState(TripState.expired);
 			}
+			break;
+		case expired:
+			if (this.date != null && !this.hasStarted()) {
+				this.setTripState(TripState.editing);
+				this.updateState();
+			}
+			break;
+		case successful:
+			break;
+		case unsuccessful:
+			if (this.driver != null && this.vehicle != null) {
+				if(this.hasStarted()) {
+					this.setFeedback(null);
+					this.setTripState(TripState.active);
+					this.updateState();
+				}
+			}
+			break;
 		}
 
 	}
@@ -175,6 +211,23 @@ public class Trip {
 
 	public void setTripState(TripState tripState) {
 		this.tripState = tripState;
+
+		switch (this.tripState) {
+		case successful:
+		case unsuccessful:
+			// unassign vehicle
+			if (this.vehicle != null) {
+				try {
+					this.vehicle.unassign(this);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				this.vehicle = null;
+			}
+
+		default:
+			break;
+		}
 	}
 
 	public TripState getTripState() {
@@ -333,6 +386,22 @@ public class Trip {
 		return "Trip [id=" + id + ", customer=" + customer + ", firstname_1=" + firstname_1 + ", lastname_1=" + lastname_1 + ", street_1=" + street_1 + ", number_1=" + number_1 + ", plz_1=" + plz_1
 				+ ", city_1=" + city_1 + ", firstname_2=" + firstname_2 + ", lastname_2=" + lastname_2 + ", street_2=" + street_2 + ", number_2=" + number_2 + ", plz_2=" + plz_2 + ", city_2=" + city_2
 				+ ", animal=" + animal + ", animalCount=" + animalCount + ", tripState=" + tripState + ", driver=" + driver + ", date=" + date + ", feedback=" + feedback + "]";
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) throws Exception {
+		if (this.vehicle != null) {
+			this.vehicle.unassign(this);
+		}
+		if (vehicle != null) {
+			vehicle.assign(this);
+		}
+		this.vehicle = vehicle;
+
+		this.updateState();
 	}
 
 }

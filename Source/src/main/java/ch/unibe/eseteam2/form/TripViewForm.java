@@ -27,6 +27,8 @@ public class TripViewForm {
 	private int animalCount;
 
 	private String driver;
+	
+	private String vehicle;
 
 	private Date date;
 
@@ -42,6 +44,10 @@ public class TripViewForm {
 
 		if (trip.getDriver() != null) {
 			this.driver = trip.getDriver().getName();
+		}
+		
+		if(trip.getVehicle() != null) {
+			this.vehicle = trip.getVehicle().getName();
 		}
 
 		this.date = trip.getDate();
@@ -221,6 +227,14 @@ public class TripViewForm {
 		return "TripViewForm [customer=" + customer + ", firstname_1=" + firstname_1 + ", lastname_1=" + lastname_1 + ", street_1=" + street_1 + ", number_1=" + number_1 + ", plz_1=" + plz_1
 				+ ", city_1=" + city_1 + ", firstname_2=" + firstname_2 + ", lastname_2=" + lastname_2 + ", street_2=" + street_2 + ", number_2=" + number_2 + ", plz_2=" + plz_2 + ", city_2=" + city_2
 				+ ", animal=" + animal + ", animalCount=" + animalCount + ", driver=" + driver + ", date=" + date + ", tripState=" + tripState + ", feedback=" + feedback + "]";
+	}
+
+	public String getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(String vehicle) {
+		this.vehicle = vehicle;
 	}
 
 }

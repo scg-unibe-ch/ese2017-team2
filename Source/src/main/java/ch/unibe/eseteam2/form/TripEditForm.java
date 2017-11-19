@@ -13,7 +13,6 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
 
 public class TripEditForm {
@@ -34,7 +33,9 @@ public class TripEditForm {
 	@Future(message = "has to be in the future.")
 	private Date date;
 
-	private Driver driver;
+	private Long driverId;
+
+	private Long vehicleId;
 
 	@NotNull
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
@@ -82,7 +83,18 @@ public class TripEditForm {
 		this.animalCount = trip.getAnimalCount();
 
 		this.date = trip.getDate();
-		this.driver = trip.getDriver();
+
+		if (trip.getDriver() != null) {
+			this.driverId = trip.getDriver().getId();
+		} else {
+			this.driverId = null;
+		}
+
+		if (trip.getVehicle() != null) {
+			this.vehicleId = trip.getVehicle().getId();
+		} else {
+			this.vehicleId = null;
+		}
 
 		this.firstname_1 = trip.getFirstname_1();
 		this.lastname_1 = trip.getLastname_1();
@@ -232,12 +244,20 @@ public class TripEditForm {
 		this.date = date;
 	}
 
-	public Driver getDriver() {
-		return driver;
+	public Long getDriverId() {
+		return driverId;
 	}
 
-	public void setDriver(Driver driver) {
-		this.driver = driver;
+	public void setDriverId(Long driverId) {
+		this.driverId = driverId;
+	}
+
+	public Long getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(Long vehicleId) {
+		this.vehicleId = vehicleId;
 	}
 
 }

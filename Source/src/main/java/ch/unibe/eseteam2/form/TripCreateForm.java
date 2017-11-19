@@ -13,8 +13,6 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import ch.unibe.eseteam2.model.Driver;
-
 public class TripCreateForm {
 	@NotNull
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
@@ -27,14 +25,15 @@ public class TripCreateForm {
 	@NotNull
 	@Min(value = 1, message = "has to be at least 1.")
 	private int animalCount;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Future(message = "has to be in the future.")
 	private Date date;
-	
-	private Driver driver;
-	
+
+	private Long driverId;
+
+	private Long vehicleId;
 
 	@NotNull
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
@@ -204,13 +203,20 @@ public class TripCreateForm {
 		this.date = date;
 	}
 
-	public Driver getDriver() {
-		return driver;
+	public Long getDriverId() {
+		return driverId;
 	}
 
-	public void setDriver(Driver driver) {
-		this.driver = driver;
+	public void setDriverId(Long driverId) {
+		this.driverId = driverId;
 	}
 
-	
+	public Long getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(Long vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+
 }

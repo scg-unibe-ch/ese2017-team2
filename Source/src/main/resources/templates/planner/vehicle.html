@@ -99,7 +99,7 @@
 					<td th:text="${vehicle.name}">name</td>
 					<td th:text="${vehicle.count}">count</td>
 					<td th:text="${vehicle.available}"></td>
-					<td><img th:alt="${vehicle.image}"
+					<td><img class="img-thumbnail" height="100" width="100" th:alt="${vehicle.image}"
 						th:src="'/images/' + ${vehicle.image}"></img></td>
 				</tr>
 			</table>

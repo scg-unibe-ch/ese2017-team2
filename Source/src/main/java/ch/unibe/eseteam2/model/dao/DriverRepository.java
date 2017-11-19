@@ -6,6 +6,6 @@ import ch.unibe.eseteam2.model.Driver;
 
 public interface DriverRepository extends CrudRepository<Driver, Long> {
 
-	public Driver findByName(String name);
+	public Driver findByEmail(String email);
 
 }

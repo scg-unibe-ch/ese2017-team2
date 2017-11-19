@@ -23,7 +23,7 @@ public class DriverService {
 		driverRepository.save(driver);
 	}
 
-	public Driver findDriver(String name) {
-		return driverRepository.findByName(name);
+	public Driver findDriver(String email) {
+		return driverRepository.findByEmail(email);
 	}
 }

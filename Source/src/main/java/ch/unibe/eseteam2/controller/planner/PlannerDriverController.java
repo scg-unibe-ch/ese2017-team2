@@ -47,7 +47,7 @@ public class PlannerDriverController {
 		}
 
 		model.addAttribute("driverList", driverService.findDrivers());
-		return "/planner/list";
+		return "/planner/driverlist";
 	}
 
 	@GetMapping("/{id}")

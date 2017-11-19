@@ -15,7 +15,7 @@ public class UserForm {
 	@Email(message="has to be a valid email address.")
 	private String email;
 	@NotNull
-	@Length(min = 8, max = 100, message = "has to be between 2 and 100 characters long.")
+	@Length(min = 8, max = 100, message = "has to be between 8 and 100 characters long.")
 	private String password;
 
 	@NotNull

@@ -176,7 +176,7 @@ public class Trip {
 			break;
 		case unsuccessful:
 			if (this.driver != null && this.vehicle != null) {
-				if(this.hasStarted()) {
+				if (this.hasStarted()) {
 					this.setFeedback(null);
 					this.setTripState(TripState.active);
 					this.updateState();
@@ -192,11 +192,8 @@ public class Trip {
 	}
 
 	public void setDriver(Driver driver) {
-		if (driver != null) {
-			this.driver = driver;
-			this.updateState();
-		}
-
+		this.driver = driver;
+		this.updateState();
 	}
 
 	public void setDate(Date date) {

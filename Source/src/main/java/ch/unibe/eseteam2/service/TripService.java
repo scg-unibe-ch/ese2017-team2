@@ -60,4 +60,8 @@ public class TripService {
 		tripRepository.save(trip);
 	}
 
+	public Iterable<Trip> findTrips(Driver driver) {
+		return tripRepository.findByDriver(driver);
+	}
+
 }

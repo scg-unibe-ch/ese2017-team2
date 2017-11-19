@@ -10,4 +10,6 @@ public interface TripRepository extends CrudRepository<Trip, Long> {
 	public Iterable<Trip> findByTripState(TripState tripState);
 
 	public Iterable<Trip> findByDriverAndTripState(Driver driver, TripState tripState);
+
+	public Iterable<Trip> findByDriver(Driver driver);
 }

@@ -17,7 +17,7 @@
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
 
-<title>Vehicle list</title>
+<title>Driver list</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -67,9 +67,11 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="/planner/list">Trips</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="/planner/driver/list">Drivers</a></li>
-				<li class="nav-item active"><a class="nav-link"
-					href="/planner/vehicle/list">Vehicles <span class="sr-only">(current)</span></a></li>
+				<li class="nav-item active"><a class="nav-link" href="#">Drivers
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/planner/vehicle/list">Vehicles</a></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<a href="/user/logout" class="btn btn-outline-danger my-2 my-sm-0">Logout</a>
@@ -78,60 +80,31 @@
 	</nav>
 	<br />
 
-	<p>
-		<button class="btn btn-light btn-block" type="button"
-			data-toggle="collapse" data-target="#available_vehicles"
-			aria-expanded="false" aria-controls="available_vehicles">
-			<h2>Available vehicles</h2>
-		</button>
-	</p>
 
-	<div class="collapse multi-collapse show" id="available_vehicles">
-		<div class="card card-body">
+	<form action="#" th:action="@{/planner/driver/list}" method="post">
+		<fieldset>
+			<button class="btn btn-outline-secondary" type="submit">View</button>
+
+			<br></br>
+
 			<table class="table table-sm">
-				<tr>
-					<th>Name</th>
-					<th>Total count</th>
-					<th>Available</th>
-					<th>Image</th>
-				</tr>
-				<tr th:each="vehicle : ${availableVehicleList}">
-					<td th:text="${vehicle.name}">name</td>
-					<td th:text="${vehicle.count}">count</td>
-					<td th:text="${vehicle.available}"></td>
-					<td><img class="img-thumbnail" height="100" width="100" th:alt="${vehicle.image}"
-						th:src="'/images/' + ${vehicle.image}"></img></td>
-				</tr>
-			</table>
-		</div>
-	</div>
+				<thead>
+					<tr>
+						<th scope="col"></th>
+						<th scope="col">Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="driver : ${driverList}">
+						<td><input type="radio" name="select" th:value="${driver.id}"
+							required="required"></input></td>
+						<td th:text="${driver.name}">name</td>
 
-	<p>
-		<button class="btn btn-light btn-block" type="button"
-			data-toggle="collapse" data-target="#all_vehicles"
-			aria-expanded="false" aria-controls="all_vehicles">
-			<h2>All vehicles</h2>
-		</button>
-	</p>
-
-	<div class="collapse multi-collapse" id="all_vehicles">
-		<div class="card card-body">
-			<table class="table table-sm">
-				<tr>
-					<th>Name</th>
-					<th>Total count</th>
-					<th>Available</th>
-					<th>Image</th>
-				</tr>
-				<tr th:each="vehicle : ${vehicleList}">
-					<td th:text="${vehicle.name}">name</td>
-					<td th:text="${vehicle.count}">count</td>
-					<td th:text="${vehicle.available}"></td>
-					<td><img class="img-thumbnail" height="100" width="100" th:alt="${vehicle.image}"
-						th:src="'/images/' + ${vehicle.image}"></img></td>
-				</tr>
+					</tr>
+				</tbody>
 			</table>
-		</div>
-	</div>
+		</fieldset>
+	</form>
+
 </body>
 </html>

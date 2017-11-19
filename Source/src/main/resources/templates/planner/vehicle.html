@@ -22,25 +22,21 @@
 </head>
 <body>
 
-<div id="carouselExampleControls" class="carousel slide"
+	<div id="carouselExampleControls" class="carousel slide"
 		data-ride="carousel">
 		<div class="carousel-inner" role="listbox"
 			style="height: 350px !important;">
 			<div class="carousel-item active">
-				<img class="d-block w-100" src="/images/d.jpg"
-					alt="First slide" />
+				<img class="d-block w-100" src="/images/d.jpg" alt="First slide" />
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="/images/a.jpg"
-					alt="Second slide" />
+				<img class="d-block w-100" src="/images/a.jpg" alt="Second slide" />
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="/images/b.jpg"
-					alt="Third slide" />
+				<img class="d-block w-100" src="/images/b.jpg" alt="Third slide" />
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100"
-					src="/images/deer.jpg" alt="Fourth slide" />
+				<img class="d-block w-100" src="/images/deer.jpg" alt="Fourth slide" />
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleControls"
@@ -58,9 +54,8 @@
 
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand"> <img
-			src="/images/Logo.png" width="30" height="30"
-			class="d-inline-block align-top" alt="" /> AniTrans
+		<a class="navbar-brand"> <img src="/images/Logo.png" width="30"
+			height="30" class="d-inline-block align-top" alt="" /> AniTrans
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -70,27 +65,35 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link"
-					href="/planner/list">Trips <span class="sr-only">(current)</span></a>
+				<li class="nav-item"><a class="nav-link"
+					href="/planner/list">Trips</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Drivers</a></li>
-				<li class="nav-item"><a class="nav-link" href="/planner/vehicle/list">Vehicles</a>
-				</li>
+				<li class="nav-item active"><a class="nav-link"
+					href="/planner/vehicle/list">Vehicles <span class="sr-only">(current)</span></a></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<a href="/user/logout" class="btn btn-outline-danger my-2 my-sm-0">Logout</a>
 			</form>
 		</div>
 	</nav>
-	<br />
-	
-	Vehicle list:
+	<br /> Available vehicles:
+	<table>
+		<tr th:each="vehicle : ${availableVehicleList}">
+			<td th:text="${vehicle.name}">name</td>
+			<td th:text="${vehicle.count}">customer</td>
+			<td><img th:alt="${vehicle.image}"
+				th:src="'/images/' + ${vehicle.image}"></img></td>
+		</tr>
+	</table>
+
+	All vehicles:
 	<table>
 		<tr th:each="vehicle : ${vehicleList}">
 			<td th:text="${vehicle.name}">name</td>
-			<!-- 			<td th:text="${vehicle.count}">customer</td> -->
-			<td><img th:each="i : ${ #numbers.sequence(1,vehicle.count) }"
-				th:alt="${vehicle.image}" th:src="'/images/' + ${vehicle.image}"></img></td>
+			<td th:text="${vehicle.count}">customer</td>
+			<td><img th:alt="${vehicle.image}"
+				th:src="'/images/' + ${vehicle.image}"></img></td>
 		</tr>
 	</table>
 </body>

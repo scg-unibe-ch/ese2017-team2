@@ -22,5 +22,6 @@ public class VehicleListController {
 
 	private void addVehicleLists(Model model) {
 		model.addAttribute("vehicleList", this.vehicleService.findVehicles());
+		model.addAttribute("availableVehicleList", vehicleService.findAvailableVehicles());
 	}
 }

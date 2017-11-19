@@ -76,39 +76,62 @@
 			</form>
 		</div>
 	</nav>
-	<br /> 
-	Available vehicles:
-	<table>
-		<tr>
-			<th>Name</th>
-			<th>Total count</th>
-			<th>Available</th>
-			<th>Image</th>
-		</tr>
-		<tr th:each="vehicle : ${availableVehicleList}">
-			<td th:text="${vehicle.name}">name</td>
-			<td th:text="${vehicle.count}">count</td>
-			<td th:text="${vehicle.available}"></td>
-			<td><img th:alt="${vehicle.image}"
-				th:src="'/images/' + ${vehicle.image}"></img></td>
-		</tr>
-	</table>
-	
-	All vehicles:
-	<table>
-		<tr>
-			<th>Name</th>
-			<th>Total count</th>
-			<th>Available</th>
-			<th>Image</th>
-		</tr>
-		<tr th:each="vehicle : ${vehicleList}">
-			<td th:text="${vehicle.name}">name</td>
-			<td th:text="${vehicle.count}">count</td>
-			<td th:text="${vehicle.available}"></td>
-			<td><img th:alt="${vehicle.image}"
-				th:src="'/images/' + ${vehicle.image}"></img></td>
-		</tr>
-	</table>
+	<br />
+
+	<p>
+		<button class="btn btn-light btn-block" type="button"
+			data-toggle="collapse" data-target="#available_vehicles"
+			aria-expanded="false" aria-controls="available_vehicles">
+			<h2>Available vehicles</h2>
+		</button>
+	</p>
+
+	<div class="collapse multi-collapse show" id="available_vehicles">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Name</th>
+					<th>Total count</th>
+					<th>Available</th>
+					<th>Image</th>
+				</tr>
+				<tr th:each="vehicle : ${availableVehicleList}">
+					<td th:text="${vehicle.name}">name</td>
+					<td th:text="${vehicle.count}">count</td>
+					<td th:text="${vehicle.available}"></td>
+					<td><img th:alt="${vehicle.image}"
+						th:src="'/images/' + ${vehicle.image}"></img></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<p>
+		<button class="btn btn-light btn-block" type="button"
+			data-toggle="collapse" data-target="#all_vehicles"
+			aria-expanded="false" aria-controls="all_vehicles">
+			<h2>All vehicles</h2>
+		</button>
+	</p>
+
+	<div class="collapse multi-collapse" id="all_vehicles">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Name</th>
+					<th>Total count</th>
+					<th>Available</th>
+					<th>Image</th>
+				</tr>
+				<tr th:each="vehicle : ${vehicleList}">
+					<td th:text="${vehicle.name}">name</td>
+					<td th:text="${vehicle.count}">count</td>
+					<td th:text="${vehicle.available}"></td>
+					<td><img class="img-thumbnail" height="100" width="100" th:alt="${vehicle.image}"
+						th:src="'/images/' + ${vehicle.image}"></img></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

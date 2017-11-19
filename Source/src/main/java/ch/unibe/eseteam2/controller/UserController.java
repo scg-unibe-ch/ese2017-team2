@@ -43,7 +43,7 @@ public class UserController {
 
 	@PreAuthorize("@userSecurityService.canCreate()")
 	@PostMapping(path = "")
-	public String create(@Valid @ModelAttribute("user") UserForm form, BindingResult bindingResult) {
+	public String create(@Valid @ModelAttribute("user") UserForm form, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			return "/login/registration";
@@ -57,8 +57,8 @@ public class UserController {
 		// }
 
 		if (userDetailsManager.userExists(form.getEmail())) {
-
-			return "login/duplicate";
+			model.addAttribute("error", "A user already exists with the same email address.");
+			return "/login/registration";
 
 		} else {
 			User user = new User(form.getEmail(), form.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_DRIVER")));

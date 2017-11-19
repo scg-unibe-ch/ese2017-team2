@@ -49,13 +49,6 @@ public class UserController {
 			return "/login/registration";
 		}
 
-		// TODO move to a better place
-		// if (!userDetailsManager.userExists("admin@anitrans.ch")) {
-		// User admin = new User("admin@anitrans.ch", "anitrans",
-		// Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
-		// userDetailsManager.createUser(admin);
-		// }
-
 		if (userDetailsManager.userExists(form.getEmail())) {
 			model.addAttribute("error", "A user already exists with the same email address.");
 			return "/login/registration";

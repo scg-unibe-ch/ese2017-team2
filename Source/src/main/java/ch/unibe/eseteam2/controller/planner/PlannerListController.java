@@ -40,6 +40,7 @@ public class PlannerListController {
 			} else if (action.equals("delete")) {
 
 				deleteTrip(id);
+				model.addAttribute("message", "Trip deleted.");	
 
 			} else if (action.equals("view")) {
 

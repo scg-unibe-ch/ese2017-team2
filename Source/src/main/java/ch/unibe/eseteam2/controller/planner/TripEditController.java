@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.eseteam2.form.TripEditForm;
 import ch.unibe.eseteam2.model.Driver;
@@ -49,7 +50,7 @@ public class TripEditController {
 	}
 
 	@PostMapping("/planner/edit/{id}")
-	public String postMapping(@PathVariable Long id, @Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult, Model model) {
+	public String postMapping(@PathVariable Long id, @Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
 
 		Trip trip;
 		try {
@@ -74,7 +75,8 @@ public class TripEditController {
 		}
 
 		tripService.save(trip);
-
+		redirectAttrs.addFlashAttribute("message", "Trip saved with state " + trip.getTripState() + ".");
+		
 		return "redirect:/planner/list";
 	}
 

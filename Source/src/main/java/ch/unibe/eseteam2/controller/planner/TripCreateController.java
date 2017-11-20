@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.eseteam2.form.TripCreateForm;
 import ch.unibe.eseteam2.model.Driver;
@@ -41,7 +42,7 @@ public class TripCreateController {
 	}
 
 	@PostMapping("/planner/create")
-	public String postMapping(@Valid @ModelAttribute("trip") TripCreateForm tripForm, BindingResult bindingResult, Model model) {
+	public String postMapping(@Valid @ModelAttribute("trip") TripCreateForm tripForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
 		Trip trip = createTrip(tripForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
@@ -53,7 +54,7 @@ public class TripCreateController {
 		}
 
 		tripService.save(trip);
-
+		redirectAttrs.addFlashAttribute("message", "Trip saved with state " + trip.getTripState() + ".");
 		return "redirect:/planner/list";
 	}
 
@@ -69,7 +70,7 @@ public class TripCreateController {
 	}
 
 	private void addVehicle(TripCreateForm form, Trip trip, BindingResult bindingResult) {
-		//TODO
+		// TODO
 		Long vehicleId = form.getVehicleId();
 		if (vehicleId == null) {
 			return;
@@ -79,7 +80,7 @@ public class TripCreateController {
 			bindingResult.addError(new FieldError("trip", "vehicleId", "Could not find selected vehicle in the database."));
 			return;
 		}
-		
+
 		try {
 			trip.setVehicle(vehicle);
 		} catch (Exception e) {

@@ -68,7 +68,8 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="/planner/list">Trips <span class="sr-only">(current)</span></a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="/planner/driver/list">Drivers</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/planner/driver/list">Drivers</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="/planner/vehicle/list">Vehicles</a></li>
 			</ul>
@@ -90,8 +91,9 @@
 	</div>
 
 	<!-- Bootstrap Modal that displays an error message: -->
-	<div class="modal fade" data-backdrop="static" id="errorModal" tabindex="-1" role="dialog"
-		aria-labelledby="errorModalLabel" aria-hidden="true">
+	<div class="modal fade" data-backdrop="static" id="errorModal"
+		tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -112,6 +114,16 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<!-- 	Displays a message -->
+	<div th:remove="${message} == null ? all : none"
+		class="alert alert-success alert-dismissible fade show" role="alert">
+		<div th:text="${message}"></div>
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
 	</div>
 
 
@@ -156,8 +168,8 @@
 								<div class="modal-body">Are you sure you want to delete
 									this trip?</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-outline-success" name="action"
-										value="delete">Yes</button>
+									<button type="submit" class="btn btn-outline-success"
+										name="action" value="delete">Yes</button>
 									<button type="button" class="btn btn-outline-danger"
 										data-dismiss="modal">No</button>
 								</div>
@@ -230,8 +242,8 @@
 								<div class="modal-body">Are you sure you want to delete
 									this trip?</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-outline-success" name="action"
-										value="delete">Yes</button>
+									<button type="submit" class="btn btn-outline-success"
+										name="action" value="delete">Yes</button>
 									<button type="button" class="btn btn-outline-danger"
 										data-dismiss="modal">No</button>
 								</div>
@@ -400,8 +412,8 @@
 								<div class="modal-body">Are you sure you want to delete
 									this trip?</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-outline-success" name="action"
-										value="delete">Yes</button>
+									<button type="submit" class="btn btn-outline-success"
+										name="action" value="delete">Yes</button>
 									<button type="button" class="btn btn-outline-danger"
 										data-dismiss="modal">No</button>
 								</div>

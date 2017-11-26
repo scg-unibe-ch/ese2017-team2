@@ -97,16 +97,26 @@
 						</div>
 
 
-
-
 						<div class="form-row">
-							<div class="col-4">
+							<div class="form-group col-md-4">
 								<label for="inputEmail4">Date and Time:</label> <input
-									type="datetime-local" class="form-control" th:field="*{date}" />
+									type="datetime-local" class="form-control" th:field="*{date}"/>
 								<label th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date
 									and Time Error> </label>
 							</div>
-							<div class="col-2">
+							<div class="form-group col-md-1">
+								<label for="inputEmail4">Estimated</label>
+								<input class="form-control" type="number" placeholder="h"/> 
+							</div>
+							<div class="form-group col-md-1">
+							<label for="inputEmail4">time:</label>
+							<input class="form-control" type="number" name="quantity" min="0" max="59" placeholder="min"/>
+							</div>
+						</div>
+
+
+						<div class="form-row">
+						<div class="col-2">
 								<label for="inputEmail4">Driver:</label> <select th:field="*{driverId}"
 									class="form-control">
 									<option th:value="null"
@@ -117,9 +127,6 @@
 								</select> <label th:if="${#fields.hasErrors('driverId')}"
 									th:errors="*{driverId}">Driver Error> </label>
 							</div>
-						</div>
-
-						<div class="form-row">
 							<div class="col-2">
 								<label for="inputEmail4">Vehicle:</label> <select
 									th:field="*{vehicleId}" class="form-control">

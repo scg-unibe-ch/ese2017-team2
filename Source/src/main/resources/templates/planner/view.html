@@ -72,41 +72,75 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<h5>Details</h5>
-								<p th:text="'Customer: ' + ${trip.customer}" />
-								<p th:text="'Animal: ' + ${trip.animal}" />
-								<p th:text="'Count: ' + ${trip.animalCount}" />
-								<p
-									th:text="${trip.date != null} ? 'Date: ' + ${trip.date} : 'Date: not set'" />
-								<p
-									th:text="${trip.driver != null} ? 'Driver: ' + ${trip.driver} : 'Driver: not set'" />
-								<p
-									th:text="${trip.vehicle != null} ? 'Vehicle: ' + ${trip.vehicle} : 'Vehicle: not set'" />
-
-								<p th:text="'State: ' + ${trip.tripState}" />
-								<p
-									th:text="${trip.feedback != null} ? 'Feedback: ' + ${trip.feedback} : 'Feedback: not set'" />
+								<div class="row">
+								<div class="col-xs-6">
+								<p> Customer: &nbsp;&nbsp;</p> 
+								<p> Animal: &nbsp;&nbsp;</p> 
+								<p> Count: &nbsp;&nbsp;</p>
+								<p> Date: &nbsp;&nbsp;</p> 
+								<p> Driver: &nbsp;&nbsp;</p> 
+								<p> Vehicle: &nbsp;&nbsp;</p> 
+								<p> State: &nbsp;&nbsp;</p> 
+								<p> Feedback: &nbsp;&nbsp;</p> 
+								</div>
+								<div class="col-xs-6">
+								<p th:text="${trip.customer}" />
+								<p th:text="${trip.animal}" />
+								<p th:text="${trip.animalCount}" />
+								<p th:text="${trip.date != null} ?  ${trip.date} : 'not set'" />
+								<p th:text="${trip.driver != null} ?  ${trip.driver} : 'not set'" />
+								<p th:text="${trip.vehicle != null} ? ${trip.vehicle} : 'not set'" />
+								<p th:text="${trip.tripState}" />
+								<p th:text="${trip.feedback != null} ? ${trip.feedback} : 'not set'" />
+									</div>
 							</div>
+							</div>
+							
 
 
 							<div class="col-sm-4">
 								<h5>Start address</h5>
-								<p th:text="'First name: ' + ${trip.firstname_1}" />
-								<p th:text="'Last name: ' + ${trip.lastname_1}" />
-								<p th:text="'Street: ' + ${trip.street_1}" />
-								<p th:text="'Number: ' + ${trip.number_1}" />
-								<p th:text="'City: ' + ${trip.city_1}" />
-								<p th:text="'PLZ: ' + ${trip.plz_1}" />
+								<div class="row">
+								<div class="col-xs-6">
+								<p> First name: &nbsp;&nbsp;</p>
+								<p> Last name: &nbsp;&nbsp;</p>
+								<p> Street: &nbsp;&nbsp;</p>
+								<p> Number: &nbsp;&nbsp;</p>
+								<p> City: &nbsp;&nbsp;</p>
+								<p> PLZ: &nbsp;&nbsp;</p>
+								</div>
+								<div class="col-xs-6">
+								<p th:text="${trip.firstname_1}" />
+								<p th:text="${trip.lastname_1}" />
+								<p th:text="${trip.street_1}" />
+								<p th:text="${trip.number_1}" />
+								<p th:text="${trip.city_1}" />
+								<p th:text="${trip.plz_1}" />
 							</div>
+						</div>
+						</div>
 
 							<div class="col-sm-4">
-								<h5>End address</h5>
-								<p th:text="'First name: ' + ${trip.firstname_2}" />
-								<p th:text="'Last name: ' + ${trip.lastname_2}" />
-								<p th:text="'Street: ' + ${trip.street_2}" />
-								<p th:text="'Number: ' + ${trip.number_2}" />
-								<p th:text="'City: ' + ${trip.city_2}" />
-								<p th:text="'PLZ: ' + ${trip.plz_2}" />
+							<h5>End address</h5>
+								<div class="row">
+								<div class="col-xs-6">
+								<p> First name: &nbsp;&nbsp;</p>
+								<p> Last name: &nbsp;&nbsp;</p>
+								<p> Street: &nbsp;&nbsp;</p>
+								<p> Number: &nbsp;&nbsp;</p>
+								<p> City: &nbsp;&nbsp;</p>
+								<p> PLZ: &nbsp;&nbsp;</p>
+								</div>
+								<div class="col-xs-6">
+								<p th:text="${trip.firstname_2}" />
+								<p th:text="${trip.lastname_2}" />
+								<p th:text="${trip.street_2}" />
+								<p th:text="${trip.number_2}" />
+								<p th:text="${trip.city_2}" />
+								<p th:text="${trip.plz_2}" />
 							</div>
+							</div>
+						</div>
 						</div>
 
 

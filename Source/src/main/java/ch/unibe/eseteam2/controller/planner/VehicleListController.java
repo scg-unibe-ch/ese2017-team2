@@ -38,7 +38,7 @@ public class VehicleListController {
 			} else if (action.equals("delete")) {
 
 				deleteVehicle(id);
-				model.addAttribute("message", "Trip deleted.");
+				model.addAttribute("message", "Vehicle deleted.");
 
 			} else if (action.equals("create")) {
 

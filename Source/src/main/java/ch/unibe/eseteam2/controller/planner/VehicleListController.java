@@ -1,11 +1,17 @@
 package ch.unibe.eseteam2.controller.planner;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.unibe.eseteam2.model.Vehicle;
@@ -56,6 +62,16 @@ public class VehicleListController {
 		return "planner/vehicle/list";
 	}
 
+	@RequestMapping(path = "/image/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> getVehicleImage(@PathVariable("id") Long id, HttpServletResponse response) {
+		Vehicle vehicle = vehicleService.findVehicle(id);
+		if (vehicle != null) {
+			return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(vehicle.getImageData());
+		}
+		return ResponseEntity.noContent().build();
+
+	}
+
 	private String redirectCreate(Long id) {
 		return "redirect:/planner/vehicle/create";
 	}
@@ -70,7 +86,7 @@ public class VehicleListController {
 		if (vehicle == null) {
 			throw new Exception("Vehicle could not be found in database.");
 		}
-		
+
 		this.vehicleService.deleteVehicle(vehicle);
 	}
 

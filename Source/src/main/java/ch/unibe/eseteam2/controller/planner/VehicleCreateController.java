@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -72,8 +73,8 @@ public class VehicleCreateController {
 			bindingResult.addError(new FieldError(objectString, "image", "no image selected."));
 			return;
 		}
-		if (!file.getContentType().matches("image/.*")) {
-			bindingResult.addError(new FieldError(objectString, "image", "not an image file."));
+		if (!file.getContentType().equals((MediaType.IMAGE_JPEG_VALUE)) && !file.getContentType().equals((MediaType.IMAGE_PNG_VALUE))) {
+			bindingResult.addError(new FieldError(objectString, "image", "not an valid image file."));
 		}
 	}
 

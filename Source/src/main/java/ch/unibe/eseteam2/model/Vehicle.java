@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -28,22 +29,24 @@ public class Vehicle {
 	private int used;
 
 	/**
-	 * The width of the load area in centimeters.
-	 * Used to calculate how many animals fit in the vehicle.
+	 * The width of the load area in centimeters. Used to calculate how many
+	 * animals fit in the vehicle.
 	 */
 	@NotNull
 	@Column(name = "width")
 	private int width;
 
 	/**
-	 * The length of the load area in centimeters.
-	 * Used to calculate how many animals fit in the vehicle.
+	 * The length of the load area in centimeters. Used to calculate how many
+	 * animals fit in the vehicle.
 	 */
 	@NotNull
 	@Column(name = "length")
 	private int length;
 
-	private String image;
+	@Column(name = "image_data")
+	@Lob
+	private byte[] imageData;
 
 	public Vehicle() {
 
@@ -53,7 +56,7 @@ public class Vehicle {
 		this.setName(name);
 		this.setCount(count);
 		this.setUsed(0);
-		
+
 		this.setWidth(width);
 		this.setLength(length);
 	}
@@ -98,10 +101,10 @@ public class Vehicle {
 		if (name.isEmpty()) {
 			throw new IllegalArgumentException("Vehicle name can not be empty.");
 		}
-		if(name.length() < 2 || name.length() > 100) {
+		if (name.length() < 2 || name.length() > 100) {
 			throw new IllegalArgumentException("Vehicle name has to be between 2 and 100 characters long.");
 		}
-		
+
 		this.name = name;
 	}
 
@@ -125,14 +128,6 @@ public class Vehicle {
 		this.count = count;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	public int getUsed() {
 		return used;
 	}
@@ -152,9 +147,10 @@ public class Vehicle {
 	}
 
 	/**
-	 * Set the width of the load area.
-	 * The width has to be greater than zero.
-	 * @param width the width of the load area in meter
+	 * Set the width of the load area. The width has to be greater than zero.
+	 * 
+	 * @param width
+	 *            the width of the load area in meter
 	 */
 	public void setWidth(int width) {
 		if (width <= 0) {
@@ -166,17 +162,26 @@ public class Vehicle {
 	public int getLength() {
 		return length;
 	}
-	
+
 	/**
-	 * Set the length of the load area.
-	 * The length has to be greater than zero.
-	 * @param length the length of the load area in meter
+	 * Set the length of the load area. The length has to be greater than zero.
+	 * 
+	 * @param length
+	 *            the length of the load area in meter
 	 */
 	public void setLength(int length) {
 		if (length <= 0) {
 			throw new IllegalArgumentException("Vehicle length has to be greater than zero.");
 		}
 		this.length = length;
+	}
+
+	public byte[] getImageData() {
+		return imageData;
+	}
+
+	public void setImageData(byte[] imageData) {
+		this.imageData = imageData;
 	}
 
 }

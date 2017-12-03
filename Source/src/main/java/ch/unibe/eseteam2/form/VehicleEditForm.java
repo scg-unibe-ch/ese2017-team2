@@ -25,6 +25,8 @@ public class VehicleEditForm {
 	@Min(value = 1, message = "has to be at least 1.")
 	private int length;
 
+	private String image;
+
 	public VehicleEditForm() {
 		this.name = "";
 		this.count = 0;
@@ -83,6 +85,14 @@ public class VehicleEditForm {
 
 	public void setLength(int length) {
 		this.length = length;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

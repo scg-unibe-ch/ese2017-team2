@@ -57,7 +57,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<a class="btn btn-secondary" role="button" href="/planner/list">Okay</a>
+					<a class="btn btn-secondary" role="button" href="/planner/vehicle/list">Okay</a>
 				</div>
 			</div>
 		</div>
@@ -71,11 +71,14 @@
 			<div class="row">
 				<div class="container" id="formContainer">
 
-					<form th:object="${vehicle}" method="post" class="border-class"
+					<form th:object="${vehicle}" enctype="multipart/form-data"
+						method="post" class="border-class"
 						style="background-color: white;">
 
 
-						<h1 align="center">Edit Vehicle</h1>
+						<h1 align="center"
+							th:text="${create} ? 'Create Vehicle' : 'Edit Vehicle'">Edit
+							Vehicle</h1>
 
 						<div>
 							<label>Name:</label> <input class="form-control" type="text"
@@ -103,6 +106,14 @@
 								th:if="${#fields.hasErrors('count')}" th:errors="*{count}">Count
 								Error> </label>
 						</div>
+
+						<div>
+
+							<label>Image:</label> <input class="form-control" type="file"
+								name="file" accept="image/*"/><label th:if="${#fields.hasErrors('image')}"
+								th:errors="*{image}">Image Error> </label>
+						</div>
+
 
 
 						<button type="submit" class="btn btn-outline-success">Save</button>

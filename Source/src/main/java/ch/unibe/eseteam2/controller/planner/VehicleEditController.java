@@ -1,16 +1,21 @@
 package ch.unibe.eseteam2.controller.planner;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.eseteam2.form.VehicleEditForm;
@@ -34,33 +39,57 @@ public class VehicleEditController {
 			model.addAttribute("error", "Vehicle can not be found in database.");
 		}
 
+		model.addAttribute("create", false);
 		return "/planner/vehicle/edit";
 	}
 
 	@PostMapping("/edit/{id}")
-	public String editVehicle(@Valid @ModelAttribute("vehicle") VehicleEditForm form, BindingResult bindingResult, @PathVariable Long id, Model model, RedirectAttributes redirectAttrs) {
+	public String editVehicle(@RequestParam(name = "file", required = false) MultipartFile file, @Valid @ModelAttribute("vehicle") VehicleEditForm form, BindingResult bindingResult,
+			@PathVariable Long id, Model model, RedirectAttributes redirectAttrs) {
 
 		Vehicle vehicle = this.vehicleService.findVehicle(id);
 
 		if (vehicle == null) {
 			model.addAttribute("error", "Vehicle can not be found in database.");
 
+			model.addAttribute("create", false);
 			return "/planner/vehicle/edit/" + id;
 		}
 
 		form.checkErrors(vehicle, bindingResult, "vehicle");
 
+		checkFile(file, bindingResult, "vehicle");
+
 		if (bindingResult.hasErrors()) {
 			// There is some invalid input, try again.
+			model.addAttribute("create", false);
 			return "/planner/vehicle/edit";
 		}
 
 		updateVehicle(vehicle, form);
+		if (file != null && !file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+				vehicle.setImageData(bytes);
+			} catch (IOException e) {
+				bindingResult.addError(new FieldError("vehicle", "image", "could not upload file."));
+				model.addAttribute("create", false);
+				return "/planner/vehicle/edit";
+			}
+		}
 
 		vehicleService.save(vehicle);
 
 		redirectAttrs.addFlashAttribute("message", "Vehicle saved.");
 		return "redirect:/planner/vehicle/list";
+	}
+
+	private void checkFile(MultipartFile file, BindingResult bindingResult, String objectString) {
+		if (file != null && !file.isEmpty()) {
+			if (!file.getContentType().matches("image/.*")) {
+				bindingResult.addError(new FieldError(objectString, "image", "not an image file."));
+			}
+		}
 	}
 
 	private void updateVehicle(Vehicle vehicle, VehicleEditForm form) {

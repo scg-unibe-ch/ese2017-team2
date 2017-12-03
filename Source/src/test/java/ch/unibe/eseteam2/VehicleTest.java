@@ -12,49 +12,61 @@ public class VehicleTest {
 
 	@Test
 	public void constructor() {
-		new Vehicle("bigTruck", 10, 1.5, 2);
-		new Vehicle("smallTruck", 0, 2, 3.2);
-		new Vehicle("tinyTruck", 2, 0.01, 0.1);
+		new Vehicle("bigTruck", 10, 150, 200);
+		new Vehicle("smallTruck", 0, 200, 320);
+		new Vehicle("tinyTruck", 2, 1, 1);
+		new Vehicle("ab", 100, 470, 360);
+		new Vehicle("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l", 1, 101, 1300);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void nameNull() {
-		new Vehicle(null, 10, 1.5, 2);
+		new Vehicle(null, 10, 150, 200);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void nameEmpty() {
-		new Vehicle("", 10, 1.5, 2);
+		new Vehicle("", 10, 150, 20);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void nameTooShort() {
+		new Vehicle("a", 4, 70, 200);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void nameTooLong() {
+		new Vehicle("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l-", 7, 2, 3);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeCount() {
-		new Vehicle("bigTruck", -1, 1.5, 2);
+		new Vehicle("bigTruck", -1, 150, 20);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void widthZero() {
-		new Vehicle("zeroTruck", 5, 0, 2);
+		new Vehicle("zeroTruck", 5, 0, 200);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void lengthZero() {
-		new Vehicle("zeroTruck", 5, 1.7, 0);
+		new Vehicle("zeroTruck", 5, 170, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void widthNegative() {
-		new Vehicle("negativeTruck", 5, -2.5, 2);
+		new Vehicle("negativeTruck", 5, -250, 200);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void lengthNegative() {
-		new Vehicle("negativeTruck", 5, 3.12, -0.4);
+		new Vehicle("negativeTruck", 5, 312, -40);
 	}
 
 	@Test
 	public void assignAndUnassgin() throws Exception {
-		Vehicle vehicle = new Vehicle("smallTruck", 3, 1.5, 2);
+		Vehicle vehicle = new Vehicle("smallTruck", 3, 150, 200);
 		Trip trip1 = mock(Trip.class);
 		Trip trip2 = mock(Trip.class);
 		Trip trip3 = mock(Trip.class);
@@ -79,5 +91,7 @@ public class VehicleTest {
 		vehicle.unassign(trip3);
 		assertEquals(vehicle.getUsed(), 0);
 	}
+	
+	//TODO add more tests
 
 }

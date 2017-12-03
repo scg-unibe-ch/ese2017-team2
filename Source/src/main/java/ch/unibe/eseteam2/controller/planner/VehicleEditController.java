@@ -1,5 +1,74 @@
 package ch.unibe.eseteam2.controller.planner;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import ch.unibe.eseteam2.form.VehicleEditForm;
+import ch.unibe.eseteam2.model.Vehicle;
+import ch.unibe.eseteam2.service.VehicleService;
+
+@Controller
+@RequestMapping("/planner/vehicle")
 public class VehicleEditController {
+
+	@Autowired
+	private VehicleService vehicleService;
+
+	@GetMapping("/edit/{id}")
+	public String getMappingEdit(@PathVariable Long id, Model model) {
+		Vehicle vehicle = this.vehicleService.findVehicle(id);
+
+		if (vehicle != null) {
+			model.addAttribute("vehicle", new VehicleEditForm(vehicle));
+		} else {
+			model.addAttribute("error", "Vehicle can not be found in database.");
+		}
+
+		return "/planner/vehicle/edit";
+	}
+
+	@PostMapping("/edit/{id}")
+	public String editVehicle(@Valid @ModelAttribute("vehicle") VehicleEditForm form, BindingResult bindingResult, @PathVariable Long id, Model model, RedirectAttributes redirectAttrs) {
+
+		Vehicle vehicle = this.vehicleService.findVehicle(id);
+
+		if (vehicle == null) {
+			model.addAttribute("error", "Vehicle can not be found in database.");
+
+			return "/planner/vehicle/edit/" + id;
+		}
+
+		form.checkErrors(vehicle, bindingResult, "vehicle");
+
+		if (bindingResult.hasErrors()) {
+			// There is some invalid input, try again.
+			return "/planner/vehicle/edit";
+		}
+
+		updateVehicle(vehicle, form);
+
+		vehicleService.save(vehicle);
+
+		redirectAttrs.addFlashAttribute("message", "Vehicle saved.");
+		return "redirect:/planner/vehicle/list";
+	}
+
+	private void updateVehicle(Vehicle vehicle, VehicleEditForm form) {
+		vehicle.setName(form.getName());
+		vehicle.setCount(form.getCount());
+		vehicle.setLength(form.getLength());
+		vehicle.setWidth(form.getWidth());
+
+	}
 
 }

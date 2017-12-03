@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.TripState;
+import ch.unibe.eseteam2.model.Vehicle;
 import ch.unibe.eseteam2.model.dao.TripRepository;
 
 @Service
@@ -55,6 +56,10 @@ public class TripService {
 	public Iterable<Trip> findTrips(Driver driver, TripState state) {
 		return tripRepository.findByDriverAndTripState(driver, state);
 	}
+	
+	public Iterable<Trip> findTrips(Vehicle vehicle, TripState state) {
+		return tripRepository.findByVehicleAndTripState(vehicle, state);
+	}
 
 	public void save(Trip trip) {
 		tripRepository.save(trip);
@@ -63,5 +68,11 @@ public class TripService {
 	public Iterable<Trip> findTrips(Driver driver) {
 		return tripRepository.findByDriver(driver);
 	}
+
+	public Iterable<Trip> findTrips(Vehicle vehicle) {
+		return tripRepository.findByVehicle(vehicle);
+	}
+
+	
 
 }

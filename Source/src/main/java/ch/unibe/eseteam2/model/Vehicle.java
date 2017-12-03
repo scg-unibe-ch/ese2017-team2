@@ -28,34 +28,32 @@ public class Vehicle {
 	private int used;
 
 	/**
-	 * The width of the load area in meters.
+	 * The width of the load area in centimeters.
 	 * Used to calculate how many animals fit in the vehicle.
 	 */
 	@NotNull
-	@Min(value = 0)
 	@Column(name = "width")
-	private double width;
+	private int width;
 
 	/**
-	 * The length of the load area in meters.
+	 * The length of the load area in centimeters.
 	 * Used to calculate how many animals fit in the vehicle.
 	 */
 	@NotNull
-	@Min(value = 0)
 	@Column(name = "length")
-	private double length;
+	private int length;
 
-	@NotNull
 	private String image;
 
 	public Vehicle() {
 
 	}
 
-	public Vehicle(String name, int count, double width, double length) {
+	public Vehicle(String name, int count, int width, int length) {
 		this.setName(name);
 		this.setCount(count);
-
+		this.setUsed(0);
+		
 		this.setWidth(width);
 		this.setLength(length);
 	}
@@ -100,7 +98,10 @@ public class Vehicle {
 		if (name.isEmpty()) {
 			throw new IllegalArgumentException("Vehicle name can not be empty.");
 		}
-
+		if(name.length() < 2 || name.length() > 100) {
+			throw new IllegalArgumentException("Vehicle name has to be between 2 and 100 characters long.");
+		}
+		
 		this.name = name;
 	}
 
@@ -146,7 +147,7 @@ public class Vehicle {
 		this.used = available;
 	}
 
-	public double getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
@@ -155,14 +156,14 @@ public class Vehicle {
 	 * The width has to be greater than zero.
 	 * @param width the width of the load area in meter
 	 */
-	public void setWidth(double width) {
+	public void setWidth(int width) {
 		if (width <= 0) {
 			throw new IllegalArgumentException("Vehicle width has to be greater than zero.");
 		}
 		this.width = width;
 	}
 
-	public double getLength() {
+	public int getLength() {
 		return length;
 	}
 	
@@ -171,7 +172,7 @@ public class Vehicle {
 	 * The length has to be greater than zero.
 	 * @param length the length of the load area in meter
 	 */
-	public void setLength(double length) {
+	public void setLength(int length) {
 		if (length <= 0) {
 			throw new IllegalArgumentException("Vehicle length has to be greater than zero.");
 		}

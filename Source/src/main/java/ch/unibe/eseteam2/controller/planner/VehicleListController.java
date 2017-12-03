@@ -17,11 +17,10 @@ public class VehicleListController {
 	@RequestMapping("/list")
 	public String getMapping(Model model) {
 		addVehicleLists(model);
-		return "planner/vehicle";
+		return "planner/vehiclelist";
 	}
 
 	private void addVehicleLists(Model model) {
 		model.addAttribute("vehicleList", this.vehicleService.findVehicles());
-		model.addAttribute("availableVehicleList", vehicleService.findAvailableVehicles());
 	}
 }

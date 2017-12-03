@@ -175,6 +175,7 @@ public class Trip {
 		case successful:
 			break;
 		case unsuccessful:
+			//TODO if time != null -> editing, update state
 			if (this.driver != null && this.vehicle != null) {
 				if (this.hasStarted()) {
 					this.setFeedback(null);

@@ -23,7 +23,7 @@ public class VehicleService {
 	public Iterable<Vehicle> findAvailableVehicles(Trip trip) {
 		if (trip != null && trip.getVehicle() != null) {
 			Vehicle vehicle = trip.getVehicle();
-			return vehicleRepository.findAvailable(vehicle.getId());
+			return vehicleRepository.findAvailableIncluding(vehicle.getId());
 		}
 		return findAvailableVehicles();
 	}

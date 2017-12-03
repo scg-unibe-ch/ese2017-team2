@@ -8,10 +8,10 @@ import ch.unibe.eseteam2.model.Vehicle;
 
 public interface VehicleRepository extends CrudRepository<Vehicle, Long> {
 	
-	@Query("SELECT v FROM Vehicle v WHERE v.available > 0")
+	@Query("SELECT v FROM Vehicle v WHERE v.used < v.count")
 	Iterable<Vehicle> findAvailable();
 	
-	@Query("SELECT v FROM Vehicle v WHERE v.available > 0 or v.id = :id")
-	Iterable<Vehicle> findAvailable(@Param("id") Long id);
+	@Query("SELECT v FROM Vehicle v WHERE v.used < v.count or v.id = :id")
+	Iterable<Vehicle> findAvailableIncluding(@Param("id") Long id);
 
 }

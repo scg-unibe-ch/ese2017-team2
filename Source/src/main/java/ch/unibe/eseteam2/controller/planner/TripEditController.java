@@ -76,28 +76,18 @@ public class TripEditController {
 
 		tripService.save(trip);
 		redirectAttrs.addFlashAttribute("message", "Trip saved with state " + trip.getTripState() + ".");
-		
+
 		return "redirect:/planner/list";
 	}
 
 	private void updateTrip(Trip trip, TripEditForm form, BindingResult bindingResult) {
+
 		trip.setCustomer(form.getCustomer());
 		trip.setAnimal(form.getAnimal());
 		trip.setAnimalCount(form.getAnimalCount());
-
-		trip.setFirstname_1(form.getFirstname_1());
-		trip.setLastname_1(form.getLastname_1());
-		trip.setStreet_1(form.getStreet_1());
-		trip.setNumber_1(form.getNumber_1());
-		trip.setCity_1(form.getCity_1());
-		trip.setPlz_1(form.getPlz_1());
-
-		trip.setFirstname_2(form.getFirstname_2());
-		trip.setLastname_2(form.getLastname_2());
-		trip.setStreet_2(form.getStreet_2());
-		trip.setNumber_2(form.getNumber_2());
-		trip.setCity_2(form.getCity_2());
-		trip.setPlz_2(form.getPlz_2());
+		
+		trip.setAddress1(form.getAddress1());
+		trip.setAddress2(form.getAddress2());
 
 		if (form.getDate() != null) {
 			trip.setDate(form.getDate());

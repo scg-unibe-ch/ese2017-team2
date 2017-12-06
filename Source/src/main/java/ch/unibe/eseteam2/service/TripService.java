@@ -33,7 +33,6 @@ public class TripService {
 		trip.onDelete();
 	}
 
-
 	public Trip findTrip(Long id) throws Exception {
 		Trip trip;
 
@@ -56,7 +55,7 @@ public class TripService {
 	public Iterable<Trip> findTrips(Driver driver, TripState state) {
 		return tripRepository.findByDriverAndTripState(driver, state);
 	}
-	
+
 	public Iterable<Trip> findTrips(Vehicle vehicle, TripState state) {
 		return tripRepository.findByVehicleAndTripState(vehicle, state);
 	}
@@ -72,7 +71,5 @@ public class TripService {
 	public Iterable<Trip> findTrips(Vehicle vehicle) {
 		return tripRepository.findByVehicle(vehicle);
 	}
-
-	
 
 }

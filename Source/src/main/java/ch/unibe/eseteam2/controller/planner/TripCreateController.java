@@ -43,7 +43,17 @@ public class TripCreateController {
 
 	@PostMapping("/planner/create")
 	public String postMapping(@Valid @ModelAttribute("trip") TripEditForm tripForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
-		Trip trip = createTrip(tripForm, bindingResult);
+		Trip trip;
+
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("driverList", driverService.findDrivers());
+			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
+
+			// There is some invalid input, try again.
+			return "/planner/trip/create";
+		}
+
+		trip = createTrip(tripForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("driverList", driverService.findDrivers());
@@ -59,9 +69,9 @@ public class TripCreateController {
 	}
 
 	private Trip createTrip(TripEditForm form, BindingResult bindingResult) {
-		// TODO maybe change this to use setters
-		Trip trip = new Trip(form.getCustomer(), form.getAnimal(), form.getAnimalCount(), form.getDate(), form.getFirstname_1(), form.getLastname_1(), form.getStreet_1(), form.getNumber_1(),
-				form.getPlz_1(), form.getCity_1(), form.getFirstname_2(), form.getFirstname_2(), form.getStreet_2(), form.getNumber_2(), form.getPlz_2(), form.getCity_2());
+		Trip trip;
+
+		trip = new Trip(form.getCustomer(), form.getAnimal(), form.getAnimalCount(), form.getAddress1(), form.getAddress2(), form.getDate());
 
 		addDriver(form, trip, bindingResult);
 		addVehicle(form, trip, bindingResult);

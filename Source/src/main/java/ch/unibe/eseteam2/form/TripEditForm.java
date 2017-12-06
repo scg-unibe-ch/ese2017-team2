@@ -103,7 +103,7 @@ public class TripEditForm {
 		setAddress2(trip.getAddress2());
 
 	}
-	
+
 	private void setAddress1(Address address) {
 		if (address != null) {
 			this.firstname_1 = address.getFirstname();
@@ -272,6 +272,24 @@ public class TripEditForm {
 
 	public void setVehicleId(Long vehicleId) {
 		this.vehicleId = vehicleId;
+	}
+
+	/**
+	 * Creates a new Address objects from the input data and returns it.
+	 * 
+	 * @return the first address
+	 */
+	public Address getAddress1() {
+		return new Address(this.firstname_1, this.lastname_1, this.street_1, this.number_1, this.plz_1, this.city_1);
+	}
+
+	/**
+	 * Creates a new Address objects from the input data and returns it.
+	 * 
+	 * @return the second address
+	 */
+	public Address getAddress2() {
+		return new Address(this.firstname_2, this.lastname_2, this.street_2, this.number_2, this.plz_2, this.city_2);
 	}
 
 }

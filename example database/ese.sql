@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 28. Okt 2017 um 22:28
+-- Erstellungszeit: 06. Dez 2017 um 20:32
 -- Server-Version: 10.1.26-MariaDB
 -- PHP-Version: 7.1.9
 
@@ -12,9 +12,45 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+
 --
 -- Datenbank: `ese`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `address`
+--
+
+CREATE TABLE `address` (
+  `id` bigint(20) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `number` varchar(255) NOT NULL,
+  `plz` int(11) NOT NULL,
+  `street` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `address`
+--
+
+INSERT INTO `address` (`id`, `city`, `firstname`, `lastname`, `number`, `plz`, `street`) VALUES
+(1, 'Basel', 'Daniela', 'Weiss', '15a', 4051, 'Leonhardstrasse'),
+(2, 'Bern', 'Josef', 'Jäger', '7', 3007, 'Ziegelstrasse'),
+(3, 'Zürich', 'Thomas', 'Schulz', '1a', 8005, 'Limmatstrasse'),
+(4, 'Luzern', 'Svenja', 'Keller', '17k', 6014, 'Ritterstrasse'),
+(5, 'Möriken', 'Ben', 'Ziegler', '10', 5103, 'Bruneggerstrasse'),
+(6, 'Genf', 'Sören', 'Lang', '2', 1203, 'Rue de Saint-Jean'),
+(7, 'Genf', 'Lennja', 'Brandt', '6d', 1201, 'Rue de Lyon'),
+(8, 'Solothurn', 'Lucas', 'Herrmann', '7g', 4500, 'Brühlstrasse'),
+(9, 'Biel', 'Noah', 'Koch', '50a', 2502, 'Gartenstrasse'),
+(10, 'Zürich', 'Karolina', 'Fischer', '1', 8008, 'Krezstrasse'),
+(11, 'Heimberg', 'Larissa', 'Schwarz', '80', 3627, 'Stationsweg'),
+(12, 'Bern', 'Dario', 'Hofer', '3b', 3027, 'Holmackerstrasse');
 
 -- --------------------------------------------------------
 
@@ -32,14 +68,9 @@ CREATE TABLE `authorities` (
 --
 
 INSERT INTO `authorities` (`username`, `authority`) VALUES
-('admin', 'ROLE_ADMIN'),
-('Anja Müller', 'ROLE_DRIVER'),
-('Dana Baumann', 'ROLE_DRIVER'),
-('Hannes Kraus', 'ROLE_DRIVER'),
-('Kai Wagner', 'ROLE_DRIVER'),
-('Kristina Becker', 'ROLE_DRIVER'),
-('Simon Müller', 'ROLE_DRIVER'),
-('Sven Weber', 'ROLE_DRIVER');
+('admin@anitrans.ch', 'ROLE_ADMIN'),
+('k.becker@gmail.com', 'ROLE_DRIVER'),
+('kai.wagner@hotmail.com', 'ROLE_DRIVER');
 
 -- --------------------------------------------------------
 
@@ -49,21 +80,22 @@ INSERT INTO `authorities` (`username`, `authority`) VALUES
 
 CREATE TABLE `driver` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `email` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `number` varchar(255) DEFAULT NULL,
+  `plz` int(11) NOT NULL,
+  `street` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `driver`
 --
 
-INSERT INTO `driver` (`id`, `name`) VALUES
-(1, 'Simon Müller'),
-(2, 'Sven Weber'),
-(3, 'Kai Wagner'),
-(4, 'Hannes Kraus'),
-(5, 'Anja Müller'),
-(6, 'Kristina Becker'),
-(7, 'Dana Baumann');
+INSERT INTO `driver` (`id`, `email`, `city`, `firstname`, `lastname`, `number`, `plz`, `street`) VALUES
+(3, 'kai.wagner@hotmail.com', 'Bern', 'Kai', 'Wagner', '12a', 3001, 'Bahnstrasse'),
+(6, 'k.becker@gmail.com', 'Basel', 'Krisina', 'Becker', '12b', 4001, 'Bachweg');
 
 -- --------------------------------------------------------
 
@@ -75,31 +107,27 @@ CREATE TABLE `trip` (
   `id` bigint(20) NOT NULL,
   `animal` varchar(100) NOT NULL,
   `animal_count` int(11) NOT NULL,
-  `city_1` varchar(100) NOT NULL,
-  `city_2` varchar(100) NOT NULL,
   `customer` varchar(100) NOT NULL,
   `date` datetime DEFAULT NULL,
-  `name_1` varchar(100) NOT NULL,
-  `name_2` varchar(100) NOT NULL,
-  `plz_1` int(11) NOT NULL,
-  `plz_2` int(11) NOT NULL,
-  `street_1` varchar(100) NOT NULL,
-  `street_2` varchar(100) NOT NULL,
   `trip_state` int(11) DEFAULT NULL,
-  `driver_id` bigint(20) DEFAULT NULL
+  `driver_id` bigint(20) DEFAULT NULL,
+  `feedback` varchar(255) DEFAULT NULL,
+  `vehicle_id` bigint(20) DEFAULT NULL,
+  `address1_id` bigint(20) DEFAULT NULL,
+  `address2_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `trip`
 --
 
-INSERT INTO `trip` (`id`, `animal`, `animal_count`, `city_1`, `city_2`, `customer`, `date`, `name_1`, `name_2`, `plz_1`, `plz_2`, `street_1`, `street_2`, `trip_state`, `driver_id`) VALUES
-(2, 'horse', 2, 'Basel', 'Bern', 'Josef Jäger', NULL, 'Daniela Weiss', 'Josef Jäger', 4051, 3007, 'Leonhardstrasse 15', 'Zieglerstrasse 7', 0, NULL),
-(3, 'cow', 3, 'Zürich', 'Luzern', 'Lara Keller', NULL, 'Thomas Schulz', 'Svenja Keller', 8005, 6014, 'Limmatstrasse 152', 'Ritterstrasse 3', 1, 6),
-(4, 'monkey', 1, 'Möriken', 'Genf', 'Sören Lang', '2017-10-22 10:30:00', 'Ben Ziegler', 'Sören Lang', 5103, 1203, 'Bruneggerstrasse 10', 'Rue de Saint-Jean 3', 3, NULL),
-(5, 'sheep', 5, 'Genf', 'Solothurn', 'Lennja Brandt', '2018-01-10 12:00:00', 'Lennja Brandt', 'Lucas Herrmann', 1201, 4500, 'Rue de Lyon 4', 'Brühlstrasse 3', 1, 4),
-(6, 'goat', 10, 'Basel', 'Biel', 'Karl Bergmann', '2017-11-30 10:00:00', 'Nele Ludwig', 'Karl Bergmann', 4057, 2502, 'Feldbergstrasse 2', 'Neumarktstrasse 32', 0, NULL),
-(7, 'deer', 2, 'Biel', 'Zürich', 'Karolina Fischer', '2017-10-27 16:15:00', 'Noah Koch', 'Karolina Fsicher', 2502, 8008, 'Gartenstrasse 12', 'Krezstrasse 22', 3, 7);
+INSERT INTO `trip` (`id`, `animal`, `animal_count`, `customer`, `date`, `trip_state`, `driver_id`, `feedback`, `vehicle_id`, `address1_id`, `address2_id`) VALUES
+(2, 'horse', 2, 'Josef Jäger', NULL, 1, 3, NULL, 2, 1, 2),
+(3, 'cow', 3, 'Lara Keller', '2017-10-29 15:04:00', 4, 6, 'Test test test', NULL, 3, 4),
+(4, 'monkey', 1, 'Sören Lang', '2017-10-22 10:30:00', 3, NULL, NULL, NULL, 5, 6),
+(5, 'sheep', 5, 'Lennja Brandt', '2018-01-10 12:00:00', 0, NULL, NULL, NULL, 7, 8),
+(7, 'deer', 2, 'Karolina Fischer', '2017-10-31 16:15:00', 3, NULL, NULL, NULL, 9, 10),
+(8, 'Cow', 2, 'Dario Steiner', '2017-11-17 10:30:00', 2, 6, NULL, NULL, 11, 12);
 
 -- --------------------------------------------------------
 
@@ -118,18 +146,48 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `password`, `enabled`) VALUES
-('admin', 'anitrans', 1),
-('Anja Müller', 'anja12', 1),
-('Dana Baumann', 'db12', 1),
-('Hannes Kraus', 'dcba', 1),
-('Kai Wagner', '4321', 1),
-('Kristina Becker', 'kb1234', 1),
-('Simon Müller', '1234', 1),
-('Sven Weber', 'abcd', 1);
+('admin@anitrans.ch', 'anitrans', 1),
+('k.becker@gmail.com', 'kb1234', 1),
+('kai.wagner@hotmail.com', '4321', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `vehicle`
+--
+
+CREATE TABLE `vehicle` (
+  `id` bigint(20) NOT NULL,
+  `count` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `used` int(11) NOT NULL,
+  `length` int(11) NOT NULL,
+  `width` int(11) NOT NULL,
+  `image_data` longblob
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `vehicle`
+--
+
+INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
+(1, 4, 'Big Transporter', 0, 400, 230, NULL);
+INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
+(2, 3, 'Medium Transporter', 1, 250, 200, NULL);
+INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
+(3, 5, 'Small Transporter', 0, 120, 100, NULL);
+INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
+(4, 7, 'Tiny Transporter', 0, 50, 50, NULL);
 
 --
 -- Indizes der exportierten Tabellen
 --
+
+--
+-- Indizes für die Tabelle `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indizes für die Tabelle `authorities`
@@ -148,7 +206,10 @@ ALTER TABLE `driver`
 --
 ALTER TABLE `trip`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKpuhkx68hnwy4by2b0onybv5x1` (`driver_id`);
+  ADD UNIQUE KEY `UK_njqi2m607gyhjxaa793nrmae0` (`address1_id`),
+  ADD UNIQUE KEY `UK_l6a8xkkna9xrbqqqjokbc1csr` (`address2_id`),
+  ADD KEY `FKpuhkx68hnwy4by2b0onybv5x1` (`driver_id`),
+  ADD KEY `FKrji8htecrp06ao6s7nfubswnr` (`vehicle_id`);
 
 --
 -- Indizes für die Tabelle `users`
@@ -157,20 +218,38 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`username`);
 
 --
+-- Indizes für die Tabelle `vehicle`
+--
+ALTER TABLE `vehicle`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT für exportierte Tabellen
 --
+
+--
+-- AUTO_INCREMENT für Tabelle `address`
+--
+ALTER TABLE `address`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT für Tabelle `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT für Tabelle `trip`
 --
 ALTER TABLE `trip`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT für Tabelle `vehicle`
+--
+ALTER TABLE `vehicle`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints der exportierten Tabellen
@@ -186,5 +265,9 @@ ALTER TABLE `authorities`
 -- Constraints der Tabelle `trip`
 --
 ALTER TABLE `trip`
-  ADD CONSTRAINT `FKpuhkx68hnwy4by2b0onybv5x1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`id`);
+  ADD CONSTRAINT `FK3xilwuneq2acvhigcx901usv9` FOREIGN KEY (`address2_id`) REFERENCES `address` (`id`),
+  ADD CONSTRAINT `FKpfxe3jn8usxxmo5dkhcoai2ng` FOREIGN KEY (`address1_id`) REFERENCES `address` (`id`),
+  ADD CONSTRAINT `FKpuhkx68hnwy4by2b0onybv5x1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`id`),
+  ADD CONSTRAINT `FKrji8htecrp06ao6s7nfubswnr` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`),
+  ADD CONSTRAINT `FKsb6ucd0fdxh1inone0o83l6nq` FOREIGN KEY (`id`) REFERENCES `address` (`id`);
 COMMIT;

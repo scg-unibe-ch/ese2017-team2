@@ -91,7 +91,38 @@ public class VehicleTest {
 		vehicle.unassign(trip3);
 		assertEquals(vehicle.getUsed(), 0);
 	}
+
+	@Test(expected = Exception.class)
+	public void assignTooMany() throws Exception {
+		Vehicle vehicle = new Vehicle("smallTruck", 1, 150, 200);
+		Trip trip1 = mock(Trip.class);
+		Trip trip2 = mock(Trip.class);
+		
+		assertEquals(vehicle.getUsed(), 0);
+		
+		vehicle.unassign(trip1);
+		assertEquals(vehicle.getUsed(), 1);
+
+		vehicle.assign(trip2);
+		
+	}
 	
-	//TODO add more tests
+	@Test(expected = Exception.class)
+	public void unassignTooMany() throws Exception {
+		Vehicle vehicle = new Vehicle("smallTruck", 5, 150, 200);
+		Trip trip1 = mock(Trip.class);
+		Trip trip2 = mock(Trip.class);
+		
+		assertEquals(vehicle.getUsed(), 0);
+		
+		vehicle.assign(trip1);
+		assertEquals(vehicle.getUsed(), 1);
+		
+		vehicle.unassign(trip1);
+		assertEquals(vehicle.getUsed(), 0);
+		
+		vehicle.unassign(trip2);
+		
+	}
 
 }

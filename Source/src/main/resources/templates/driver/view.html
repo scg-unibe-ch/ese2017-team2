@@ -84,9 +84,9 @@
 								<p> Feedback: &nbsp;&nbsp;</p> 
 								</div>
 								<div class="col-xs-6">
-								<p th:text="${trip.customer}" />
-								<p th:text="${trip.animal}" />
-								<p th:text="${trip.animalCount}" />
+								<p th:text="${trip.customer != null} ?  ${trip.customer} : 'not set'" />
+								<p th:text="${trip.animal != null} ?  ${trip.animal} : 'not set'" />
+								<p th:text="${trip.animalCount != null} ?  ${trip.animalCount} : 'not set'" />
 								<p th:text="${trip.date != null} ?  ${trip.date} : 'not set'" />
 								<p th:text="${trip.driver != null} ?  ${trip.driver} : 'not set'" />
 								<p th:text="${trip.vehicle != null} ? ${trip.vehicle} : 'not set'" />
@@ -110,12 +110,12 @@
 								<p> PLZ: &nbsp;&nbsp;</p>
 								</div>
 								<div class="col-xs-6">
-								<p th:text="${trip.firstname_1}" />
-								<p th:text="${trip.lastname_1}" />
-								<p th:text="${trip.street_1}" />
-								<p th:text="${trip.number_1}" />
-								<p th:text="${trip.city_1}" />
-								<p th:text="${trip.plz_1}" />
+								<p th:text="${trip.firstname_1 != null} ?  ${trip.firstname_1} : 'not set'" />
+								<p th:text="${trip.lastname_1 != null} ?  ${trip.lastname_1} : 'not set'" />
+								<p th:text="${trip.street_1 != null} ?  ${trip.street_1} : 'not set'" />
+								<p th:text="${trip.number_1!= null} ?  ${trip.number_1} : 'not set'" />
+								<p th:text="${trip.city_1 != null} ?  ${trip.city_1} : 'not set'" />
+								<p th:text="${trip.plz_1 != null} ?  ${trip.plz_1} : 'not set'" />
 							</div>
 						</div>
 						</div>
@@ -132,12 +132,12 @@
 								<p> PLZ: &nbsp;&nbsp;</p>
 								</div>
 								<div class="col-xs-6">
-								<p th:text="${trip.firstname_2}" />
-								<p th:text="${trip.lastname_2}" />
-								<p th:text="${trip.street_2}" />
-								<p th:text="${trip.number_2}" />
-								<p th:text="${trip.city_2}" />
-								<p th:text="${trip.plz_2}" />
+								<p th:text="${trip.firstname_2 != null} ?  ${trip.firstname_2} : 'not set'" />
+								<p th:text="${trip.lastname_2 != null} ?  ${trip.lastname_2} : 'not set'" />
+								<p th:text="${trip.street_2 != null} ?  ${trip.street_2} : 'not set'" />
+								<p th:text="${trip.number_2 != null} ?  ${trip.number_2} : 'not set'" />
+								<p th:text="${trip.city_2 != null} ?  ${trip.city_2} : 'not set'" />
+								<p th:text="${trip.plz_2 != null} ?  ${trip.plz_2} : 'not set'" />
 							</div>
 							</div>
 						</div>

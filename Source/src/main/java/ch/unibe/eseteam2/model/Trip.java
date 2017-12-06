@@ -82,6 +82,14 @@ public class Trip {
 	private TripState tripState;
 
 	@OneToOne
+	@NotNull
+	private Address address1;
+
+	@OneToOne
+	@NotNull
+	private Address address2;
+
+	@OneToOne
 	private Driver driver;
 
 	@ManyToOne
@@ -175,7 +183,7 @@ public class Trip {
 		case successful:
 			break;
 		case unsuccessful:
-			//TODO if time != null -> editing, update state
+			// TODO if time != null -> editing, update state
 			if (this.driver != null && this.vehicle != null) {
 				if (this.hasStarted()) {
 					this.setFeedback(null);
@@ -379,11 +387,20 @@ public class Trip {
 		this.animalCount = animalCount;
 	}
 
-	@Override
-	public String toString() {
-		return "Trip [id=" + id + ", customer=" + customer + ", firstname_1=" + firstname_1 + ", lastname_1=" + lastname_1 + ", street_1=" + street_1 + ", number_1=" + number_1 + ", plz_1=" + plz_1
-				+ ", city_1=" + city_1 + ", firstname_2=" + firstname_2 + ", lastname_2=" + lastname_2 + ", street_2=" + street_2 + ", number_2=" + number_2 + ", plz_2=" + plz_2 + ", city_2=" + city_2
-				+ ", animal=" + animal + ", animalCount=" + animalCount + ", tripState=" + tripState + ", driver=" + driver + ", date=" + date + ", feedback=" + feedback + "]";
+	public Address getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(Address address1) {
+		this.address1 = address1;
+	}
+
+	public Address getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(Address address2) {
+		this.address2 = address2;
 	}
 
 	public Vehicle getVehicle() {

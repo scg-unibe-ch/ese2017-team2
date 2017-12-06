@@ -2,6 +2,7 @@ package ch.unibe.eseteam2.form;
 
 import java.util.Date;
 
+import ch.unibe.eseteam2.model.Address;
 import ch.unibe.eseteam2.model.Trip;
 
 public class TripViewForm {
@@ -27,7 +28,7 @@ public class TripViewForm {
 	private int animalCount;
 
 	private String driver;
-	
+
 	private String vehicle;
 
 	private Date date;
@@ -45,8 +46,8 @@ public class TripViewForm {
 		if (trip.getDriver() != null) {
 			this.driver = trip.getDriver().getName();
 		}
-		
-		if(trip.getVehicle() != null) {
+
+		if (trip.getVehicle() != null) {
 			this.vehicle = trip.getVehicle().getName();
 		}
 
@@ -55,19 +56,30 @@ public class TripViewForm {
 
 		this.feedback = trip.getFeedback();
 
-		this.firstname_1 = trip.getFirstname_1();
-		this.lastname_1 = trip.getLastname_1();
-		this.street_1 = trip.getStreet_1();
-		this.number_1 = trip.getNumber_1();
-		this.plz_1 = trip.getPlz_1();
-		this.city_1 = trip.getCity_1();
+		setAddress1(trip.getAddress1());
+		setAddress2(trip.getAddress2());
+	}
 
-		this.firstname_2 = trip.getFirstname_2();
-		this.lastname_2 = trip.getLastname_2();
-		this.street_2 = trip.getStreet_2();
-		this.number_2 = trip.getNumber_2();
-		this.plz_2 = trip.getPlz_2();
-		this.city_2 = trip.getCity_2();
+	private void setAddress1(Address address) {
+		if (address != null) {
+			this.firstname_1 = address.getFirstname();
+			this.lastname_1 = address.getLastname();
+			this.street_1 = address.getStreet();
+			this.number_1 = address.getNumber();
+			this.plz_1 = address.getPlz();
+			this.city_1 = address.getCity();
+		}
+	}
+
+	private void setAddress2(Address address) {
+		if (address != null) {
+			this.firstname_2 = address.getFirstname();
+			this.lastname_2 = address.getLastname();
+			this.street_2 = address.getStreet();
+			this.number_2 = address.getNumber();
+			this.plz_2 = address.getPlz();
+			this.city_2 = address.getCity();
+		}
 	}
 
 	public String getCustomer() {

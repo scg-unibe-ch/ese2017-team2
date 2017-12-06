@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ch.unibe.eseteam2.form.TripCreateForm;
+import ch.unibe.eseteam2.form.TripEditForm;
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.Vehicle;
@@ -34,7 +34,7 @@ public class TripCreateController {
 	@GetMapping("/planner/create")
 	public String getMapping(Model model) {
 
-		model.addAttribute("trip", new TripCreateForm());
+		model.addAttribute("trip", new TripEditForm());
 		model.addAttribute("driverList", driverService.findDrivers());
 		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 
@@ -42,7 +42,7 @@ public class TripCreateController {
 	}
 
 	@PostMapping("/planner/create")
-	public String postMapping(@Valid @ModelAttribute("trip") TripCreateForm tripForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
+	public String postMapping(@Valid @ModelAttribute("trip") TripEditForm tripForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
 		Trip trip = createTrip(tripForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
@@ -58,7 +58,7 @@ public class TripCreateController {
 		return "redirect:/planner/list";
 	}
 
-	private Trip createTrip(TripCreateForm form, BindingResult bindingResult) {
+	private Trip createTrip(TripEditForm form, BindingResult bindingResult) {
 		// TODO maybe change this to use setters
 		Trip trip = new Trip(form.getCustomer(), form.getAnimal(), form.getAnimalCount(), form.getDate(), form.getFirstname_1(), form.getLastname_1(), form.getStreet_1(), form.getNumber_1(),
 				form.getPlz_1(), form.getCity_1(), form.getFirstname_2(), form.getFirstname_2(), form.getStreet_2(), form.getNumber_2(), form.getPlz_2(), form.getCity_2());
@@ -69,7 +69,7 @@ public class TripCreateController {
 		return trip;
 	}
 
-	private void addVehicle(TripCreateForm form, Trip trip, BindingResult bindingResult) {
+	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult) {
 		// TODO
 		Long vehicleId = form.getVehicleId();
 		if (vehicleId == null) {
@@ -88,7 +88,7 @@ public class TripCreateController {
 		}
 	}
 
-	private void addDriver(TripCreateForm form, Trip trip, BindingResult bindingResult) {
+	private void addDriver(TripEditForm form, Trip trip, BindingResult bindingResult) {
 		Long driverId = form.getDriverId();
 		if (driverId == null) {
 			return;

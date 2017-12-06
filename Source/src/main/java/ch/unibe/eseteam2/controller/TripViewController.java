@@ -24,7 +24,7 @@ public class TripViewController {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "planner/view";
+		return "planner/trip/view";
 	}
 
 	@RequestMapping("/driver/view/{id}")

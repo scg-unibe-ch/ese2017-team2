@@ -22,7 +22,7 @@ public class PlannerListController {
 	public String getList(Model model) {
 		tripService.updateTripStates();
 		addTripLists(model);
-		return "planner/list";
+		return "planner/triplist";
 	}
 
 	@PostMapping()
@@ -56,7 +56,7 @@ public class PlannerListController {
 
 		tripService.updateTripStates();
 		addTripLists(model);
-		return "/planner/list";
+		return "/planner/triplist";
 	}
 
 	private String redirectEdit(Long id) throws Exception {

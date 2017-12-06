@@ -38,7 +38,7 @@ public class TripCreateController {
 		model.addAttribute("driverList", driverService.findDrivers());
 		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 
-		return "/planner/create";
+		return "/planner/trip/create";
 	}
 
 	@PostMapping("/planner/create")
@@ -50,7 +50,7 @@ public class TripCreateController {
 			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 
 			// There is some invalid input, try again.
-			return "/planner/create";
+			return "/planner/trip/create";
 		}
 
 		tripService.save(trip);

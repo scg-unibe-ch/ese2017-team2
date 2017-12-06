@@ -46,7 +46,7 @@ public class TripEditController {
 		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles(trip));
 		model.addAttribute("driverList", driverService.findDrivers());
 
-		return "/planner/edit";
+		return "/planner/trip/edit";
 	}
 
 	@PostMapping("/planner/edit/{id}")
@@ -63,7 +63,7 @@ public class TripEditController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 
-			return "/planner/edit";
+			return "/planner/trip/edit";
 		}
 
 		if (bindingResult.hasErrors()) {
@@ -71,7 +71,7 @@ public class TripEditController {
 			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles(trip));
 
 			// There is some invalid input, try again.
-			return "/planner/edit";
+			return "/planner/trip/edit";
 		}
 
 		tripService.save(trip);

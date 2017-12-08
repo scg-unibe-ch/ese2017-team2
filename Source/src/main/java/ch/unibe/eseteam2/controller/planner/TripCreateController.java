@@ -62,7 +62,7 @@ public class TripCreateController {
 		}
 
 		tripService.save(trip);
-		redirectAttrs.addFlashAttribute("message", "Trip saved with state " + trip.getTripState() + ".");
+		redirectAttrs.addFlashAttribute("message", "Trip saved in " + trip.getTripState() + " state.");
 		return "redirect:/planner/list";
 	}
 

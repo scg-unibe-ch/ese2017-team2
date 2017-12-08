@@ -3,6 +3,7 @@ package ch.unibe.eseteam2.form;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -11,10 +12,11 @@ import ch.unibe.eseteam2.model.Vehicle;
 public class VehicleEditForm {
 
 	@NotNull
+	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String name;
 
 	@NotNull
-	@Min(value = 0, message = "has to be at least 0.")
+	@Min(value = 1, message = "has to be at least 1.")
 	private int count;
 
 	@NotNull
@@ -25,11 +27,14 @@ public class VehicleEditForm {
 	@Min(value = 1, message = "has to be at least 1.")
 	private int length;
 
+	/**
+	 * Used to display error messages for the selected image.
+	 */
 	private String image;
 
 	public VehicleEditForm() {
 		this.name = "";
-		this.count = 0;
+		this.count = 1;
 		this.width = 1;
 		this.length = 1;
 	}
@@ -41,18 +46,10 @@ public class VehicleEditForm {
 		this.length = vehicle.getLength();
 	}
 
-	public void checkErrors(BindingResult bindingResult, String objectName) {
-		if (this.name.length() < 2 || this.name.length() > 100) {
-			bindingResult.addError(new FieldError(objectName, "name", "has to be between 2 and 100 characters long."));
-		}
-	}
-
 	public void checkErrors(Vehicle vehicle, BindingResult bindingResult, String objectName) {
 		if (vehicle.getUsed() > this.count) {
 			bindingResult.addError(new FieldError(objectName, "count", "has to be greater than the number of assigned vehicles (" + vehicle.getUsed() + ")."));
 		}
-
-		this.checkErrors(bindingResult, objectName);
 	}
 
 	public String getName() {

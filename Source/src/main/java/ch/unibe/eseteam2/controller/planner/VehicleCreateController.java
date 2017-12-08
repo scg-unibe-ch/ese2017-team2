@@ -41,9 +41,9 @@ public class VehicleCreateController {
 			RedirectAttributes redirectAttrs) {
 		Vehicle vehicle;
 
-		form.checkErrors(bindingResult, "vehicle");
-
-		checkFile(file, bindingResult, "vehicle");
+		if(hasFile(file)) {			
+			checkFileType(file, bindingResult, "vehicle");
+		}
 
 		if (bindingResult.hasErrors()) {
 			// There is some invalid input, try again.
@@ -52,14 +52,16 @@ public class VehicleCreateController {
 		}
 
 		vehicle = new Vehicle(form.getName(), form.getCount(), form.getLength(), form.getWidth());
-		try {
-			byte[] bytes = file.getBytes();
-			vehicle.setImageData(bytes);
-		} catch (IOException e) {
-			bindingResult.addError(new FieldError("vehicle", "image", "could not upload image."));
-
-			model.addAttribute("create", true);
-			return "/planner/vehicle/edit";
+		
+		if(hasFile(file)) {
+			try {
+				vehicle.setImageData(file.getBytes());
+			} catch (IOException e) {
+				bindingResult.addError(new FieldError("vehicle", "image", "could not upload image."));
+				
+				model.addAttribute("create", true);
+				return "/planner/vehicle/edit";
+			}
 		}
 
 		vehicleService.save(vehicle);
@@ -68,11 +70,11 @@ public class VehicleCreateController {
 		return "redirect:/planner/vehicle/list";
 	}
 
-	private void checkFile(MultipartFile file, BindingResult bindingResult, String objectString) {
-		if (file == null || file.isEmpty()) {
-			bindingResult.addError(new FieldError(objectString, "image", "no image selected."));
-			return;
-		}
+	private boolean hasFile(MultipartFile file) {
+		return file != null && !file.isEmpty();
+	}
+
+	private void checkFileType(MultipartFile file, BindingResult bindingResult, String objectString) {
 		if (!file.getContentType().equals((MediaType.IMAGE_JPEG_VALUE)) && !file.getContentType().equals((MediaType.IMAGE_PNG_VALUE))) {
 			bindingResult.addError(new FieldError(objectString, "image", "not an valid image file."));
 		}

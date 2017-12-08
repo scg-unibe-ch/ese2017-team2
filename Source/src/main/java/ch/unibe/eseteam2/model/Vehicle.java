@@ -114,13 +114,13 @@ public class Vehicle {
 
 	/**
 	 * Sets how many vehicles of this type there are in total. The count has to
-	 * be positive and greater than or equal to the number of used vehicles.
+	 * be positive (not zero) and greater than or equal to the number of used vehicles.
 	 * 
 	 * @param count
 	 */
 	public void setCount(int count) {
-		if (count < 0) {
-			throw new IllegalArgumentException("Vehicle count can not be negative.");
+		if (count <= 0) {
+			throw new IllegalArgumentException("Vehicle count can not be less than one.");
 		}
 		if (count < used) {
 			throw new IllegalArgumentException("Vehicle count can not be smaller than the number of used vehicles.");

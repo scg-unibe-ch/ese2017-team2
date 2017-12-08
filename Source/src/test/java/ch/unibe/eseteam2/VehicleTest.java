@@ -13,7 +13,7 @@ public class VehicleTest {
 	@Test
 	public void constructor() {
 		new Vehicle("bigTruck", 10, 150, 200);
-		new Vehicle("smallTruck", 0, 200, 320);
+		new Vehicle("smallTruck", 1, 200, 320);
 		new Vehicle("tinyTruck", 2, 1, 1);
 		new Vehicle("ab", 100, 470, 360);
 		new Vehicle("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l", 1, 101, 1300);
@@ -43,6 +43,12 @@ public class VehicleTest {
 	public void negativeCount() {
 		new Vehicle("bigTruck", -1, 150, 20);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void countZero() {
+		new Vehicle("bigTruck", 0, 150, 20);
+	}
+
 
 	@Test(expected = IllegalArgumentException.class)
 	public void widthZero() {

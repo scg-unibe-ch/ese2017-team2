@@ -34,11 +34,11 @@ public class TripCreateController {
 	@GetMapping("/planner/create")
 	public String getMapping(Model model) {
 
-		model.addAttribute("trip", new TripEditForm());
+		model.addAttribute("trip", new TripEditForm(true));
 		model.addAttribute("driverList", driverService.findDrivers());
 		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 
-		return "/planner/trip/create";
+		return "/planner/trip/edit";
 	}
 
 	@PostMapping("/planner/create")
@@ -50,7 +50,7 @@ public class TripCreateController {
 			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 
 			// There is some invalid input, try again.
-			return "/planner/trip/create";
+			return "/planner/trip/edit";
 		}
 
 		trip = createTrip(tripForm, bindingResult);
@@ -60,7 +60,7 @@ public class TripCreateController {
 			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 
 			// There is some invalid input, try again.
-			return "/planner/trip/create";
+			return "/planner/trip/edit";
 		}
 
 		tripService.save(trip);

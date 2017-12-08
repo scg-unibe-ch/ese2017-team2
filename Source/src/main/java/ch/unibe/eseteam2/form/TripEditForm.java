@@ -37,6 +37,8 @@ public class TripEditForm {
 	private Long driverId;
 
 	private Long vehicleId;
+	
+	private boolean create;
 
 	@NotNull
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
@@ -79,8 +81,21 @@ public class TripEditForm {
 	@NotNull
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String city_2;
+	
+	/**
+	 * Default constructor used by Spring
+	 */
+	public TripEditForm() {
 
+	}
+	
+	public TripEditForm(boolean create) {
+		this.setCreate(create);
+	}
+	
 	public TripEditForm(Trip trip) {
+		this(false);
+		
 		this.customer = trip.getCustomer();
 		this.animal = trip.getAnimal();
 		this.animalCount = trip.getAnimalCount();
@@ -101,7 +116,6 @@ public class TripEditForm {
 
 		setAddress1(trip.getAddress1());
 		setAddress2(trip.getAddress2());
-
 	}
 
 	private void setAddress1(Address address) {
@@ -126,9 +140,7 @@ public class TripEditForm {
 		}
 	}
 
-	public TripEditForm() {
-
-	}
+	
 
 	public String getCustomer() {
 		return customer;
@@ -290,6 +302,14 @@ public class TripEditForm {
 	 */
 	public Address getAddress2() {
 		return new Address(this.firstname_2, this.lastname_2, this.street_2, this.number_2, this.plz_2, this.city_2);
+	}
+
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
 	}
 
 }

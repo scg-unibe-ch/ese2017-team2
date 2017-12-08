@@ -34,9 +34,9 @@ public class TripCreateController {
 	@GetMapping("/planner/create")
 	public String getMapping(Model model) {
 
-		model.addAttribute("trip", new TripEditForm(true));
-		model.addAttribute("driverList", driverService.findDrivers());
-		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
+		model.addAttribute("trip", new TripEditForm());
+
+		addModelAttributes(model);
 
 		return "/planner/trip/edit";
 	}
@@ -46,8 +46,7 @@ public class TripCreateController {
 		Trip trip;
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("driverList", driverService.findDrivers());
-			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
+			addModelAttributes(model);
 
 			// There is some invalid input, try again.
 			return "/planner/trip/edit";
@@ -56,8 +55,7 @@ public class TripCreateController {
 		trip = createTrip(tripForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("driverList", driverService.findDrivers());
-			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
+			addModelAttributes(model);
 
 			// There is some invalid input, try again.
 			return "/planner/trip/edit";
@@ -66,6 +64,12 @@ public class TripCreateController {
 		tripService.save(trip);
 		redirectAttrs.addFlashAttribute("message", "Trip saved with state " + trip.getTripState() + ".");
 		return "redirect:/planner/list";
+	}
+
+	private void addModelAttributes(Model model) {
+		model.addAttribute("create", true);
+		model.addAttribute("driverList", driverService.findDrivers());
+		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 	}
 
 	private Trip createTrip(TripEditForm form, BindingResult bindingResult) {

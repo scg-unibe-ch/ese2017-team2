@@ -43,9 +43,9 @@ public class TripEditController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles(trip));
-		model.addAttribute("driverList", driverService.findDrivers());
-
+		
+		addModelAttributes(model, trip);
+		
 		return "/planner/trip/edit";
 	}
 
@@ -67,9 +67,8 @@ public class TripEditController {
 		}
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("driverList", driverService.findDrivers());
-			model.addAttribute("vehicleList", vehicleService.findAvailableVehicles(trip));
-
+			addModelAttributes(model, trip);
+			
 			// There is some invalid input, try again.
 			return "/planner/trip/edit";
 		}
@@ -80,12 +79,18 @@ public class TripEditController {
 		return "redirect:/planner/list";
 	}
 
+	private void addModelAttributes(Model model, Trip trip) {
+		model.addAttribute("create", false);
+		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles(trip));
+		model.addAttribute("driverList", driverService.findDrivers());
+	}
+
 	private void updateTrip(Trip trip, TripEditForm form, BindingResult bindingResult) {
 
 		trip.setCustomer(form.getCustomer());
 		trip.setAnimal(form.getAnimal());
 		trip.setAnimalCount(form.getAnimalCount());
-		
+
 		trip.setAddress1(form.getAddress1());
 		trip.setAddress2(form.getAddress2());
 

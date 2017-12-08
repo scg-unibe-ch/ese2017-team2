@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.unibe.eseteam2.model.Driver;
@@ -14,6 +15,7 @@ import ch.unibe.eseteam2.service.DriverService;
 import ch.unibe.eseteam2.service.TripService;
 
 @Controller
+@RequestMapping("/driver")
 public class DriverListController {
 	@Autowired
 	private TripService tripService;
@@ -24,14 +26,14 @@ public class DriverListController {
 	@Autowired
 	private UserSecurityService userSecurityService;
 
-	@GetMapping("/driver/list")
+	@GetMapping("/list")
 	public String getMapping(Model model) {
 		tripService.updateTripStates();
 		addTripLists(model);
-		return "driver/list";
+		return "driver/trip/list";
 	}
 
-	@PostMapping("/driver/list")
+	@PostMapping("/list")
 	public String postMapping(@RequestParam(value = "action", required = false) String action, @RequestParam(value = "select", required = false) Long id, Model model) {
 		try {
 			if (action == null) {
@@ -55,7 +57,7 @@ public class DriverListController {
 		tripService.updateTripStates();
 		addTripLists(model);
 
-		return "driver/list";
+		return "driver/trip/list";
 	}
 
 	private String redirectView(Long id) throws Exception {

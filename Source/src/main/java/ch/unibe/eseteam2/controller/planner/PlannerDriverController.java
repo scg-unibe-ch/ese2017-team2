@@ -23,7 +23,7 @@ public class PlannerDriverController {
 	@GetMapping("/list")
 	private String listDrivers(Model model) {
 		model.addAttribute("driverList", driverService.findDrivers());
-		return "/planner/driverlist";
+		return "/planner/driver/list";
 	}
 
 	@PostMapping("/list")
@@ -47,7 +47,7 @@ public class PlannerDriverController {
 		}
 
 		model.addAttribute("driverList", driverService.findDrivers());
-		return "/planner/driverlist";
+		return "/planner/driver/list";
 	}
 
 	@GetMapping("/{id}")
@@ -56,11 +56,11 @@ public class PlannerDriverController {
 
 		if (driver == null) {
 			model.addAttribute("error", "Driver can not be found in database.");
-			return "/planner/driver";
+			return "/planner/driver/view";
 		}
 
 		model.addAttribute("driver", new DriverViewForm(driver));
-		return "/planner/driver";
+		return "/planner/driver/view";
 	}
 
 	@PostMapping("/{id}")
@@ -76,7 +76,7 @@ public class PlannerDriverController {
 
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
-			return "/planner/driver";
+			return "/planner/driver/view";
 		}
 		return "redirect:/planner/driver/list";
 	}

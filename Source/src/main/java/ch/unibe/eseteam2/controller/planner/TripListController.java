@@ -14,7 +14,7 @@ import ch.unibe.eseteam2.service.TripService;
 
 @Controller
 @RequestMapping("/planner/list")
-public class PlannerListController {
+public class TripListController {
 	@Autowired
 	private TripService tripService;
 
@@ -22,7 +22,7 @@ public class PlannerListController {
 	public String getList(Model model) {
 		tripService.updateTripStates();
 		addTripLists(model);
-		return "planner/triplist";
+		return "planner/trip/list";
 	}
 
 	@PostMapping()
@@ -56,7 +56,7 @@ public class PlannerListController {
 
 		tripService.updateTripStates();
 		addTripLists(model);
-		return "/planner/triplist";
+		return "/planner/trip/list";
 	}
 
 	private String redirectEdit(Long id) throws Exception {

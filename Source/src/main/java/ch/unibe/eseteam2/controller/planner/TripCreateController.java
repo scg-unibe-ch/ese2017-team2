@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.eseteam2.form.TripEditForm;
@@ -21,6 +22,7 @@ import ch.unibe.eseteam2.service.TripService;
 import ch.unibe.eseteam2.service.VehicleService;
 
 @Controller
+@RequestMapping("/planner/trip")
 public class TripCreateController {
 	@Autowired
 	private DriverService driverService;
@@ -31,7 +33,7 @@ public class TripCreateController {
 	@Autowired
 	private VehicleService vehicleService;
 
-	@GetMapping("/planner/create")
+	@GetMapping("/create")
 	public String getMapping(Model model) {
 
 		model.addAttribute("trip", new TripEditForm());
@@ -41,7 +43,7 @@ public class TripCreateController {
 		return "/planner/trip/edit";
 	}
 
-	@PostMapping("/planner/create")
+	@PostMapping("/create")
 	public String postMapping(@Valid @ModelAttribute("trip") TripEditForm tripForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
 		Trip trip;
 

@@ -127,7 +127,7 @@
 	</div>
 
 
-	<form action="/planner/create" method="get">
+	<form action="/planner/trip/create" method="get">
 		<button type="submit" class="btn btn-outline-success">Create
 			new trip</button>
 	</form>
@@ -185,18 +185,20 @@
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
 								<th scope="col">Driver</th>
+								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="trip : ${tripsEditing}">
-								<td><input type="radio" name="select" th:value="${trip.id}"
-									></input></td>
+								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
-								<td th:text="${trip.animal}">customer</td>
+								<td th:text="${trip.animal}">animal</td>
 								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
-								<td th:text="${trip.date}">customer</td>
+									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
+								<td
+									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
+								<td th:text="${trip.date}">date</td>
 							</tr>
 						</tbody>
 					</table>
@@ -261,18 +263,20 @@
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
 								<th scope="col">Driver</th>
+								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="trip : ${tripsExpired}">
-								<td><input type="radio" name="select" th:value="${trip.id}"
-									></input></td>
+								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
-								<td th:text="${trip.animal}">customer</td>
+								<td th:text="${trip.animal}">animal</td>
 								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
-								<td th:text="${trip.date}">customer</td>
+									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
+								<td
+									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
+								<td th:text="${trip.date}">date</td>
 							</tr>
 						</tbody>
 					</table>
@@ -308,18 +312,20 @@
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
 								<th scope="col">Driver</th>
+								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="trip : ${tripsAssigned}">
-								<td><input type="radio" name="select" th:value="${trip.id}"
-									></input></td>
+								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
-								<td th:text="${trip.animal}">customer</td>
+								<td th:text="${trip.animal}">animal</td>
 								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
-								<td th:text="${trip.date}">customer</td>
+									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
+								<td
+									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
+								<td th:text="${trip.date}">date</td>
 							</tr>
 						</tbody>
 					</table>
@@ -353,18 +359,20 @@
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
 								<th scope="col">Driver</th>
+								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="trip : ${tripsActive}">
-								<td><input type="radio" name="select" th:value="${trip.id}"
-									></input></td>
+								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
-								<td th:text="${trip.animal}">customer</td>
+								<td th:text="${trip.animal}">animal</td>
 								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
-								<td th:text="${trip.date}">customer</td>
+									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
+								<td
+									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
+								<td th:text="${trip.date}">date</td>
 							</tr>
 						</tbody>
 					</table>
@@ -431,18 +439,20 @@
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
 								<th scope="col">Driver</th>
+								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="trip : ${tripsUnsuccessful}">
-								<td><input type="radio" name="select" th:value="${trip.id}"
-									></input></td>
+								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
-								<td th:text="${trip.animal}">customer</td>
+								<td th:text="${trip.animal}">animal</td>
 								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
-								<td th:text="${trip.date}">customer</td>
+									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
+								<td
+									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
+								<td th:text="${trip.date}">date</td>
 							</tr>
 						</tbody>
 					</table>
@@ -479,18 +489,20 @@
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
 								<th scope="col">Driver</th>
+								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="trip : ${tripsSuccessful}">
-								<td><input type="radio" name="select" th:value="${trip.id}"
-									></input></td>
+								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
-								<td th:text="${trip.animal}">customer</td>
+								<td th:text="${trip.animal}">animal</td>
 								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">customer</td>
-								<td th:text="${trip.date}">customer</td>
+									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
+								<td
+									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
+								<td th:text="${trip.date}">date</td>
 							</tr>
 						</tbody>
 					</table>

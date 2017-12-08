@@ -37,7 +37,7 @@ public class TripViewController {
 			
 		}
 
-		return "driver/view";
+		return "driver/trip/view";
 	}
 
 	private void addAttributes(Long id, Model model) throws Exception {

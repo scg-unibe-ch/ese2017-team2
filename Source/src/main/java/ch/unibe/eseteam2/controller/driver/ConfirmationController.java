@@ -32,11 +32,11 @@ public class ConfirmationController {
 			
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
-			return "driver/confirm";
+			return "driver/trip/confirm";
 		}
 		
 		model.addAttribute("form", new ConfirmationForm());
-		return "driver/confirm";
+		return "driver/trip/confirm";
 	}
 
 	@PostMapping("{id}")
@@ -52,11 +52,11 @@ public class ConfirmationController {
 			
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
-			return "driver/confirm";
+			return "driver/trip/confirm";
 		}
 
 		if (bindingResult.hasErrors()) {
-			return "driver/confirm";
+			return "driver/trip/confirm";
 		}
 
 		return "redirect:/driver/list";

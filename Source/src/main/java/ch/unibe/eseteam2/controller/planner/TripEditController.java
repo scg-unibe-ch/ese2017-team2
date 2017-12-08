@@ -43,9 +43,9 @@ public class TripEditController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		
+
 		addModelAttributes(model, trip);
-		
+
 		return "/planner/trip/edit";
 	}
 
@@ -68,7 +68,7 @@ public class TripEditController {
 
 		if (bindingResult.hasErrors()) {
 			addModelAttributes(model, trip);
-			
+
 			// There is some invalid input, try again.
 			return "/planner/trip/edit";
 		}
@@ -98,8 +98,14 @@ public class TripEditController {
 			trip.setDate(form.getDate());
 		}
 
+		addEstimate(form, trip, bindingResult);
 		addDriver(form, trip, bindingResult);
 		addVehicle(form, trip, bindingResult);
+	}
+
+	private void addEstimate(TripEditForm form, Trip trip, BindingResult bindingResult) {
+		trip.setEstimateHours(form.getEstimateHours());
+		trip.setEstimateMinutes(form.getEstimateMinutes());
 	}
 
 	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult) {

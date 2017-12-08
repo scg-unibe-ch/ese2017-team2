@@ -79,10 +79,16 @@ public class TripCreateController {
 
 		trip = new Trip(form.getCustomer(), form.getAnimal(), form.getAnimalCount(), form.getAddress1(), form.getAddress2(), form.getDate());
 
+		addEstimate(form, trip, bindingResult);
 		addDriver(form, trip, bindingResult);
 		addVehicle(form, trip, bindingResult);
 
 		return trip;
+	}
+
+	private void addEstimate(TripEditForm form, Trip trip, BindingResult bindingResult) {
+		trip.setEstimateHours(form.getEstimateHours());
+		trip.setEstimateMinutes(form.getEstimateMinutes());
 	}
 
 	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult) {

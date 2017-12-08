@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -57,6 +58,18 @@ public class Trip {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date date;
 
+	@Min(value = 0)
+	private Integer estimateHours;
+	@Min(value = 0)
+	@Max(value = 59)
+	private Integer estimateMinutes;
+
+	@Min(value = 0)
+	private Integer usedHours;
+	@Min(value = 0)
+	@Max(value = 59)
+	private Integer usedMinutes;
+
 	private String feedback;
 
 	public Trip(String customer, String animal, int animalCount, Address address1, Address address2, Date date) {
@@ -101,14 +114,14 @@ public class Trip {
 		case active:
 			break;
 		case assigned:
-			if (this.driver != null && this.vehicle != null) {
+			if (this.driver == null || this.vehicle == null) {
+				this.setTripState(TripState.editing);
+				this.updateState();
+			} else {
 				if (this.hasStarted()) {
 					this.setTripState(TripState.active);
 					this.updateState();
 				}
-			} else {
-				this.setTripState(TripState.editing);
-				this.updateState();
 			}
 			break;
 		case editing:
@@ -141,6 +154,13 @@ public class Trip {
 
 	}
 
+	public boolean isEstimateSet() {
+		if (this.estimateHours == null || this.estimateMinutes == null) {
+			return false;
+		}
+		return this.estimateHours != 0 && this.estimateMinutes != 0;
+	}
+
 	public Driver getDriver() {
 		return driver;
 	}
@@ -158,6 +178,38 @@ public class Trip {
 
 	public Date getDate() {
 		return this.date;
+	}
+
+	public Integer getEstimateHours() {
+		return estimateHours;
+	}
+
+	public void setEstimateHours(Integer estimateHours) {
+		this.estimateHours = estimateHours;
+	}
+
+	public Integer getEstimateMinutes() {
+		return estimateMinutes;
+	}
+
+	public void setEstimateMinutes(Integer estimateMinutes) {
+		this.estimateMinutes = estimateMinutes;
+	}
+
+	public Integer getUsedHours() {
+		return usedHours;
+	}
+
+	public void setUsedHours(Integer usedHours) {
+		this.usedHours = usedHours;
+	}
+
+	public Integer getUsedMinutes() {
+		return usedMinutes;
+	}
+
+	public void setUsedMinutes(Integer usedMinutes) {
+		this.usedMinutes = usedMinutes;
 	}
 
 	public void setTripState(TripState tripState) {

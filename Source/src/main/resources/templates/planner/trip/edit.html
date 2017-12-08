@@ -85,13 +85,13 @@
 								<label>Animal:</label> <input type="text" class="form-control"
 									th:field="*{animal}" /> <label
 									th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
-									Error> </label>
+									Error </label>
 							</div>
 							<div class="col-2">
 								<label>Count:</label> <input type="number" class="form-control"
 									th:field="*{animalCount}" /> <label
 									th:if="${#fields.hasErrors('animalCount')}"
-									th:errors="*{animalCount}">Animal Count Error> </label>
+									th:errors="*{animalCount}">Animal Count Error </label>
 							</div>
 						</div>
 
@@ -101,15 +101,21 @@
 								<label>Date and Time:</label> <input type="datetime-local"
 									class="form-control" th:field="*{date}" /> <label
 									th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date
-									and Time Error> </label>
+									and Time Error </label>
 							</div>
 							<div class="form-group col-md-1">
 								<label>Estimated</label> <input class="form-control"
-									type="number" placeholder="h" />
+									type="number" min="0" placeholder="h"
+									th:field="*{estimateHours}" /><label
+									th:if="${#fields.hasErrors('estimateHours')}"
+									th:errors="*{estimateHours}">Estimate Hours Error </label>
 							</div>
 							<div class="form-group col-md-1">
 								<label>time:</label> <input class="form-control" type="number"
-									min="0" max="59" placeholder="min" />
+									min="0" max="59" placeholder="min"
+									th:field="*{estimateMinutes}" /><label
+									th:if="${#fields.hasErrors('estimateMinutes')}"
+									th:errors="*{estimateMinutes}">Estimate Minutes Error </label>
 							</div>
 						</div>
 
@@ -124,7 +130,7 @@
 										th:text="${d.name}"
 										th:selected=" (*{driverId} != null) ? (${d.id} == *{driverId} ? true : false) : false"></option>
 								</select> <label th:if="${#fields.hasErrors('driverId')}"
-									th:errors="*{driverId}">Driver Error> </label>
+									th:errors="*{driverId}">Driver Error </label>
 							</div>
 							<div class="col-2">
 								<label>Vehicle:</label> <select th:field="*{vehicleId}"
@@ -133,7 +139,7 @@
 									<option th:each="vehicle : ${vehicleList}"
 										th:value="${vehicle.id}" th:text="${vehicle.name}"></option>
 								</select> <label th:if="${#fields.hasErrors('vehicleId')}"
-									th:errors="*{vehicleId}">Vehicle Error> </label> <br /> <br />
+									th:errors="*{vehicleId}">Vehicle Error </label> <br /> <br />
 							</div>
 						</div>
 
@@ -163,7 +169,7 @@
 								<label>Street:</label> <input type="text" class="form-control"
 									id="inputAddress" th:field="*{street_1}" /> <label
 									th:if="${#fields.hasErrors('street_1')}"
-									th:errors="*{street_1}">Street_1 Error> </label>
+									th:errors="*{street_1}">Street_1 Error </label>
 
 							</div>
 
@@ -171,7 +177,7 @@
 								<label>Number:</label> <input type="text" class="form-control"
 									id="inputAddress" th:field="*{number_1}" /> <label
 									th:if="${#fields.hasErrors('number_1')}"
-									th:errors="*{number_1}">Number_1 Error> </label>
+									th:errors="*{number_1}">Number_1 Error </label>
 
 							</div>
 						</div>
@@ -184,13 +190,13 @@
 								<label>City:</label> <input type="text" class="form-control"
 									th:field="*{city_1}" /> <label
 									th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
-									Error> </label>
+									Error </label>
 							</div>
 							<div class="col-2">
 								<label>PLZ:</label> <input type="number" class="form-control"
 									th:field="*{plz_1}" /> <label
 									th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
-									Error> </label>
+									Error </label>
 							</div>
 						</div>
 
@@ -222,7 +228,7 @@
 								<label>Street:</label> <input type="text" class="form-control"
 									th:field="*{street_2}" /> <label
 									th:if="${#fields.hasErrors('street_2')}"
-									th:errors="*{street_2}"> Street_2 Error> </label>
+									th:errors="*{street_2}"> Street_2 Error </label>
 
 							</div>
 
@@ -230,7 +236,7 @@
 								<label>Number:</label> <input type="text" class="form-control"
 									th:field="*{number_2}" /> <label
 									th:if="${#fields.hasErrors('number_2')}"
-									th:errors="*{number_2}"> Number_2 Error> </label>
+									th:errors="*{number_2}"> Number_2 Error </label>
 
 							</div>
 						</div>
@@ -243,13 +249,13 @@
 								<label>City:</label> <input type="text" class="form-control"
 									th:field="*{city_2}" /> <label
 									th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
-									Error> </label>
+									Error </label>
 							</div>
 							<div class="col-2">
 								<label>PLZ:</label> <input type="number" class="form-control"
 									th:field="*{plz_2}" /> <label
 									th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_2
-									Error> </label>
+									Error </label>
 							</div>
 						</div>
 

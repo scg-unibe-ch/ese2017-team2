@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import ch.unibe.eseteam2.model.Address;
@@ -33,6 +34,11 @@ public class TripEditForm {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Future(message = "has to be in the future.")
 	private Date date;
+
+	@Min(value = 0, message = "has to be positive.")
+	private int estimateHours;
+	@Range(min = 0, max = 59, message = "has to be between 0 and 59.")
+	private int estimateMinutes;
 
 	private Long driverId;
 
@@ -92,6 +98,14 @@ public class TripEditForm {
 		this.animalCount = trip.getAnimalCount();
 
 		this.date = trip.getDate();
+
+		if (trip.getEstimateHours() != null) {
+			this.estimateHours = trip.getEstimateHours();
+		}
+
+		if (trip.getEstimateMinutes() != null) {
+			this.estimateMinutes = trip.getEstimateMinutes();
+		}
 
 		if (trip.getDriver() != null) {
 			this.driverId = trip.getDriver().getId();
@@ -257,6 +271,22 @@ public class TripEditForm {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public int getEstimateHours() {
+		return estimateHours;
+	}
+
+	public void setEstimateHours(int estimateHours) {
+		this.estimateHours = estimateHours;
+	}
+
+	public int getEstimateMinutes() {
+		return estimateMinutes;
+	}
+
+	public void setEstimateMinutes(int estimateMinutes) {
+		this.estimateMinutes = estimateMinutes;
 	}
 
 	public Long getDriverId() {

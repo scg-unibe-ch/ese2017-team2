@@ -142,7 +142,7 @@
 						<tbody>
 							<tr th:each="trip : ${tripsActive}">
 								<td><input type="radio" name="select" th:value="${trip.id}"
-									required="required"></input></td>
+									></input></td>
 								<td th:text="${trip.customer}">customer</td>
 								<td th:text="${trip.animal}">customer</td>
 								<td
@@ -186,7 +186,7 @@
 						<tbody>
 							<tr th:each="trip : ${tripsAssigned}">
 								<td><input type="radio" name="select" th:value="${trip.id}"
-									required="required"></input></td>
+									></input></td>
 								<td th:text="${trip.customer}">customer</td>
 								<td th:text="${trip.animal}">customer</td>
 								<td
@@ -233,7 +233,7 @@
 						<tbody>
 							<tr th:each="trip : ${tripsUnsuccessful}">
 								<td><input type="radio" name="select" th:value="${trip.id}"
-									required="required"></input></td>
+									></input></td>
 								<td th:text="${trip.customer}">customer</td>
 								<td th:text="${trip.animal}">customer</td>
 								<td
@@ -277,7 +277,7 @@
 						<tbody>
 							<tr th:each="trip : ${tripsSuccessful}">
 								<td><input type="radio" name="select" th:value="${trip.id}"
-									required="required"></input></td>
+									></input></td>
 								<td th:text="${trip.customer}">customer</td>
 								<td th:text="${trip.animal}">customer</td>
 								<td

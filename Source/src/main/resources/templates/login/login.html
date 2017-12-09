@@ -8,10 +8,37 @@ img {
 }
 
 .border-class {
-	border: outset;
+	border: none;
 	margin: 20px;
 	padding: 20px;
 }
+
+.horizontal-divider {
+	width: 100%;
+	height: 1px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin: 0 auto;
+	position: relative;
+	background-color: white;
+}
+
+.horizontal-divider:before {
+	content: 'Login';
+	top: -18px;
+	left: 40%;
+	padding: 0 5px;
+	position: absolute;
+	font-size: 25px;
+	background: #3f5d20;
+	color: white;
+}
+
+input[type="text"], input[type="password"] {
+	border: none;
+	border-bottom: 1px solid white;
+}
+
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -46,27 +73,35 @@ img {
 			<div class="container">
 				<div class="row">
 					<div class="container" id="formContainer">
-						<form name="f" th:action="@{/login}" method="post"
-							class="border-class" style="background-color: white;">
 
-							<div th:if="${param.error}" class="alert alert-error">
+
+						<form name="f" th:action="@{/login}" method="post"
+							class="border-class">
+
+
+							<div th:if="${param.error}" class="alert alert-error"
+								style="color: white;">
 								Invalid E-mail address or password. <br /> <br />
 							</div>
 
+
+
+							<div class="horizontal-divider"></div>
+							<br />
 							<div class="form-group">
-								<h3>Login</h3>
-								<label>E-mail address</label> <input type="text"
-									class="form-control" placeholder="email@example.com" size="30"
-									maxlength="100" />
+								<input type="text" class="form-control"
+									style="background-color: #3f5d20; color: white;"
+									placeholder="E-mail address" size="30" maxlength="100" />
 							</div>
 							<div class="form-group">
-								<label>Password</label> <input type="password"
-									class="form-control" placeholder="Password" size="30"
-									maxlength="100" />
+								<input type="password" class="form-control"
+									style="background-color: #3f5d20; color: white;"
+									placeholder="Password" size="30" maxlength="100" />
 							</div>
 
 							<button type="submit" class="btn btn-outline-secondary">Login</button>
 							<a href="/user/create" class="btn btn-outline-secondary">Register</a>
+							<br />
 
 						</form>
 					</div>

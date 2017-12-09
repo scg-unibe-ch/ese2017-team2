@@ -74,17 +74,31 @@
 
 
 						<div class="row">
+						<div class="col-sm-4">
+						<h5>Details</h5>
+								<div class="row">
+									<div class="col-xs-6">
+										<p>Email: &nbsp;&nbsp;</p>
+										<p>First name: &nbsp;&nbsp;</p>
+										<p>Last name: &nbsp;&nbsp;</p>
+										<p>Street: &nbsp;&nbsp;</p>
+										<p>Number: &nbsp;&nbsp;</p>
+										<p>City: &nbsp;&nbsp;</p>
+										<p>PLZ: &nbsp;&nbsp;</p>
+									</div>
+									<div class="col-xs-6">
 							<div class="col-sm-4">
-								<h5>Details</h5>
-								<p th:text="'Email: ' + ${driver.email}" />
-								<p th:text="'First name: ' + ${driver.firstname}" />
-								<p th:text="'Last name: ' + ${driver.lastname}" />
-								<p th:text="'Street: ' + ${driver.street}" />
-								<p th:text="'Number: ' + ${driver.number}" />
-								<p th:text="'City: ' + ${driver.city}" />
-								<p th:text="'PLZ: ' + ${driver.plz}" />
+								<p th:text="${driver.email}" />
+								<p th:text="${driver.firstname}" />
+								<p th:text="${driver.lastname}" />
+								<p th:text="${driver.street}" />
+								<p th:text="${driver.number}" />
+								<p th:text="${driver.city}" />
+								<p th:text="${driver.plz}" />
 							</div>
-
+						</div>
+						</div>
+						</div>
 						</div>
 
 						<button class="btn btn-outline-secondary" data-backdrop="static"

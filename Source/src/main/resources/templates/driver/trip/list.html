@@ -147,7 +147,6 @@
 								<th scope="col"></th>
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
-								<th scope="col">Driver</th>
 								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
@@ -157,8 +156,6 @@
 								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
 								<td th:text="${trip.animal}">animal</td>
-								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
 								<td
 									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
 								<td th:text="${trip.date}">date</td>
@@ -193,7 +190,6 @@
 								<th scope="col"></th>
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
-								<th scope="col">Driver</th>
 								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
@@ -203,8 +199,6 @@
 								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
 								<td th:text="${trip.animal}">animal</td>
-								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
 								<td
 									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
 								<td th:text="${trip.date}">date</td>
@@ -242,7 +236,6 @@
 								<th scope="col"></th>
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
-								<th scope="col">Driver</th>
 								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
@@ -252,8 +245,6 @@
 								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
 								<td th:text="${trip.animal}">animal</td>
-								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
 								<td
 									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
 								<td th:text="${trip.date}">date</td>
@@ -288,7 +279,7 @@
 								<th scope="col"></th>
 								<th scope="col">Customer</th>
 								<th scope="col">Animal</th>
-								<th scope="col">Driver</th>
+								<th scope="col">Vehicle</th>
 								<th scope="col">Date</th>
 							</tr>
 						</thead>
@@ -297,8 +288,6 @@
 								<td><input type="radio" name="select" th:value="${trip.id}"></input></td>
 								<td th:text="${trip.customer}">customer</td>
 								<td th:text="${trip.animal}">animal</td>
-								<td
-									th:text="(${trip.driver} != null ? ${trip.driver.name} : '')">driver</td>
 								<td
 									th:text="(${trip.vehicle} != null ? ${trip.vehicle.name} : '')">vehicle</td>
 								<td th:text="${trip.date}">date</td>

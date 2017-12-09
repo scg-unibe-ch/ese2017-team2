@@ -16,6 +16,17 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
+
+<script>
+	$(document).ready(function() {
+		$('table tr').click(function(event) {
+			if (event.target.type !== 'radio') {
+				$(':radio', this).trigger('click');
+			}
+		});
+	});
+</script>
+
 <title>Trip List Driver</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
@@ -130,7 +141,7 @@
 
 
 					<br></br>
-					<table class="table table-sm">
+					<table class="table table-sm table-hover">
 						<thead>
 							<tr>
 								<th scope="col"></th>
@@ -176,7 +187,7 @@
 					<button class="btn btn-outline-secondary" type="submit"
 						name="action" value="view">View</button>
 					<br></br>
-					<table class="table table-sm">
+					<table class="table table-sm table-hover">
 						<thead>
 							<tr>
 								<th scope="col"></th>
@@ -225,7 +236,7 @@
 					<button class="btn btn-outline-secondary" type="submit"
 						name="action" value="view">View</button>
 					<br></br>
-					<table class="table table-sm">
+					<table class="table table-sm table-hover">
 						<thead>
 							<tr>
 								<th scope="col"></th>
@@ -271,7 +282,7 @@
 					<button class="btn btn-outline-secondary" type="submit"
 						name="action" value="view">View</button>
 					<br></br>
-					<table class="table table-sm">
+					<table class="table table-sm table-hover">
 						<thead>
 							<tr>
 								<th scope="col"></th>

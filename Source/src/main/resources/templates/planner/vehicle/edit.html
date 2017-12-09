@@ -80,42 +80,48 @@
 							th:text="${create} ? 'Create Vehicle' : 'Edit Vehicle'">Edit
 							Vehicle</h1>
 
-						<div>
+						<div class="form-row">
+							<div class="col-4">
 							<label>Name:</label> <input class="form-control" type="text"
 								th:field="*{name}" /> <label
 								th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
 								Error</label>
 						</div>
+						<div class="col-4"></div>
+						</div>
 
-						<div>
+						<div class="form-row">
+							<div class="col-2">
 							<label>Width in cm:</label> <input class="form-control"
 								type="number" th:field="*{width}" /> <label
 								th:if="${#fields.hasErrors('width')}" th:errors="*{width}">Width
 								Error> </label>
 						</div>
-						<div>
+						<div class="col-2">
 							<label>Length in cm:</label> <input class="form-control"
 								type="number" th:field="*{length}" /> <label
 								th:if="${#fields.hasErrors('length')}" th:errors="*{length}">Length
 								Error> </label>
 						</div>
-						<div>
-
+						</div>
+						
+							<div class="form-row">
+							<div class="col-1">
 							<label>Count:</label> <input class="form-control" type="number"
 								th:field="*{count}" /> <label
 								th:if="${#fields.hasErrors('count')}" th:errors="*{count}">Count
 								Error> </label>
 						</div>
 
-						<div>
-
-							<label>Image:</label> <input class="form-control" type="file"
+						<div class="col-4">
+							<label>Image:</label> <input class="form-control" type="file" 
 								name="file" accept="image/*"/><label th:if="${#fields.hasErrors('image')}"
 								th:errors="*{image}">Image Error> </label>
 						</div>
+						</div>
 
 
-
+						<br /> <br />
 						<button type="submit" class="btn btn-outline-success">Save</button>
 						<a href="/planner/vehicle/list" class="btn btn-outline-danger">Cancel</a>
 

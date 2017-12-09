@@ -1,5 +1,7 @@
 package ch.unibe.eseteam2.model;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -64,11 +66,8 @@ public class Trip {
 	@Max(value = 59)
 	private Integer estimateMinutes;
 
-	@Min(value = 0)
-	private Integer usedHours;
-	@Min(value = 0)
-	@Max(value = 59)
-	private Integer usedMinutes;
+	private Long usedHours;
+	private Long usedMinutes;
 
 	private String feedback;
 
@@ -107,6 +106,17 @@ public class Trip {
 
 	public boolean canEdit() {
 		return !(this.tripState == TripState.successful || this.tripState == TripState.active);
+	}
+
+	private boolean hasStarted() {
+		if (this.date == null) {
+			return false;
+		}
+		if (this.date.before(Calendar.getInstance().getTime())) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public void updateState() {
@@ -161,6 +171,21 @@ public class Trip {
 		return this.estimateHours != 0 && this.estimateMinutes != 0;
 	}
 
+	public void updateUsedTime() {
+		if (isEstimateSet() && this.date != null) {
+			Instant start = this.date.toInstant();
+			Instant now = Instant.now();
+
+			if (start.isBefore(now)) {
+
+				this.usedHours = ChronoUnit.HOURS.between(start, now);
+				now = now.minus(this.usedHours, ChronoUnit.HOURS);
+				this.usedMinutes = ChronoUnit.MINUTES.between(start, now);
+			}
+
+		}
+	}
+
 	public Driver getDriver() {
 		return driver;
 	}
@@ -196,19 +221,19 @@ public class Trip {
 		this.estimateMinutes = estimateMinutes;
 	}
 
-	public Integer getUsedHours() {
+	public Long getUsedHours() {
 		return usedHours;
 	}
 
-	public void setUsedHours(Integer usedHours) {
+	public void setUsedHours(Long usedHours) {
 		this.usedHours = usedHours;
 	}
 
-	public Integer getUsedMinutes() {
+	public Long getUsedMinutes() {
 		return usedMinutes;
 	}
 
-	public void setUsedMinutes(Integer usedMinutes) {
+	public void setUsedMinutes(Long usedMinutes) {
 		this.usedMinutes = usedMinutes;
 	}
 
@@ -243,17 +268,6 @@ public class Trip {
 
 	public void setFeedback(String feedback) {
 		this.feedback = feedback;
-	}
-
-	private boolean hasStarted() {
-		if (this.date == null) {
-			return false;
-		}
-		if (this.date.before(Calendar.getInstance().getTime())) {
-			return true;
-		}
-
-		return false;
 	}
 
 	public Long getId() {
@@ -325,5 +339,4 @@ public class Trip {
 
 		this.updateState();
 	}
-
 }

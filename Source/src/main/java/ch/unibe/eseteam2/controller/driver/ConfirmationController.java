@@ -65,6 +65,7 @@ public class ConfirmationController {
 	private void updateTrip(Trip trip, ConfirmationForm form) {
 		if (form.isSuccess()) {
 			trip.setTripState(TripState.successful);
+			trip.updateUsedTime();
 		} else {
 			trip.setTripState(TripState.unsuccessful);
 		}

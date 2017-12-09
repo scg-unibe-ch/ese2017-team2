@@ -37,6 +37,9 @@ public class TripViewForm {
 
 	private String feedback;
 
+	private String estimate;
+	private String used;
+
 	public TripViewForm(Trip trip) {
 		this.customer = trip.getCustomer();
 
@@ -52,12 +55,34 @@ public class TripViewForm {
 		}
 
 		this.date = trip.getDate();
+
+		setEstimate(trip);
+		setUsed(trip);
+
 		this.tripState = trip.getTripState().toString();
 
 		this.feedback = trip.getFeedback();
 
 		setAddress1(trip.getAddress1());
 		setAddress2(trip.getAddress2());
+	}
+
+	private void setEstimate(Trip trip) {
+		Integer hours = trip.getEstimateHours();
+		Integer minutes = trip.getEstimateMinutes();
+
+		if (hours != null && minutes != null) {
+			this.estimate = hours + ":" + minutes;
+		}
+	}
+
+	private void setUsed(Trip trip) {
+		Long hours = trip.getUsedHours();
+		Long minutes = trip.getUsedMinutes();
+
+		if (hours != null && minutes != null) {
+			this.used = hours + ":" + minutes;
+		}
 	}
 
 	private void setAddress1(Address address) {
@@ -216,6 +241,22 @@ public class TripViewForm {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getEstimate() {
+		return estimate;
+	}
+
+	public void setEstimate(String estimate) {
+		this.estimate = estimate;
+	}
+
+	public String getUsed() {
+		return used;
+	}
+
+	public void setUsed(String used) {
+		this.used = used;
 	}
 
 	public String getTripState() {

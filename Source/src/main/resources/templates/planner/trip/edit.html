@@ -81,13 +81,19 @@
 						<br />
 
 						<div class="form-row">
-							<div class="col-4">
+							<div class="col-2">
 								<label>Animal:</label> <input type="text" class="form-control"
 									th:field="*{animal}" /> <label
 									th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
 									Error </label>
 							</div>
 							<div class="col-2">
+								<label>Width in cm:</label> <input type="number" class="form-control"/> 
+							</div>
+							<div class="col-2">
+								<label>Length in cm:</label> <input type="number" class="form-control"/> 
+							</div>
+							<div class="col-1">
 								<label>Count:</label> <input type="number" class="form-control"
 									th:field="*{animalCount}" /> <label
 									th:if="${#fields.hasErrors('animalCount')}"

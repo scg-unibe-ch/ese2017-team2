@@ -76,6 +76,8 @@
 									<div class="col-xs-6">
 										<p>Customer: &nbsp;&nbsp;</p>
 										<p>Animal: &nbsp;&nbsp;</p>
+										<p>Width: &nbsp;&nbsp;</p>
+										<p>Length: &nbsp;&nbsp;</p>
 										<p>Count: &nbsp;&nbsp;</p>
 										<p>Date: &nbsp;&nbsp;</p>
 										<p>Estimated Time: &nbsp;&nbsp;</p>
@@ -90,6 +92,13 @@
 											th:text="${trip.customer != null} ?  ${trip.customer} : 'not set'" />
 										<p
 											th:text="${trip.animal != null} ?  ${trip.animal} : 'not set'" />
+											
+											<!-- TODO width -->
+											<p th:text='width' />
+											
+											<!-- TODO length -->
+											<p th:text='length' />
+											
 										<p
 											th:text="${trip.animalCount != null} ?  ${trip.animalCount} : 'not set'" />
 										<p th:text="${trip.date != null} ?  ${trip.date} : 'not set'" />

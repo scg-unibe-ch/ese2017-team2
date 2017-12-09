@@ -23,6 +23,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
+
+
 <title>Trip view</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
@@ -93,10 +95,11 @@
 										<p
 											th:text="${trip.animalCount != null} ?  ${trip.animalCount} : 'not set'" />
 										<p th:text="${trip.date != null} ?  ${trip.date} : 'not set'" />
-										
-										<p th:text="${trip.estimate != null} ?  ${trip.estimate} : 'not set'" />
+
+										<p
+											th:text="${trip.estimate != null} ?  ${trip.estimate} : 'not set'" />
 										<p th:text="${trip.used != null} ?  ${trip.used} : 'not set'" />
-										
+
 										<p
 											th:text="${trip.driver != null} ?  ${trip.driver} : 'not set'" />
 										<p
@@ -168,8 +171,16 @@
 						</div>
 
 
-
-
+						<iframe width="600" height="450" frameborder="0" style="border: 0"
+							allowfullscreen="allowfullscreen"
+							th:src="@{https://www.google.com/maps/embed/v1/directions( 
+								key = 'AIzaSyD2RAChUrA-HRcSdeyZcIHK4ryu7trN8dU', 
+								origin = 'Uni+Engehalde,Neubrückstrasse+10,3012+Bern', 
+								waypoints = |${trip.street_1} ${trip.number_1} ${trip.plz_1} ${trip.city_1} Schweiz|,
+								destination = |${trip.street_2} ${trip.number_2} ${trip.plz_2} ${trip.city_2} Schweiz|,
+								mode = 'driving'
+							)}">
+						</iframe>
 
 						<div class="text-right">
 							<a href="/planner/list"

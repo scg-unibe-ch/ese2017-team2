@@ -168,6 +168,11 @@
 							th:if="${#fields.hasErrors('animalLength')}"
 							th:errors="*{animalLength}">Animal Length Error </label>
 					</div>
+
+					<div>
+						<button type="submit" name="action" value="suggest"
+							class="btn btn-outline-success">Suggest Vehicle</button>
+					</div>
 				</div>
 
 				<div class="form-row">
@@ -364,7 +369,8 @@
 
 
 				<br />
-				<button type="submit" class="btn btn-outline-success">Save</button>
+				<button type="submit" name="action" value="create"
+					class="btn btn-outline-success">Save</button>
 				<a href="/planner/list" class="btn btn-outline-danger">Cancel</a>
 			</div>
 

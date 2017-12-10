@@ -64,6 +64,16 @@ public class Vehicle {
 		this.setLength(length);
 	}
 
+	public int getMaxAnimals(int animalLength, int animalWidth) {
+		if (animalLength < 1) {
+			throw new IllegalArgumentException("animalLength has to be at least 1.");
+		}
+		if (animalWidth < 1) {
+			throw new IllegalArgumentException("animalWidth has to be at least 1.");
+		}
+		return (this.length / animalLength) * (this.width / animalWidth);
+	}
+
 	public void assign(Trip trip) throws VehicleAssignException {
 		if (this.used >= this.count) {
 			throw new VehicleAssignException("Can not assign vehicle to trip: All vehicles of type " + name + " are in use");

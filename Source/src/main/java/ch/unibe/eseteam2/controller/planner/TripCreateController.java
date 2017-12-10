@@ -47,7 +47,7 @@ public class TripCreateController {
 		return "/planner/trip/edit";
 	}
 
-	@PostMapping("/create")
+	@PostMapping(path = "/create", params = "action=create")
 	public String postMapping(@Valid @ModelAttribute("trip") TripEditForm tripForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
 		Trip trip;
 
@@ -72,6 +72,24 @@ public class TripCreateController {
 
 		redirectAttrs.addFlashAttribute("message", "Trip saved in " + trip.getTripState() + " state.");
 		return "redirect:/planner/list";
+	}
+
+	@PostMapping(path = "/create", params = "action=suggest")
+	public String suggestVehicle(@Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasFieldErrors("animalLength") || bindingResult.hasFieldErrors("animalLength") || bindingResult.hasFieldErrors("animalCount")) {
+			addModelAttributes(model);
+
+			return "/planner/trip/edit";
+		}
+
+		Vehicle vehicle = vehicleService.findBestVehicle(form.getAnimalLength(), form.getAnimalWidth(), form.getAnimalCount());
+		if (vehicle == null) {
+			vehicle = vehicleService.findBiggestVehicle(form.getAnimalLength(), form.getAnimalWidth());
+		}
+		form.setVehicleId(vehicle.getId());
+
+		addModelAttributes(model);
+		return "/planner/trip/edit";
 	}
 
 	private void addModelAttributes(Model model) {

@@ -16,6 +16,72 @@ public class VehicleService {
 	@Autowired
 	private TripService tripService;
 
+	public Vehicle findBestVehicle(Trip trip, int animaLength, int animalWidth, int animalCount) {
+		Vehicle best = null;
+		int maxCount = 0;
+		int count;
+		for (Vehicle current : findAvailableVehicles(trip)) {
+			count = current.getMaxAnimals(animaLength, animalWidth);
+			if (count > maxCount) {
+				best = current;
+			}
+		}
+
+		return best;
+	}
+
+	public Vehicle findBestVehicle(int animaLength, int animalWidth, int animalCount) {
+		Vehicle best = null;
+		int bestCount = 0;
+		int count;
+		for (Vehicle current : findAvailableVehicles()) {
+			count = current.getMaxAnimals(animaLength, animalWidth);
+
+			if (count >= animalCount) {
+				if (bestCount < animalCount) {
+					// first vehicle which is big enough
+					bestCount = count;
+					best = current;
+				} else if (count < bestCount) {
+					// smaller vehicle which is big enough
+					bestCount = count;
+					best = current;
+				}
+			}
+
+		}
+
+		return best;
+	}
+
+	public Vehicle findBiggestVehicle(Trip trip, int animalLength, int animalWidth) {
+		Vehicle best = null;
+		int bestCount = 0;
+		int count;
+		for (Vehicle current : findAvailableVehicles(trip)) {
+			count = current.getMaxAnimals(animalLength, animalWidth);
+			if (count > bestCount) {
+				bestCount = count;
+				best = current;
+			}
+		}
+		return best;
+	}
+
+	public Vehicle findBiggestVehicle(int animalLength, int animalWidth) {
+		Vehicle best = null;
+		int bestCount = 0;
+		int count;
+		for (Vehicle current : findAvailableVehicles()) {
+			count = current.getMaxAnimals(animalLength, animalWidth);
+			if (count > bestCount) {
+				bestCount = count;
+				best = current;
+			}
+		}
+		return best;
+	}
+
 	public Iterable<Vehicle> findVehicles() {
 		return vehicleRepository.findAll();
 	}
@@ -50,7 +116,7 @@ public class VehicleService {
 			trip.setVehicle(null);
 			tripService.save(trip);
 		}
-		
+
 		vehicleRepository.delete(vehicle);
 	}
 }

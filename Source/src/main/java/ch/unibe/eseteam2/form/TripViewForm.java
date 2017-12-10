@@ -13,19 +13,19 @@ public class TripViewForm {
 	private String lastname_1;
 	private String street_1;
 	private String number_1;
-	private int plz_1;
+	private Integer plz_1;
 	private String city_1;
 
 	private String firstname_2;
 	private String lastname_2;
 	private String street_2;
 	private String number_2;
-	private int plz_2;
+	private Integer plz_2;
 	private String city_2;
 
 	private String animal;
 
-	private int animalCount;
+	private Integer animalCount;
 
 	private String driver;
 
@@ -147,11 +147,11 @@ public class TripViewForm {
 		this.number_1 = number_1;
 	}
 
-	public int getPlz_1() {
+	public Integer getPlz_1() {
 		return plz_1;
 	}
 
-	public void setPlz_1(int plz_1) {
+	public void setPlz_1(Integer plz_1) {
 		this.plz_1 = plz_1;
 	}
 
@@ -195,11 +195,11 @@ public class TripViewForm {
 		this.number_2 = number_2;
 	}
 
-	public int getPlz_2() {
+	public Integer getPlz_2() {
 		return plz_2;
 	}
 
-	public void setPlz_2(int plz_2) {
+	public void setPlz_2(Integer plz_2) {
 		this.plz_2 = plz_2;
 	}
 
@@ -219,11 +219,11 @@ public class TripViewForm {
 		this.animal = animal;
 	}
 
-	public int getAnimalCount() {
+	public Integer getAnimalCount() {
 		return animalCount;
 	}
 
-	public void setAnimalCount(int animalCount) {
+	public void setAnimalCount(Integer animalCount) {
 		this.animalCount = animalCount;
 	}
 

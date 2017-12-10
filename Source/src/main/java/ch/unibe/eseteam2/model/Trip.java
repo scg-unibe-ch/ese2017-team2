@@ -14,12 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import ch.unibe.eseteam2.InputUtils;
 
 @Entity
 public class Trip {
@@ -29,15 +28,12 @@ public class Trip {
 	private Long id;
 
 	@NotNull
-	@Length(min = 2, max = 100)
 	private String customer;
 
 	@NotNull
-	@Length(min = 2, max = 100)
 	private String animal;
 
 	@NotNull
-	@Min(value = 1)
 	private int animalCount;
 
 	private TripState tripState;
@@ -60,10 +56,7 @@ public class Trip {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date date;
 
-	@Min(value = 0)
 	private Integer estimateHours;
-	@Min(value = 0)
-	@Max(value = 59)
 	private Integer estimateMinutes;
 
 	private Long usedHours;
@@ -283,6 +276,8 @@ public class Trip {
 	}
 
 	public void setCustomer(String customer) {
+		InputUtils.checkNull(customer, "customer");
+		InputUtils.checkStringRange(customer, "customer", 2, 100);
 		this.customer = customer;
 	}
 
@@ -291,6 +286,8 @@ public class Trip {
 	}
 
 	public void setAnimal(String animal) {
+		InputUtils.checkNull(animal, "animal");
+		InputUtils.checkStringRange(animal, "animal", 2, 100);
 		this.animal = animal;
 	}
 
@@ -299,6 +296,9 @@ public class Trip {
 	}
 
 	public void setAnimalCount(int animalCount) {
+		if (animalCount < 1) {
+			throw new IllegalArgumentException("animalCount has to be at least 1.");
+		}
 		this.animalCount = animalCount;
 	}
 
@@ -307,9 +307,7 @@ public class Trip {
 	}
 
 	public void setAddress1(Address address1) {
-		if (address1 == null) {
-			throw new IllegalArgumentException("Address1 can not be null.");
-		}
+		InputUtils.checkNull(address1, "address1");
 		this.address1 = address1;
 	}
 
@@ -318,9 +316,7 @@ public class Trip {
 	}
 
 	public void setAddress2(Address address2) {
-		if (address2 == null) {
-			throw new IllegalArgumentException("Address2 can not be null.");
-		}
+		InputUtils.checkNull(address2, "address2");
 		this.address2 = address2;
 	}
 

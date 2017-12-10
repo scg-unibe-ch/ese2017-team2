@@ -64,7 +64,7 @@ public class UserController {
 
 			Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(auth);
-			return "redirect:driver/list";
+			return "redirect:/driver/list";
 		}
 	}
 

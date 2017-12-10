@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.eseteam2.form.DriverViewForm;
 import ch.unibe.eseteam2.model.Driver;
@@ -64,7 +65,7 @@ public class PlannerDriverController {
 	}
 
 	@PostMapping("/{id}")
-	private String fireDriver(@PathVariable(name = "id") Long id, Model model) {
+	private String fireDriver(@PathVariable(name = "id") Long id, Model model, RedirectAttributes redirectAttrs) {
 
 		try {
 			Driver driver = driverService.findDriver(id);
@@ -78,6 +79,8 @@ public class PlannerDriverController {
 			model.addAttribute("error", e.getMessage());
 			return "/planner/driver/view";
 		}
+
+		redirectAttrs.addFlashAttribute("message", "Driver fired.");
 		return "redirect:/planner/driver/list";
 	}
 }

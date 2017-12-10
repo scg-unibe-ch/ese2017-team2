@@ -41,7 +41,9 @@ public class TripCreateController {
 	@GetMapping("/create")
 	public String getMapping(Model model) {
 
-		model.addAttribute("trip", new TripEditForm());
+		if(!model.containsAttribute("trip")) {			
+			model.addAttribute("trip", new TripEditForm());
+		}
 
 		addModelAttributes(model);
 
@@ -59,33 +61,63 @@ public class TripCreateController {
 			return "/planner/trip/edit";
 		}
 
-		trip = createTrip(form, bindingResult);
+		trip = createTrip(form, bindingResult, model, true);
 
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() || model.containsAttribute("ask")) {
 			addModelAttributes(model);
 
 			// There is some invalid input, try again.
 			return "/planner/trip/edit";
 		}
 
-		// if (trip.getVehicle() != null) {
-		// Vehicle vehicle = trip.getVehicle();
-		// int max = vehicle.getMaxAnimals(form.getAnimalLength(),
-		// form.getAnimalWidth());
-		// if (max < form.getAnimalCount()) {
-		// trip.setAnimalCount(max);
-		//
-		// model.addAttribute("copy", true);
-		//
-		// return "/planner/trip/edit";
-		// }
-		// }
-
 		tripService.save(trip);
 		animalService.save(form.getAnimalObject());
 
 		redirectAttrs.addFlashAttribute("message", "Trip saved in " + trip.getTripState() + " state.");
 		return "redirect:/planner/list";
+	}
+
+	@PostMapping(path = "/create", params = "action=copy")
+	public String saveAndcopyTrip(@Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult, Model model) {
+		Trip trip;
+
+		if (bindingResult.hasErrors()) {
+			addModelAttributes(model);
+
+			model.addAttribute("message", "Could not create Trip.");
+			// There is some invalid input, try again.
+			return "/planner/trip/edit";
+		}
+
+		trip = createTrip(form, bindingResult, model, false);
+
+		if (bindingResult.hasErrors()) {
+			addModelAttributes(model);
+
+			model.addAttribute("message", "Could not create Trip.");
+			// There is some invalid input, try again.
+			return "/planner/trip/edit";
+		}
+
+		int max = setMaxAnimalCount(trip, form);
+
+		tripService.save(trip);
+		animalService.save(form.getAnimalObject());
+
+		model.addAttribute("message", "Saved trip with animal count " + max + ".");
+
+		addModelAttributes(model);
+		return "/planner/trip/edit";
+	}
+
+	private int setMaxAnimalCount(Trip trip, TripEditForm form) {
+		Vehicle vehicle = trip.getVehicle();
+		int max = vehicle.getMaxAnimals(form.getAnimalLength(), form.getAnimalWidth());
+		trip.setAnimalCount(max);
+
+		form.setAnimalCount(form.getAnimalCount() - max);
+
+		return max;
 	}
 
 	@PostMapping(path = "/create", params = "action=suggest")
@@ -119,14 +151,14 @@ public class TripCreateController {
 		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 	}
 
-	private Trip createTrip(TripEditForm form, BindingResult bindingResult) {
+	private Trip createTrip(TripEditForm form, BindingResult bindingResult, Model model, boolean checkIfAllAnimalsFit) {
 		Trip trip;
 
 		trip = new Trip(form.getCustomer(), form.getAnimal(), form.getAnimalLength(), form.getAnimalWidth(), form.getAnimalCount(), form.getAddress1(), form.getAddress2(), form.getDate());
 
 		addEstimate(form, trip, bindingResult);
 		addDriver(form, trip, bindingResult);
-		addVehicle(form, trip, bindingResult);
+		addVehicle(form, trip, bindingResult, model, checkIfAllAnimalsFit);
 
 		return trip;
 	}
@@ -136,7 +168,7 @@ public class TripCreateController {
 		trip.setEstimateMinutes(form.getEstimateMinutes());
 	}
 
-	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult) {
+	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult, Model model, boolean checkIfAllAnimalsFit) {
 		Long vehicleId = form.getVehicleId();
 		if (vehicleId == null) {
 			return;
@@ -150,6 +182,11 @@ public class TripCreateController {
 		int max = vehicle.getMaxAnimals(form.getAnimalLength(), form.getAnimalWidth());
 		if (max <= 0) {
 			bindingResult.addError(new FieldError("trip", "vehicleId", "not big enough."));
+			return;
+		}
+
+		if (checkIfAllAnimalsFit && max < form.getAnimalCount()) {
+			model.addAttribute("ask", true);
 			return;
 		}
 

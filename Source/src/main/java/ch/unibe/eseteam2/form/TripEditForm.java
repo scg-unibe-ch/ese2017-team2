@@ -345,7 +345,7 @@ public class TripEditForm {
 	}
 
 	/**
-	 * Creates a new Address objects from the input data and returns it.
+	 * Creates a new Address object from the input data and returns it.
 	 * 
 	 * @return the first address
 	 */
@@ -354,7 +354,7 @@ public class TripEditForm {
 	}
 
 	/**
-	 * Creates a new Address objects from the input data and returns it.
+	 * Creates a new Address object from the input data and returns it.
 	 * 
 	 * @return the second address
 	 */

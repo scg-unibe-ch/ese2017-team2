@@ -89,6 +89,16 @@
 	</nav>
 	<br />
 
+	<!-- Hide askModal if there is no error: -->
+	<div th:remove="${ask} == null ? all : none">
+		<!-- Open errorModal on page load: -->
+		<script type="text/javascript">
+			$(window).on('load', function() {
+				$('#askModal').modal('show');
+			});
+		</script>
+	</div>
+
 	<!-- Hide errorModal if there is no error: -->
 	<div th:remove="${error} == null ? all : none">
 		<!-- Open errorModal on page load: -->
@@ -120,8 +130,43 @@
 		</div>
 	</div>
 
+	<!-- 	Displays a message -->
+	<div th:remove="${message} == null ? all : none"
+		class="alert alert-success alert-dismissible fade show" role="alert">
+		<div th:text="${message}"></div>
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
 	<div th:remove="${trip} == null ? all : none">
 		<form th:object="${trip}" method="post" class="border-class">
+
+			<div class="modal fade" id="askModal" tabindex="-1" role="dialog"
+				aria-labelledby="askModalLabel" aria-hidden="true"
+				data-backdrop="static" data-keyboard="false">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="askModalLabel">Error</h5>
+						</div>
+						<div class="modal-body">
+
+							<label>The selected vehicle is not big enough to fit all
+								animals. Do you want to create a second trip?</label>
+
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" type="submit" name="action"
+								value="copy">Create</button>
+
+							<a class="btn btn-secondary" role="button" data-dismiss="modal">Back</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
 
 			<div class="underline">
 				<h1 align="center"

@@ -92,7 +92,7 @@ public class Trip {
 		setCustomer(customer);
 		setAnimal(animal);
 		setAnimalLength(animalLength);
-		setAnimalWidht(animalWidth);
+		setAnimalWidth(animalWidth);
 		setAnimalCount(animalCount);
 
 		setAddress1(address1);
@@ -330,7 +330,7 @@ public class Trip {
 		return animalWidth;
 	}
 
-	public void setAnimalWidht(int width) {
+	public void setAnimalWidth(int width) {
 		if (width < 1) {
 			throw new IllegalArgumentException("animalWidth has to be at least 1.");
 		}

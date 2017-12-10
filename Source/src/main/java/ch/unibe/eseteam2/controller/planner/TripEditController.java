@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ch.unibe.eseteam2.exception.TripEditException;
 import ch.unibe.eseteam2.exception.VehicleAssignException;
 import ch.unibe.eseteam2.form.TripEditForm;
 import ch.unibe.eseteam2.model.Driver;
@@ -56,14 +57,13 @@ public class TripEditController {
 
 	@PostMapping(path = "/planner/edit/{id}", params = "action=create")
 	public String postMapping(@PathVariable Long id, @Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
-
 		Trip trip;
+
 		try {
 			trip = tripService.findTrip(id);
 			if (!trip.canEdit()) {
-				throw new Exception("Trip is in the state " + trip.getTripState() + " and can not be edited.");
+				throw new TripEditException("Trip is in the state " + trip.getTripState() + " and can not be edited.");
 			}
-			updateTrip(trip, form, bindingResult);
 
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -78,12 +78,75 @@ public class TripEditController {
 			return "/planner/trip/edit";
 		}
 
+		updateTrip(trip, form, bindingResult, model, true);
+
+		if (bindingResult.hasErrors() || model.containsAttribute("ask")) {
+			addModelAttributes(model, trip);
+
+			// There is some invalid input, try again.
+			return "/planner/trip/edit";
+		}
+
 		tripService.save(trip);
 		animalService.save(form.getAnimalObject());
 
 		redirectAttrs.addFlashAttribute("message", "Trip saved in " + trip.getTripState() + " state.");
-
 		return "redirect:/planner/list";
+	}
+
+	@PostMapping(path = "/planner/edit/{id}", params = "action=copy")
+	public String saveAndcopyTrip(@PathVariable Long id, @Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
+		Trip trip;
+
+		try {
+			trip = tripService.findTrip(id);
+			if (!trip.canEdit()) {
+				throw new TripEditException("Trip is in the state " + trip.getTripState() + " and can not be edited.");
+			}
+
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+
+			return "/planner/trip/edit";
+		}
+
+		if (bindingResult.hasErrors()) {
+			addModelAttributes(model, trip);
+
+			model.addAttribute("message", "Could not save Trip.");
+			// There is some invalid input, try again.
+			return "/planner/trip/edit";
+		}
+
+		updateTrip(trip, form, bindingResult, model, false);
+
+		if (bindingResult.hasErrors()) {
+			addModelAttributes(model, trip);
+
+			model.addAttribute("message", "Could not save Trip.");
+			// There is some invalid input, try again.
+			return "/planner/trip/edit";
+		}
+
+		int max = setMaxAnimalCount(trip, form);
+
+		tripService.save(trip);
+		animalService.save(form.getAnimalObject());
+
+		redirectAttrs.addFlashAttribute("message", "Saved trip with animal count " + max + ".");
+
+		redirectAttrs.addFlashAttribute("trip", form);
+		return "redirect:/planner/trip/create";
+	}
+
+	private int setMaxAnimalCount(Trip trip, TripEditForm form) {
+		Vehicle vehicle = trip.getVehicle();
+		int max = vehicle.getMaxAnimals(form.getAnimalLength(), form.getAnimalWidth());
+		trip.setAnimalCount(max);
+
+		form.setAnimalCount(form.getAnimalCount() - max);
+
+		return max;
 	}
 
 	@PostMapping(path = "/planner/edit/{id}", params = "action=suggest")
@@ -126,12 +189,12 @@ public class TripEditController {
 		model.addAttribute("driverList", driverService.findDrivers());
 	}
 
-	private void updateTrip(Trip trip, TripEditForm form, BindingResult bindingResult) {
+	private void updateTrip(Trip trip, TripEditForm form, BindingResult bindingResult, Model model, boolean checkIfAllAnimalsFit) {
 
 		trip.setCustomer(form.getCustomer());
 		trip.setAnimal(form.getAnimal());
 		trip.setAnimalLength(form.getAnimalLength());
-		trip.setAnimalWidht(form.getAnimalWidth());
+		trip.setAnimalWidth(form.getAnimalWidth());
 		trip.setAnimalCount(form.getAnimalCount());
 
 		trip.setAddress1(form.getAddress1());
@@ -143,7 +206,7 @@ public class TripEditController {
 
 		addEstimate(form, trip, bindingResult);
 		addDriver(form, trip, bindingResult);
-		addVehicle(form, trip, bindingResult);
+		addVehicle(form, trip, bindingResult, model, checkIfAllAnimalsFit);
 	}
 
 	private void addEstimate(TripEditForm form, Trip trip, BindingResult bindingResult) {
@@ -151,7 +214,7 @@ public class TripEditController {
 		trip.setEstimateMinutes(form.getEstimateMinutes());
 	}
 
-	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult) {
+	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult, Model model, boolean checkIfAllAnimalsFit) {
 		Long vehicleId = form.getVehicleId();
 		if (vehicleId == null) {
 			try {
@@ -164,6 +227,17 @@ public class TripEditController {
 		Vehicle vehicle = vehicleService.findVehicle(vehicleId);
 		if (vehicle == null) {
 			bindingResult.addError(new FieldError("trip", "vehicle", "Could not find selected vehicle in the database."));
+			return;
+		}
+
+		int max = vehicle.getMaxAnimals(form.getAnimalLength(), form.getAnimalWidth());
+		if (max <= 0) {
+			bindingResult.addError(new FieldError("trip", "vehicleId", "not big enough."));
+			return;
+		}
+
+		if (checkIfAllAnimalsFit && max < form.getAnimalCount()) {
+			model.addAttribute("ask", true);
 			return;
 		}
 

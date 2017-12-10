@@ -46,6 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll()
 				.antMatchers("/planner/**")
 					.hasRole("ADMIN")
+				.antMatchers("/driver/**")
+					.hasRole("DRIVER")
                 .anyRequest()
                     .authenticated()
                     .and()

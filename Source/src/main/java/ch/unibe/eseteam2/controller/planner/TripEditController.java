@@ -89,6 +89,8 @@ public class TripEditController {
 
 		trip.setCustomer(form.getCustomer());
 		trip.setAnimal(form.getAnimal());
+		trip.setAnimalLength(form.getAnimalLength());
+		trip.setAnimalWidht(form.getAnimalWidth());
 		trip.setAnimalCount(form.getAnimalCount());
 
 		trip.setAddress1(form.getAddress1());

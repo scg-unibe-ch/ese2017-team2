@@ -157,12 +157,16 @@
 
 				<div class="form-row">
 					<div class="col-2">
-						<label><b>Width in cm:</b></label> <input type="number"
-							class="form-control" placeholder="cm" />
+						<label><b>Width in cm:</b></label> <input type="number" min="1"
+							class="form-control" placeholder="cm" th:field="*{animalWidth}" /><label
+							th:if="${#fields.hasErrors('animalWidth')}"
+							th:errors="*{animalWidth}">Animal Width Error </label>
 					</div>
 					<div class="col-2">
-						<label><b>Length in cm:</b></label> <input type="number"
-							class="form-control" placeholder="cm" />
+						<label><b>Length in cm:</b></label> <input type="number" min="1"
+							class="form-control" placeholder="cm" th:field="*{animalLength}" /><label
+							th:if="${#fields.hasErrors('animalLength')}"
+							th:errors="*{animalLength}">Animal Length Error </label>
 					</div>
 				</div>
 

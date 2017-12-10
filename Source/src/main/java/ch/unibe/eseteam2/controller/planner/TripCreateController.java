@@ -77,7 +77,7 @@ public class TripCreateController {
 	private Trip createTrip(TripEditForm form, BindingResult bindingResult) {
 		Trip trip;
 
-		trip = new Trip(form.getCustomer(), form.getAnimal(), form.getAnimalCount(), form.getAddress1(), form.getAddress2(), form.getDate());
+		trip = new Trip(form.getCustomer(), form.getAnimal(), form.getAnimalLength(), form.getAnimalWidth(), form.getAnimalCount(), form.getAddress1(), form.getAddress2(), form.getDate());
 
 		addEstimate(form, trip, bindingResult);
 		addDriver(form, trip, bindingResult);

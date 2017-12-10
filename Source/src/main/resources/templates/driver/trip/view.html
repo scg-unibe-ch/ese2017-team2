@@ -168,13 +168,11 @@
 							<p
 								th:text="${trip.animalCount != null} ?  ${trip.animalCount} : 'not set'" />
 
+							<p
+								th:text="${trip.animalCount != null} ?  ${trip.animalCount} : 'not set'" />
 
-							<!-- TODO width -->
-							<p th:text='width' />
-
-							<!-- TODO length -->
-							<p th:text='length' />
-
+							<p
+								th:text='${trip.animalWidth != null} ? ${trip.animalWidth} : not set' />
 
 							<p th:text="${trip.date != null} ?  ${trip.date} : 'not set'" />
 

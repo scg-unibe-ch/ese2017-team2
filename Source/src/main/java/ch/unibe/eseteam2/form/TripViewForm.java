@@ -25,6 +25,10 @@ public class TripViewForm {
 
 	private String animal;
 
+	private Integer animalLength;
+
+	private Integer animalWidth;
+
 	private Integer animalCount;
 
 	private String driver;
@@ -44,6 +48,8 @@ public class TripViewForm {
 		this.customer = trip.getCustomer();
 
 		this.animal = trip.getAnimal();
+		this.animalLength = trip.getAnimalLength();
+		this.animalWidth = trip.getAnimalWidht();
 		this.animalCount = trip.getAnimalCount();
 
 		if (trip.getDriver() != null) {
@@ -217,6 +223,22 @@ public class TripViewForm {
 
 	public void setAnimal(String animal) {
 		this.animal = animal;
+	}
+
+	public Integer getAnimalLength() {
+		return animalLength;
+	}
+
+	public void setAnimalLength(Integer animalLength) {
+		this.animalLength = animalLength;
+	}
+
+	public Integer getAnimalWidth() {
+		return animalWidth;
+	}
+
+	public void setAnimalWidth(Integer animalWidth) {
+		this.animalWidth = animalWidth;
 	}
 
 	public Integer getAnimalCount() {

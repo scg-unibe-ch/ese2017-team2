@@ -43,20 +43,20 @@ public class TripTest {
 	public void constructor() {
 		Trip trip;
 
-		trip = new Trip("Peter Braun", "cow", 5, address1, address2, null);
+		trip = new Trip("Peter Braun", "cow", 150, 100, 5, address1, address2, null);
 		assertEquals(trip.getTripState(), TripState.editing);
 
-		trip = new Trip("Peter Braun", "horse", 1, address1, address2, futureDate);
+		trip = new Trip("Peter Braun", "horse", 200, 100, 1, address1, address2, futureDate);
 		assertEquals(trip.getTripState(), TripState.editing);
 
-		trip = new Trip("Peter Braun", "chicken", 100, address1, address2, pastDate);
+		trip = new Trip("Peter Braun", "chicken", 25, 25, 100, address1, address2, pastDate);
 		assertEquals(trip.getTripState(), TripState.expired);
 
-		trip = new Trip("Pe", "co", 1, address1, address2, futureDate);
+		trip = new Trip("Pe", "co", 1, 1, 1, address1, address2, futureDate);
 		assertEquals(trip.getTripState(), TripState.editing);
 
 		trip = new Trip("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l",
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l", 5, address1, address2, futureDate);
+				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l", 110, 100, 5, address1, address2, futureDate);
 		assertEquals(trip.getTripState(), TripState.editing);
 
 	}
@@ -65,70 +65,98 @@ public class TripTest {
 	public void customerNull() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("customer can not be null.");
-		new Trip(null, "cow", 5, address1, address2, futureDate);
+		new Trip(null, "cow", 120, 70, 5, address1, address2, futureDate);
 	}
 
 	@Test
 	public void customerTooShort() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("customer has to be between 2 and 100 characters long.");
-		new Trip("c", "cow", 5, address1, address2, futureDate);
+		new Trip("c", "cow", 120, 80, 5, address1, address2, futureDate);
 	}
 
 	@Test
 	public void customerTooLong() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("customer has to be between 2 and 100 characters long.");
-		new Trip("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l1", "cow", 5, address1, address2, futureDate);
+		new Trip("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l1", "cow", 100, 100, 5, address1, address2, futureDate);
 	}
 
 	@Test
 	public void animalNull() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("animal can not be null.");
-		new Trip("Paul Schärer", null, 5, address1, address2, futureDate);
+		new Trip("Paul Schärer", null, 80, 80, 5, address1, address2, futureDate);
 	}
 
 	@Test
 	public void animalTooShort() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("animal has to be between 2 and 100 characters long.");
-		new Trip("Bob Bauer", "c", 5, address1, address2, futureDate);
+		new Trip("Bob Bauer", "c", 90, 89, 5, address1, address2, futureDate);
 	}
 
 	@Test
 	public void animalTooLong() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("animal has to be between 2 and 100 characters long.");
-		new Trip("Anna Arnold", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l1", 5, address1, address2, futureDate);
+		new Trip("Anna Arnold", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l1", 99, 45, 5, address1, address2, futureDate);
 	}
-	
+
+	@Test
+	public void animalLengthNegative() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("animalLength has to be at least 1.");
+		new Trip("Bob Bauer", "cow", -1, 180, 5, address1, address2, futureDate);
+	}
+
+	@Test
+	public void animalLengthZero() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("animalLength has to be at least 1.");
+		new Trip("Bob Bauer", "cow", 0, 90, 5, address1, address2, futureDate);
+	}
+
+	@Test
+	public void animalWidthNegative() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("animalWidth has to be at least 1.");
+		new Trip("Bob Bauer", "cow", 180, -1, 4, address1, address2, futureDate);
+	}
+
+	@Test
+	public void animalWidthZero() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("animalWidth has to be at least 1.");
+		new Trip("Bob Bauer", "cow", 190, 0, 9, address1, address2, futureDate);
+	}
+
 	@Test
 	public void animalCountNegative() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("animalCount has to be at least 1.");
-		new Trip("Bob Bauer", "cow", -1, address1, address2, futureDate);
+		new Trip("Bob Bauer", "cow", 180, 100, -1, address1, address2, futureDate);
 	}
-	
+
 	@Test
 	public void animalCountZero() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("animalCount has to be at least 1.");
-		new Trip("Bob Bauer", "cow", 0, address1, address2, futureDate);
+		new Trip("Bob Bauer", "cow", 190, 90, 0, address1, address2, futureDate);
 	}
-	
+
 	@Test
 	public void address1Null() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("address1 can not be null.");
-		new Trip("Paul Schärer", "sheep", 5, null, address2, futureDate);
+		new Trip("Paul Schärer", "sheep", 170, 40, 5, null, address2, futureDate);
 	}
-	
+
 	@Test
 	public void address2Null() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("address2 can not be null.");
-		new Trip("Paul Schärer", "sheep", 5, address1, null, futureDate);
+		new Trip("Paul Schärer", "sheep", 150, 64, 5, address1, null, futureDate);
 	}
 
 	// TODO implement more test cases

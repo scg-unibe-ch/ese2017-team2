@@ -6,12 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -21,29 +23,43 @@ import org.springframework.format.annotation.DateTimeFormat;
 import ch.unibe.eseteam2.InputUtils;
 
 @Entity
+@Table(name = "trip")
 public class Trip {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Long id;
 
 	@NotNull
+	@Column(name = "customer")
 	private String customer;
 
 	@NotNull
+	@Column(name = "animal")
 	private String animal;
 
 	@NotNull
+	@Column(name = "animal_length")
+	private int animalLength;
+
+	@NotNull
+	@Column(name = "animal_width")
+	private int animalWidth;
+
+	@NotNull
+	@Column(name = "animal_count")
 	private int animalCount;
 
+	@Column(name = "trip_state")
 	private TripState tripState;
 
-	@OneToOne(cascade = CascadeType.ALL)
 	@NotNull
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address1;
 
-	@OneToOne(cascade = CascadeType.ALL)
 	@NotNull
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address2;
 
 	@OneToOne
@@ -54,21 +70,28 @@ public class Trip {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "date")
 	private Date date;
 
+	@Column(name = "estimate_hours")
 	private Integer estimateHours;
+	@Column(name = "estimate_minutes")
 	private Integer estimateMinutes;
 
+	@Column(name = "used_hours")
 	private Long usedHours;
+	@Column(name = "used_minutes")
 	private Long usedMinutes;
 
 	private String feedback;
 
-	public Trip(String customer, String animal, int animalCount, Address address1, Address address2, Date date) {
+	public Trip(String customer, String animal, int animalLength, int animalWidth, int animalCount, Address address1, Address address2, Date date) {
 		setTripState(TripState.editing);
 
 		setCustomer(customer);
 		setAnimal(animal);
+		setAnimalLength(animalLength);
+		setAnimalWidht(animalWidth);
 		setAnimalCount(animalCount);
 
 		setAddress1(address1);
@@ -289,6 +312,28 @@ public class Trip {
 		InputUtils.checkNull(animal, "animal");
 		InputUtils.checkStringRange(animal, "animal", 2, 100);
 		this.animal = animal;
+	}
+
+	public int getAnimalLength() {
+		return animalLength;
+	}
+
+	public void setAnimalLength(int length) {
+		if (length < 1) {
+			throw new IllegalArgumentException("animalLength has to be at least 1.");
+		}
+		this.animalLength = length;
+	}
+
+	public int getAnimalWidht() {
+		return animalWidth;
+	}
+
+	public void setAnimalWidht(int width) {
+		if (width < 1) {
+			throw new IllegalArgumentException("animalWidth has to be at least 1.");
+		}
+		this.animalWidth = width;
 	}
 
 	public int getAnimalCount() {

@@ -21,6 +21,10 @@ public class Animal {
 	@Column(name = "width")
 	private int width;
 
+	public Animal() {
+
+	}
+
 	public Animal(String name, int length, int width) {
 		setName(name);
 		setLength(length);

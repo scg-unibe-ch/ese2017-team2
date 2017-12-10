@@ -17,6 +17,7 @@ import ch.unibe.eseteam2.form.TripEditForm;
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.Vehicle;
+import ch.unibe.eseteam2.service.AnimalService;
 import ch.unibe.eseteam2.service.DriverService;
 import ch.unibe.eseteam2.service.TripService;
 import ch.unibe.eseteam2.service.VehicleService;
@@ -32,6 +33,9 @@ public class TripEditController {
 
 	@Autowired
 	private VehicleService vehicleService;
+
+	@Autowired
+	private AnimalService animalService;
 
 	@GetMapping("/planner/edit/{id}")
 	public String getMapping(@PathVariable Long id, Model model) {
@@ -74,6 +78,8 @@ public class TripEditController {
 		}
 
 		tripService.save(trip);
+		animalService.save(form.getAnimalObject());
+
 		redirectAttrs.addFlashAttribute("message", "Trip saved in " + trip.getTripState() + " state.");
 
 		return "redirect:/planner/list";

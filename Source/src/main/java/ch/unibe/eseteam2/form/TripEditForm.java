@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import ch.unibe.eseteam2.model.Address;
+import ch.unibe.eseteam2.model.Animal;
 import ch.unibe.eseteam2.model.Trip;
 
 public class TripEditForm {
@@ -161,6 +162,10 @@ public class TripEditForm {
 			this.plz_2 = address.getPlz();
 			this.city_2 = address.getCity();
 		}
+	}
+
+	public Animal getAnimalObject() {
+		return new Animal(this.animal, this.animalLength, this.animalWidth);
 	}
 
 	public String getCustomer() {

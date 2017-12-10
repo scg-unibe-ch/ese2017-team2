@@ -23,6 +23,7 @@ public class VehicleService {
 		for (Vehicle current : findAvailableVehicles(trip)) {
 			count = current.getMaxAnimals(animaLength, animalWidth);
 			if (count > maxCount) {
+				maxCount = count;
 				best = current;
 			}
 		}

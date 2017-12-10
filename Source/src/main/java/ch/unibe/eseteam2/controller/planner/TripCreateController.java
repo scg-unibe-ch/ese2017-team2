@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ch.unibe.eseteam2.exception.VehicleAssignException;
 import ch.unibe.eseteam2.form.TripEditForm;
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
@@ -48,7 +49,7 @@ public class TripCreateController {
 	}
 
 	@PostMapping(path = "/create", params = "action=create")
-	public String postMapping(@Valid @ModelAttribute("trip") TripEditForm tripForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
+	public String postMapping(@Valid @ModelAttribute("trip") TripEditForm form, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
 		Trip trip;
 
 		if (bindingResult.hasErrors()) {
@@ -58,7 +59,7 @@ public class TripCreateController {
 			return "/planner/trip/edit";
 		}
 
-		trip = createTrip(tripForm, bindingResult);
+		trip = createTrip(form, bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			addModelAttributes(model);
@@ -67,8 +68,21 @@ public class TripCreateController {
 			return "/planner/trip/edit";
 		}
 
+		// if (trip.getVehicle() != null) {
+		// Vehicle vehicle = trip.getVehicle();
+		// int max = vehicle.getMaxAnimals(form.getAnimalLength(),
+		// form.getAnimalWidth());
+		// if (max < form.getAnimalCount()) {
+		// trip.setAnimalCount(max);
+		//
+		// model.addAttribute("copy", true);
+		//
+		// return "/planner/trip/edit";
+		// }
+		// }
+
 		tripService.save(trip);
-		animalService.save(tripForm.getAnimalObject());
+		animalService.save(form.getAnimalObject());
 
 		redirectAttrs.addFlashAttribute("message", "Trip saved in " + trip.getTripState() + " state.");
 		return "redirect:/planner/list";
@@ -85,6 +99,13 @@ public class TripCreateController {
 		Vehicle vehicle = vehicleService.findBestVehicle(form.getAnimalLength(), form.getAnimalWidth(), form.getAnimalCount());
 		if (vehicle == null) {
 			vehicle = vehicleService.findBiggestVehicle(form.getAnimalLength(), form.getAnimalWidth());
+
+			if (vehicle == null) {
+				bindingResult.addError(new FieldError("trip", "vehicleId", "no vehicle found that is big enough to fit one animal."));
+
+				addModelAttributes(model);
+				return "/planner/trip/edit";
+			}
 		}
 		form.setVehicleId(vehicle.getId());
 
@@ -126,9 +147,15 @@ public class TripCreateController {
 			return;
 		}
 
+		int max = vehicle.getMaxAnimals(form.getAnimalLength(), form.getAnimalWidth());
+		if (max <= 0) {
+			bindingResult.addError(new FieldError("trip", "vehicleId", "not big enough."));
+			return;
+		}
+
 		try {
 			trip.setVehicle(vehicle);
-		} catch (Exception e) {
+		} catch (VehicleAssignException e) {
 			e.printStackTrace();
 		}
 	}

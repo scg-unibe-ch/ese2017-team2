@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ch.unibe.eseteam2.exception.VehicleAssignException;
 import ch.unibe.eseteam2.form.TripEditForm;
 import ch.unibe.eseteam2.model.Driver;
 import ch.unibe.eseteam2.model.Trip;
@@ -90,11 +91,6 @@ public class TripEditController {
 		Trip trip;
 		try {
 			trip = tripService.findTrip(id);
-			if (!trip.canEdit()) {
-				throw new Exception("Trip is in the state " + trip.getTripState() + " and can not be edited.");
-			}
-			updateTrip(trip, form, bindingResult);
-
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 
@@ -110,6 +106,13 @@ public class TripEditController {
 		Vehicle vehicle = vehicleService.findBestVehicle(trip, form.getAnimalLength(), form.getAnimalWidth(), form.getAnimalCount());
 		if (vehicle == null) {
 			vehicle = vehicleService.findBiggestVehicle(trip, form.getAnimalLength(), form.getAnimalWidth());
+
+			if (vehicle == null) {
+				bindingResult.addError(new FieldError("trip", "vehicleId", "no vehicle found that is big enough to fit one animal."));
+
+				addModelAttributes(model, trip);
+				return "/planner/trip/edit";
+			}
 		}
 		form.setVehicleId(vehicle.getId());
 
@@ -166,7 +169,7 @@ public class TripEditController {
 
 		try {
 			trip.setVehicle(vehicle);
-		} catch (Exception e) {
+		} catch (VehicleAssignException e) {
 			e.printStackTrace();
 		}
 	}

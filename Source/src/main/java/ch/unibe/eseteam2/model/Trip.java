@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import ch.unibe.eseteam2.InputUtils;
+import ch.unibe.eseteam2.exception.VehicleAssignException;
 
 @Entity
 @Table(name = "trip")
@@ -369,7 +370,7 @@ public class Trip {
 		return vehicle;
 	}
 
-	public void setVehicle(Vehicle vehicle) throws Exception {
+	public void setVehicle(Vehicle vehicle) throws VehicleAssignException {
 		if (this.vehicle != null) {
 			this.vehicle.unassign(this);
 		}

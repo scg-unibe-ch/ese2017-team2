@@ -10,7 +10,7 @@ public class DriverViewForm {
 	private String lastname;
 	private String street;
 	private String number;
-	private int plz;
+	private Integer plz;
 	private String city;
 
 	public DriverViewForm(Driver driver) {
@@ -63,11 +63,11 @@ public class DriverViewForm {
 		this.number = number;
 	}
 
-	public int getPlz() {
+	public Integer getPlz() {
 		return plz;
 	}
 
-	public void setPlz(int plz) {
+	public void setPlz(Integer plz) {
 		this.plz = plz;
 	}
 

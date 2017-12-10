@@ -11,21 +11,21 @@ import ch.unibe.eseteam2.model.Vehicle;
 
 public class VehicleEditForm {
 
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String name;
 
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Min(value = 1, message = "has to be at least 1.")
-	private int count;
+	private Integer count;
 
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Min(value = 1, message = "has to be at least 1.")
-	private int width;
+	private Integer width;
 
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Min(value = 1, message = "has to be at least 1.")
-	private int length;
+	private Integer length;
 
 	/**
 	 * Used to display error messages for the selected image.
@@ -33,10 +33,6 @@ public class VehicleEditForm {
 	private String image;
 
 	public VehicleEditForm() {
-		this.name = "";
-		this.count = 1;
-		this.width = 1;
-		this.length = 1;
 	}
 
 	public VehicleEditForm(Vehicle vehicle) {
@@ -60,27 +56,27 @@ public class VehicleEditForm {
 		this.name = name;
 	}
 
-	public int getCount() {
+	public Integer getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(Integer count) {
 		this.count = count;
 	}
 
-	public int getWidth() {
+	public Integer getWidth() {
 		return width;
 	}
 
-	public void setWidth(int width) {
+	public void setWidth(Integer width) {
 		this.width = width;
 	}
 
-	public int getLength() {
+	public Integer getLength() {
 		return length;
 	}
 
-	public void setLength(int length) {
+	public void setLength(Integer length) {
 		this.length = length;
 	}
 

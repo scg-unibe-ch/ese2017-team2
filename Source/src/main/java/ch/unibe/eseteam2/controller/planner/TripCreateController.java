@@ -92,7 +92,6 @@ public class TripCreateController {
 	}
 
 	private void addVehicle(TripEditForm form, Trip trip, BindingResult bindingResult) {
-		// TODO
 		Long vehicleId = form.getVehicleId();
 		if (vehicleId == null) {
 			return;

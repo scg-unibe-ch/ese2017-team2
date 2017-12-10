@@ -94,7 +94,7 @@
 								<label>Length in cm:</label> <input type="number" class="form-control"/> 
 							</div>
 							<div class="col-1">
-								<label>Count:</label> <input type="number" class="form-control"
+								<label>Count:</label> <input type="number" min="1" class="form-control"
 									th:field="*{animalCount}" /> <label
 									th:if="${#fields.hasErrors('animalCount')}"
 									th:errors="*{animalCount}">Animal Count Error </label>
@@ -199,7 +199,7 @@
 									Error </label>
 							</div>
 							<div class="col-2">
-								<label>PLZ:</label> <input type="number" class="form-control"
+								<label>PLZ:</label> <input type="number" min="1000" max="9999" class="form-control"
 									th:field="*{plz_1}" /> <label
 									th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
 									Error </label>
@@ -258,7 +258,7 @@
 									Error </label>
 							</div>
 							<div class="col-2">
-								<label>PLZ:</label> <input type="number" class="form-control"
+								<label>PLZ:</label> <input type="number" min="1000" max="9999" class="form-control"
 									th:field="*{plz_2}" /> <label
 									th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_2
 									Error </label>

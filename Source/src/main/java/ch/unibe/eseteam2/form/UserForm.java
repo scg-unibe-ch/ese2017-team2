@@ -7,37 +7,46 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import ch.unibe.eseteam2.model.Driver;
 
 public class UserForm {
-	@NotNull
-	@Email(message="has to be a valid email address.")
+	
+	@NotNull(message = "can not be empty.")
+	@NotEmpty(message="can not be empty.")
+	@Email(message = "has to be a valid email address.")
 	private String email;
-	@NotNull
+
+	@NotNull(message = "can not be empty.")
 	@Length(min = 8, max = 100, message = "has to be between 8 and 100 characters long.")
 	private String password;
 
-	@NotNull
+	@NotNull(message = "can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String firstname;
-	@NotNull
+
+	@NotNull(message = "can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String lastname;
-	@NotNull
+
+	@NotNull(message = "can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String street;
-	@NotNull
+
+	@NotNull(message = "can not be empty.")
 	@Pattern(regexp = "\\d+[A-Za-z]?", message = "has to be a number followed by at most one character.")
 	private String number;
-	@NotNull
+
+	@NotNull(message = "can not be empty.")
 	@Min(value = 1000, message = "has to be greater than or equal to 1000.")
 	@Max(value = 9999, message = "has to be less than or equal to 9999.")
-	private int plz;
-	@NotNull
+	private Integer plz;
+
+	@NotNull(message = "can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String city;
-	
+
 	public Driver createDriver() {
 		Driver driver = new Driver();
 		driver.setEmail(email);
@@ -47,7 +56,7 @@ public class UserForm {
 		driver.setNumber(number);
 		driver.setCity(city);
 		driver.setPlz(plz);
-		
+
 		return driver;
 	}
 
@@ -99,11 +108,11 @@ public class UserForm {
 		this.number = number;
 	}
 
-	public int getPlz() {
+	public Integer getPlz() {
 		return plz;
 	}
 
-	public void setPlz(int plz) {
+	public void setPlz(Integer plz) {
 		this.plz = plz;
 	}
 

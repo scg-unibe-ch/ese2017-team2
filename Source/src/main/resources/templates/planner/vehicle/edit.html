@@ -24,7 +24,9 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/bootstrap-filestyle.min.js"> </script>
+<script type="text/javascript" src="js/bootstrap-filestyle.min.js">
+	
+</script>
 
 <title>Vehicle editor</title>
 
@@ -58,7 +60,8 @@
 
 				</div>
 				<div class="modal-footer">
-					<a class="btn btn-secondary" role="button" href="/planner/vehicle/list">Okay</a>
+					<a class="btn btn-secondary" role="button"
+						href="/planner/vehicle/list">Okay</a>
 				</div>
 			</div>
 		</div>
@@ -83,47 +86,48 @@
 
 						<div class="form-row">
 							<div class="col-4">
-							<label>Name:</label> <input class="form-control" type="text"
-								th:field="*{name}" /> <label
-								th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
-								Error</label>
-						</div>
-						<div class="col-4"></div>
+								<label>Name:</label> <input class="form-control" type="text"
+									th:field="*{name}" /> <label
+									th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
+									Error</label>
+							</div>
+							<div class="col-4"></div>
 						</div>
 
 						<div class="form-row">
 							<div class="col-2">
-							<label>Width in cm:</label> <input class="form-control"
-								type="number" th:field="*{width}" /> <label
-								th:if="${#fields.hasErrors('width')}" th:errors="*{width}">Width
-								Error> </label>
+								<label>Width in cm:</label> <input class="form-control"
+									type="number" min="1" th:field="*{width}" /> <label
+									th:if="${#fields.hasErrors('width')}" th:errors="*{width}">Width
+									Error> </label>
+							</div>
+							<div class="col-2">
+								<label>Length in cm:</label> <input class="form-control"
+									type="number" min="1" th:field="*{length}" /> <label
+									th:if="${#fields.hasErrors('length')}" th:errors="*{length}">Length
+									Error> </label>
+							</div>
 						</div>
-						<div class="col-2">
-							<label>Length in cm:</label> <input class="form-control"
-								type="number" th:field="*{length}" /> <label
-								th:if="${#fields.hasErrors('length')}" th:errors="*{length}">Length
-								Error> </label>
-						</div>
-						</div>
-						
-							<div class="form-row">
-							<div class="col-1">
-							<label>Count:</label> <input class="form-control" type="number"
-								th:field="*{count}" /> <label
-								th:if="${#fields.hasErrors('count')}" th:errors="*{count}">Count
-								Error> </label>
-						</div>
-						
-					<div class="col-4"></div>
-					</div>
-						
+
 						<div class="form-row">
-						<div class="col-4">
-							<label>Image:</label> <input class="filestyle" type="file" 
-								name="file" accept="image/*"/><label th:if="${#fields.hasErrors('image')}"
-								th:errors="*{image}">Image Error> </label>
+							<div class="col-1">
+								<label>Count:</label> <input class="form-control" type="number"
+									min="1" th:field="*{count}" /> <label
+									th:if="${#fields.hasErrors('count')}" th:errors="*{count}">Count
+									Error> </label>
+							</div>
+
+							<div class="col-4"></div>
 						</div>
-						<div class="col-4"></div>
+
+						<div class="form-row">
+							<div class="col-4">
+								<label>Image:</label> <input class="filestyle" type="file"
+									name="file" accept="image/*" /><label
+									th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Image
+									Error> </label>
+							</div>
+							<div class="col-4"></div>
 						</div>
 
 

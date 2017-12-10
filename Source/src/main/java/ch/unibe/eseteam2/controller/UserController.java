@@ -42,7 +42,7 @@ public class UserController {
 	}
 
 	@PreAuthorize("@userSecurityService.canCreate()")
-	@PostMapping(path = "")
+	@PostMapping(path = "/create")
 	public String create(@Valid @ModelAttribute("user") UserForm form, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
@@ -51,6 +51,7 @@ public class UserController {
 
 		if (userDetailsManager.userExists(form.getEmail())) {
 			model.addAttribute("error", "A user already exists with the same email address.");
+			form.setEmail("");
 			return "/login/registration";
 
 		} else {
@@ -63,7 +64,7 @@ public class UserController {
 
 			Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(auth);
-			return "driver/list";
+			return "redirect:driver/list";
 		}
 	}
 

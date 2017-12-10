@@ -18,17 +18,17 @@ import ch.unibe.eseteam2.model.Address;
 import ch.unibe.eseteam2.model.Trip;
 
 public class TripEditForm {
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String customer;
 
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String animal;
 
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Min(value = 1, message = "has to be at least 1.")
-	private int animalCount;
+	private Integer animalCount;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Temporal(value = TemporalType.TIMESTAMP)
@@ -36,59 +36,67 @@ public class TripEditForm {
 	private Date date;
 
 	@Min(value = 0, message = "has to be positive.")
-	private int estimateHours;
+	private Integer estimateHours;
+	
 	@Range(min = 0, max = 59, message = "has to be between 0 and 59.")
-	private int estimateMinutes;
+	private Integer estimateMinutes;
 
 	private Long driverId;
 
 	private Long vehicleId;
 
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String firstname_1;
-	@NotNull
+	
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String lastname_1;
-	@NotNull
+	
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String street_1;
-	@NotNull
+	
+	@NotNull(message="can not be empty.")
 	@Length(max = 6, message = "has to be at most 6 characters long.")
 	@Pattern(regexp = "\\d+[A-Za-z]?", message = "has to be a number followed by at most one character.")
 	private String number_1;
-	@NotNull
+	
+	@NotNull(message="can not be empty.")
 	@Min(value = 1000, message = "has to be greater than or equal to 1000.")
 	@Max(value = 9999, message = "has to be less than or equal to 9999.")
-	private int plz_1;
-	@NotNull
+	private Integer plz_1;
+	
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String city_1;
 
-	@NotNull
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String firstname_2;
-	@NotNull
+	
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String lastname_2;
-	@NotNull
+	
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String street_2;
-	@NotNull
+	
+	@NotNull(message="can not be empty.")
 	@Length(max = 6, message = "has to be at most 6 characters long.")
 	@Pattern(regexp = "\\d+[A-Za-z]?", message = "has to be a number followed by at most one character.")
 	private String number_2;
-	@NotNull
+	
+	@NotNull(message="can not be empty.")
 	@Min(value = 1000, message = "has to be greater than or equal to 1000.")
 	@Max(value = 9999, message = "has to be less than or equal to 9999.")
-	private int plz_2;
-	@NotNull
+	private Integer plz_2;
+	
+	@NotNull(message="can not be empty.")
 	@Length(min = 2, max = 100, message = "has to be between 2 and 100 characters long.")
 	private String city_2;
 
-	/**
-	 * Default constructor used by Spring
-	 */
 	public TripEditForm() {
 	}
 
@@ -161,11 +169,11 @@ public class TripEditForm {
 		this.animal = animal;
 	}
 
-	public int getAnimalCount() {
+	public Integer getAnimalCount() {
 		return animalCount;
 	}
 
-	public void setAnimalCount(int animalCount) {
+	public void setAnimalCount(Integer animalCount) {
 		this.animalCount = animalCount;
 	}
 
@@ -201,11 +209,11 @@ public class TripEditForm {
 		this.number_1 = number_1;
 	}
 
-	public int getPlz_1() {
+	public Integer getPlz_1() {
 		return plz_1;
 	}
 
-	public void setPlz_1(int plz_1) {
+	public void setPlz_1(Integer plz_1) {
 		this.plz_1 = plz_1;
 	}
 
@@ -249,11 +257,11 @@ public class TripEditForm {
 		this.number_2 = number_2;
 	}
 
-	public int getPlz_2() {
+	public Integer getPlz_2() {
 		return plz_2;
 	}
 
-	public void setPlz_2(int plz_2) {
+	public void setPlz_2(Integer plz_2) {
 		this.plz_2 = plz_2;
 	}
 
@@ -273,19 +281,19 @@ public class TripEditForm {
 		this.date = date;
 	}
 
-	public int getEstimateHours() {
+	public Integer getEstimateHours() {
 		return estimateHours;
 	}
 
-	public void setEstimateHours(int estimateHours) {
+	public void setEstimateHours(Integer estimateHours) {
 		this.estimateHours = estimateHours;
 	}
 
-	public int getEstimateMinutes() {
+	public Integer getEstimateMinutes() {
 		return estimateMinutes;
 	}
 
-	public void setEstimateMinutes(int estimateMinutes) {
+	public void setEstimateMinutes(Integer estimateMinutes) {
 		this.estimateMinutes = estimateMinutes;
 	}
 

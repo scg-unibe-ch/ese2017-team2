@@ -6,26 +6,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.validation.constraints.Min;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
+import ch.unibe.eseteam2.exception.VehicleAssignException;
 
 @Entity
+@Table(name = "vehicle")
 public class Vehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Long id;
 
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Column(name = "name")
 	private String name;
+
 	@NotNull
-	@Min(value = 0)
+	@Column(name = "count")
 	private int count;
 
 	@NotNull
-	@Min(value = 0)
+	@Column(name = "used")
 	private int used;
 
 	/**
@@ -44,8 +47,8 @@ public class Vehicle {
 	@Column(name = "length")
 	private int length;
 
-	@Column(name = "image_data")
 	@Lob
+	@Column(name = "image_data")
 	private byte[] imageData;
 
 	public Vehicle() {
@@ -61,16 +64,16 @@ public class Vehicle {
 		this.setLength(length);
 	}
 
-	public void assign(Trip trip) throws Exception {
+	public void assign(Trip trip) throws VehicleAssignException {
 		if (this.used >= this.count) {
-			throw new Exception("Can not assign vehicle to trip: All vehicles of type " + name + " are in use");
+			throw new VehicleAssignException("Can not assign vehicle to trip: All vehicles of type " + name + " are in use");
 		}
 		this.used++;
 	}
 
-	public void unassign(Trip trip) throws Exception {
+	public void unassign(Trip trip) throws VehicleAssignException {
 		if (this.used <= 0) {
-			throw new Exception("Tried to unassign vehicle from trip when there was no vehicle assigned of type " + name);
+			throw new VehicleAssignException("Tried to unassign vehicle from trip when there was no vehicle assigned of type " + name);
 		}
 		this.used--;
 
@@ -114,7 +117,8 @@ public class Vehicle {
 
 	/**
 	 * Sets how many vehicles of this type there are in total. The count has to
-	 * be positive (not zero) and greater than or equal to the number of used vehicles.
+	 * be positive (not zero) and greater than or equal to the number of used
+	 * vehicles.
 	 * 
 	 * @param count
 	 */

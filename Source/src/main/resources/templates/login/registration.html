@@ -113,7 +113,8 @@ input[type="text"], input[type="password"], input[type="number"] {
 								style="background-color: #3f5d20; color: white;"
 								placeholder="First name" th:field="*{firstname}" /> <label
 								th:if="${#fields.hasErrors('firstname')}"
-								th:errors="*{firstname}">First name Error</label>
+								th:errors="*{firstname}" style="color: white;">First
+								name Error</label>
 
 						</div>
 
@@ -121,8 +122,8 @@ input[type="text"], input[type="password"], input[type="number"] {
 							<input type="text" class="form-control"
 								style="background-color: #3f5d20; color: white;"
 								placeholder="Last name" th:field="*{lastname}" /> <label
-								th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Last
-								name Error</label>
+								th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"
+								style="color: white;">Last name Error</label>
 
 						</div>
 					</div>
@@ -133,16 +134,16 @@ input[type="text"], input[type="password"], input[type="number"] {
 							<input type="text" class="form-control"
 								style="background-color: #3f5d20; color: white;"
 								placeholder="Street" th:field="*{street}" /> <label
-								th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Street
-								Error> </label>
+								th:if="${#fields.hasErrors('street')}" th:errors="*{street}"
+								style="color: white;">Street Error> </label>
 						</div>
 
 						<div class="col-3">
 							<input type="text" class="form-control"
 								style="background-color: #3f5d20; color: white;"
 								placeholder="Number" th:field="*{number}" /> <label
-								th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number
-								Error> </label>
+								th:if="${#fields.hasErrors('number')}" th:errors="*{number}"
+								style="color: white;">Number Error> </label>
 
 						</div>
 					</div>
@@ -153,15 +154,15 @@ input[type="text"], input[type="password"], input[type="number"] {
 							<input type="number" min="1000" max="9999" class="form-control"
 								style="background-color: #3f5d20; color: white;"
 								placeholder="PLZ" th:field="*{plz}" /> <label
-								th:if="${#fields.hasErrors('plz')}" th:errors="*{plz}">PLZ
-								Error> </label>
+								th:if="${#fields.hasErrors('plz')}" th:errors="*{plz}"
+								style="color: white;">PLZ Error> </label>
 						</div>
 						<div class="col-6">
 							<input type="text" class="form-control"
 								style="background-color: #3f5d20; color: white;"
 								placeholder="City" th:field="*{city}" /> <label
-								th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City
-								Error> </label>
+								th:if="${#fields.hasErrors('city')}" th:errors="*{city}"
+								style="color: white;">City Error> </label>
 						</div>
 					</div>
 
@@ -171,8 +172,8 @@ input[type="text"], input[type="password"], input[type="number"] {
 						<input type="text" class="form-control"
 							style="background-color: #3f5d20; color: white;"
 							placeholder="Email" th:field="*{email}" /> <label
-							th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
-							Error> </label>
+							th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+							style="color: white;">Email Error> </label>
 
 					</div>
 
@@ -181,8 +182,8 @@ input[type="text"], input[type="password"], input[type="number"] {
 						<input type="password" class="form-control"
 							style="background-color: #3f5d20; color: white;"
 							placeholder="Password" th:field="*{password}" /> <label
-							th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
-							Error> </label>
+							th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+							style="color: white;">Password Error> </label>
 
 					</div>
 

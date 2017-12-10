@@ -14,12 +14,24 @@ public class Driver {
 
 	private String email;
 
+	//TODO use address instead
+	
 	private String firstname;
 	private String lastname;
 	private String street;
 	private String number;
 	private int plz;
 	private String city;
+
+	public Driver(String email, String firstname, String lastname, String street, String number, int plz, String city) {
+		this.setEmail(email);
+		this.setFirstname(firstname);
+		this.setLastname(lastname);
+		this.setStreet(street);
+		this.setNumber(number);
+		this.setPlz(plz);
+		this.setCity(city);
+	}
 
 	public Long getId() {
 		return id;

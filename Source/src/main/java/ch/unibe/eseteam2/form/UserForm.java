@@ -12,9 +12,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import ch.unibe.eseteam2.model.Driver;
 
 public class UserForm {
-	
+
 	@NotNull(message = "can not be empty.")
-	@NotEmpty(message="can not be empty.")
+	@NotEmpty(message = "can not be empty.")
 	@Email(message = "has to be a valid email address.")
 	private String email;
 
@@ -48,14 +48,7 @@ public class UserForm {
 	private String city;
 
 	public Driver createDriver() {
-		Driver driver = new Driver();
-		driver.setEmail(email);
-		driver.setFirstname(firstname);
-		driver.setLastname(lastname);
-		driver.setStreet(street);
-		driver.setNumber(number);
-		driver.setCity(city);
-		driver.setPlz(plz);
+		Driver driver = new Driver(email, firstname, lastname, street, number, plz, city);
 
 		return driver;
 	}

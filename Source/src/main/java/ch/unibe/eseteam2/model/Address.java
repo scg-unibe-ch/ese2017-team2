@@ -1,44 +1,44 @@
 package ch.unibe.eseteam2.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
-
 @Entity
+@Table(name = "address")
 public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Long id;
 
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Column(name = "firstname")
 	private String firstname;
 
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Column(name = "lastname")
 	private String lastname;
 
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Column(name = "street")
 	private String street;
 
 	@NotNull
+	@Column(name = "number")
 	private String number;
 
 	@NotNull
-	@Min(value = 1000)
-	@Max(value = 9999)
+	@Column(name = "plz")
 	private int plz;
 
 	@NotNull
-	@Length(min = 2, max = 100)
+	@Column(name = "city")
 	private String city;
 
 	public Address() {

@@ -1,10 +1,11 @@
 package ch.unibe.eseteam2;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import ch.unibe.eseteam2.exception.VehicleAssignException;
 import ch.unibe.eseteam2.model.Trip;
 import ch.unibe.eseteam2.model.Vehicle;
 
@@ -40,7 +41,7 @@ public class VehicleTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void negativeCount() {
+	public void countNegative() {
 		new Vehicle("bigTruck", -1, 150, 20);
 	}
 	
@@ -98,8 +99,8 @@ public class VehicleTest {
 		assertEquals(vehicle.getUsed(), 0);
 	}
 
-	@Test(expected = Exception.class)
-	public void assignTooMany() throws Exception {
+	@Test(expected = VehicleAssignException.class)
+	public void assignTooMany() throws VehicleAssignException {
 		Vehicle vehicle = new Vehicle("smallTruck", 1, 150, 200);
 		Trip trip1 = mock(Trip.class);
 		Trip trip2 = mock(Trip.class);
@@ -113,8 +114,8 @@ public class VehicleTest {
 		
 	}
 	
-	@Test(expected = Exception.class)
-	public void unassignTooMany() throws Exception {
+	@Test(expected = VehicleAssignException.class)
+	public void unassignTooMany() throws VehicleAssignException {
 		Vehicle vehicle = new Vehicle("smallTruck", 5, 150, 200);
 		Trip trip1 = mock(Trip.class);
 		Trip trip2 = mock(Trip.class);

@@ -7,6 +7,9 @@
 	margin: 20px;
 	padding: 20px;
 }
+.underline{
+text-decoration: underline;
+}
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -118,60 +121,62 @@
 
 	<div th:remove="${trip} == null ? all : none">		
 					<form th:object="${trip}" method="post">
-
+					
+						<div class="underline">
 						<h1 align="center"
-							th:text="${create} ? 'Create new Trip' : 'Edit trip'">Title</h1>
+							th:text="${create} ? 'Create new Trip' : 'Edit trip'">Title</h1></div>
 						<br />
 						<div class="form-group" align="center">
 							<div class="col-4" align="center">
-								<label>Customer:</label> <input type="text" class="form-control"
-									th:field="*{customer}" /> <label
+								<label><b>Customer:</b></label> <input type="text" class="form-control"
+									th:field="*{customer}" placeholder="Customer" /> <label
 									th:if="${#fields.hasErrors('customer')}"
 									th:errors="*{customer}">Customer Error</label>
 							</div>
 						</div>
-						<br />
-						<div class="container">
-  						<div class="row">
-  						<div class="col-sm-4">
+						
+						<div class="col">
 						<div class="form-row">
 							<div class="col-2">
-								<label>Animal:</label> <input type="text" class="form-control"
-									th:field="*{animal}" /> <label
+								<label><b>Animal:</b></label> <input type="text" class="form-control"
+									th:field="*{animal}" placeholder="Animal"/> <label
 									th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}">Animal
 									Error </label>
 							</div>
-							<div class="col-2">
-								<label>Width in cm:</label> <input type="number" class="form-control"/> 
-							</div>
-							<div class="col-2">
-								<label>Length in cm:</label> <input type="number" class="form-control"/> 
-							</div>
+							
 							<div class="col-1">
-								<label>Count:</label> <input type="number" min="1" class="form-control"
-									th:field="*{animalCount}" /> <label
+								<label><b>Count:</b></label> <input type="number" min="1" class="form-control"
+									th:field="*{animalCount}" placeholder="Count" /> <label
 									th:if="${#fields.hasErrors('animalCount')}"
 									th:errors="*{animalCount}">Animal Count Error </label>
+					</div>
+					</div>
+					
+					<div class="form-row">
+					<div class="col-2">
+								<label><b>Width in cm:</b></label> <input type="number" class="form-control" placeholder="cm"/> 
 							</div>
-						</div>
-
+							<div class="col-2">
+								<label><b>Length in cm:</b></label> <input type="number" class="form-control" placeholder="cm"/> 
+							</div>
+							</div>
 
 						<div class="form-row">
-							<div class="form-group col-md-4">
-								<label>Date and Time:</label> <input type="datetime-local"
+							<div class="col-2">
+								<label><b>Date and Time:</b></label> <input type="datetime-local"
 									class="form-control" th:field="*{date}" /> <label
 									th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date
 									and Time Error </label>
 							</div>
-							<div class="form-group col-md-1">
-								<label>Estimated</label> <input class="form-control"
-									type="number" min="0" placeholder="h"
+							<div class="col-1">
+								<label><b>Estimated</b></label> <input class="form-control"
+									type="number" min="0" placeholder="hour"
 									th:field="*{estimateHours}" /><label
 									th:if="${#fields.hasErrors('estimateHours')}"
 									th:errors="*{estimateHours}">Estimate Hours Error </label>
 							</div>
-							<div class="form-group col-md-1">
-								<label>time:</label> <input class="form-control" type="number"
+							<div class="col-1">
+								<label><b>time:</b></label> <input class="form-control" type="number"
 									min="0" max="59" placeholder="min"
 									th:field="*{estimateMinutes}" /><label
 									th:if="${#fields.hasErrors('estimateMinutes')}"
@@ -182,7 +187,7 @@
 
 						<div class="form-row">
 							<div class="col-2">
-								<label>Driver:</label> <select th:field="*{driverId}"
+								<label><b>Driver:</b></label> <select th:field="*{driverId}"
 									class="form-control">
 									<option th:value="null"
 										th:selected="*{driverId} == null ? true : false">none</option>
@@ -193,7 +198,7 @@
 									th:errors="*{driverId}">Driver Error </label>
 							</div>
 							<div class="col-2">
-								<label>Vehicle:</label> <select th:field="*{vehicleId}"
+								<label><b>Vehicle:</b></label> <select th:field="*{vehicleId}"
 									class="form-control">
 									<option th:value="null">none</option>
 									<option th:each="vehicle : ${vehicleList}"
@@ -202,23 +207,26 @@
 									th:errors="*{vehicleId}">Vehicle Error </label> <br /> <br />
 							</div>
 						</div>
-						</div>
+						
+						
 
-						<br /> <br />
-						<div class="col">
-						<h5>Start address</h5>
+						
+ 						 <div class="row">
+   						 <div class="col">
+						
+						<h5><ins>Start address</ins></h5>
 						<div class="form-row">
 							<div class="col-4">
-								<label>First name:</label> <input type="text"
-									class="form-control" th:field="*{firstname_1}" /> <label
+								<label><b>First name:</b></label> <input type="text"
+									class="form-control" th:field="*{firstname_1}" placeholder="First name"/> <label
 									th:if="${#fields.hasErrors('firstname_1')}"
 									th:errors="*{firstname_1}">First name_1 Error</label>
 
 							</div>
 
 							<div class="col-4">
-								<label>Last name:</label> <input type="text"
-									class="form-control" th:field="*{lastname_1}" /> <label
+								<label><b>Last name:</b></label> <input type="text"
+									class="form-control" th:field="*{lastname_1}" placeholder="Last name"/> <label
 									th:if="${#fields.hasErrors('lastname_1')}"
 									th:errors="*{lastname_1}">Last name_1 Error</label>
 
@@ -228,16 +236,16 @@
 
 						<div class="form-row">
 							<div class="col-4">
-								<label>Street:</label> <input type="text" class="form-control"
-									id="inputAddress" th:field="*{street_1}" /> <label
+								<label><b>Street:</b></label> <input type="text" class="form-control"
+									id="inputAddress" th:field="*{street_1}" placeholder="Street"/> <label
 									th:if="${#fields.hasErrors('street_1')}"
 									th:errors="*{street_1}">Street_1 Error </label>
 
 							</div>
 
-							<div class="col-1">
-								<label>Number:</label> <input type="text" class="form-control"
-									id="inputAddress" th:field="*{number_1}" /> <label
+							<div class="col-2">
+								<label><b>Number:</b></label> <input type="text" class="form-control"
+									id="inputAddress" th:field="*{number_1}" placeholder="Number"/> <label
 									th:if="${#fields.hasErrors('number_1')}"
 									th:errors="*{number_1}">Number_1 Error </label>
 
@@ -248,38 +256,41 @@
 
 
 						<div class="form-row">
-							<div class="col-4">
-								<label>City:</label> <input type="text" class="form-control"
-									th:field="*{city_1}" /> <label
-									th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
-									Error </label>
-							</div>
-							<div class="col-2">
-								<label>PLZ:</label> <input type="number" min="1000" max="9999" class="form-control"
-									th:field="*{plz_1}" /> <label
+						<div class="col-2">
+								<label><b>PLZ:</b></label> <input type="number" min="1000" max="9999" class="form-control"
+									th:field="*{plz_1}" placeholder="PLZ"/> <label
 									th:if="${#fields.hasErrors('plz_1')}" th:errors="*{plz_1}">PLZ_1
 									Error </label>
 							</div>
+							<div class="col-4">
+								<label><b>City:</b></label> <input type="text" class="form-control"
+									th:field="*{city_1}" placeholder="City"/> <label
+									th:if="${#fields.hasErrors('city_1')}" th:errors="*{city_1}">City_1
+									Error </label>
+							</div>
+							
 						</div>
 						</div>
+						
 
 
 
-						<br /> <br />
+						
 						<div class="col">
-						<h5>End address</h5>
+						<div class="col">
+						<h5><ins>End address</ins></h5>
 						<div class="form-row">
 							<div class="col-4">
-								<label>First name:</label> <input type="text"
-									class="form-control" th:field="*{firstname_2}" /> <label
+								<label><b>First name:</b></label> <input type="text"
+									class="form-control" th:field="*{firstname_2}" placeholder="First name"/> <label
 									th:if="${#fields.hasErrors('firstname_2')}"
 									th:errors="*{firstname_2}">First name_2 Error</label>
 
 							</div>
 
 							<div class="col-4">
-								<label>Last name:</label> <input type="text"
-									class="form-control" th:field="*{lastname_2}" /> <label
+								<label><b>Last name:</b></label> <input type="text"
+									class="form-control" th:field="*{lastname_2}" placeholder="Last name"/> <label
 									th:if="${#fields.hasErrors('lastname_2')}"
 									th:errors="*{lastname_2}">Last name_2 Error</label>
 
@@ -289,16 +300,16 @@
 
 						<div class="form-row">
 							<div class="col-4">
-								<label>Street:</label> <input type="text" class="form-control"
-									th:field="*{street_2}" /> <label
+								<label><b>Street:</b></label> <input type="text" class="form-control"
+									th:field="*{street_2}" placeholder="Street"/> <label
 									th:if="${#fields.hasErrors('street_2')}"
 									th:errors="*{street_2}"> Street_2 Error </label>
 
 							</div>
 
-							<div class="col-1">
-								<label>Number:</label> <input type="text" class="form-control"
-									th:field="*{number_2}" /> <label
+							<div class="col-2">
+								<label><b>Number:</b></label> <input type="text" class="form-control"
+									th:field="*{number_2}" placeholder="Number"/> <label
 									th:if="${#fields.hasErrors('number_2')}"
 									th:errors="*{number_2}"> Number_2 Error </label>
 
@@ -309,29 +320,33 @@
 
 
 						<div class="form-row">
-							<div class="col-4">
-								<label>City:</label> <input type="text" class="form-control"
-									th:field="*{city_2}" /> <label
-									th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
-									Error </label>
-							</div>
-							<div class="col-2">
-								<label>PLZ:</label> <input type="number" min="1000" max="9999" class="form-control"
-									th:field="*{plz_2}" /> <label
+						<div class="col-2">
+								<label><b>PLZ:</b></label> <input type="number" min="1000" max="9999" class="form-control"
+									th:field="*{plz_2}" placeholder="PLZ"/> <label
 									th:if="${#fields.hasErrors('plz_2')}" th:errors="*{plz_2}">PLZ_2
 									Error </label>
 							</div>
+							<div class="col-4">
+								<label><b>City:</b></label> <input type="text" class="form-control"
+									th:field="*{city_2}" placeholder="City"/> <label
+									th:if="${#fields.hasErrors('city_2')}" th:errors="*{city_2}">City_2
+									Error </label>
+							</div>
+							
+						</div>
+						
 						</div>
 						</div>
 						</div>
-						</div>
-
-						<br /> <br />
+						
+						
+					 <br />
 						<button type="submit" class="btn btn-outline-success">Save</button>
 						<a href="/planner/list" class="btn btn-outline-danger">Cancel</a>
-
+						</div>
+						
 					</form>
-				</div>
+			</div>
 	
 </body>
 </html>

@@ -22,6 +22,10 @@ public class Driver {
 	private String number;
 	private int plz;
 	private String city;
+	
+	public Driver() {
+		
+	}
 
 	public Driver(String email, String firstname, String lastname, String street, String number, int plz, String city) {
 		this.setEmail(email);

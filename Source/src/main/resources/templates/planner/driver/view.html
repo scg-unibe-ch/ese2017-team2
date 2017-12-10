@@ -7,7 +7,6 @@
 	margin: 20px;
 	padding: 20px;
 }
-
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -71,11 +70,11 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link"
-					href="/planner/list">Trips <span class="sr-only">(current)</span></a>
+				<li class="nav-item"><a class="nav-link" href="/planner/list">Trips</a>
 				</li>
-				<li class="nav-item"><a class="nav-link"
-					href="/planner/driver/list">Drivers</a></li>
+				<li class="nav-item active"><a class="nav-link" href="#">Drivers
+						<span class="sr-only">(current)</span>
+				</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="/planner/vehicle/list">Vehicles</a></li>
 			</ul>
@@ -119,33 +118,49 @@
 	</div>
 
 	<div th:remove="${driver} == null ? all : none">
-				
-					<form method="post" >
-					
-					<div class="container">
-  					<div class="row">
-    				<div class="col"></div>
-    					<div class="col-6">
 
-						<h1 ><ins>Driver information</ins></h1>
+		<form method="post" class="border-class">
+
+			<div class="container">
+				<div class="row">
+					<div class="col"></div>
+					<div class="col-6">
+
+						<h1>
+							<ins>Driver information</ins>
+						</h1>
 						<br />
-						
-						
-										<div class="row">
-     									 <div class="col-md-4">
-						
-										
-										<p><b>First name: &nbsp;&nbsp;</b></p>
-										<p><b>Last name: &nbsp;&nbsp;</b></p>
-										<p><b>Email: &nbsp;&nbsp;</b></p>
-										<p><b>Street: &nbsp;&nbsp;</b></p>
-										<p><b>Number: &nbsp;&nbsp;</b></p>
-										<p><b>PLZ: &nbsp;&nbsp;</b></p>
-										<p><b>City: &nbsp;&nbsp;</b></p>
-										
-									</div>
-									<div class="col-md-4">
-								
+
+
+						<div class="row">
+							<div class="col-md-4">
+
+
+								<p>
+									<b>First name: &nbsp;&nbsp;</b>
+								</p>
+								<p>
+									<b>Last name: &nbsp;&nbsp;</b>
+								</p>
+								<p>
+									<b>Email: &nbsp;&nbsp;</b>
+								</p>
+								<p>
+									<b>Street: &nbsp;&nbsp;</b>
+								</p>
+								<p>
+									<b>Number: &nbsp;&nbsp;</b>
+								</p>
+								<p>
+									<b>PLZ: &nbsp;&nbsp;</b>
+								</p>
+								<p>
+									<b>City: &nbsp;&nbsp;</b>
+								</p>
+
+							</div>
+							<div class="col-md-4">
+
 								<p th:text="${driver.firstname}" />
 								<p th:text="${driver.lastname}" />
 								<p th:text="${driver.email}" />
@@ -153,16 +168,15 @@
 								<p th:text="${driver.number}" />
 								<p th:text="${driver.plz}" />
 								<p th:text="${driver.city}" />
-								
+
 							</div>
-							<div class="col-md-4">
-							</div>
-							</div>
-						
-						
-					<br/>
-						
-					
+							<div class="col-md-4"></div>
+						</div>
+
+
+						<br />
+
+
 						<button class="btn btn-outline-danger" data-backdrop="static"
 							data-toggle="modal" data-target="#fireModal" type="button">Fire</button>
 
@@ -191,16 +205,16 @@
 
 						<a href="/planner/driver/list"
 							class="btn btn-outline-secondary pull-right">Back</a>
-							
-							</div>
-							<div class="col"></div>
-  							</div>
-							</div>
-							
-					</form>
+
 					</div>
-				
-				
+					<div class="col"></div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+
 
 </body>
 </html>

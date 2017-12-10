@@ -3,9 +3,13 @@
 <head>
 <style>
 .border-class {
-	border: outset;
+	border: none;
 	margin: 20px;
 	padding: 20px;
+}
+
+.underline {
+	text-decoration: underline;
 }
 </style>
 <link rel="stylesheet"
@@ -33,7 +37,60 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
-<body style="background-color: #3f5d20;">
+<body>
+	<div id="carouselExampleControls" class="carousel slide"
+		data-ride="carousel">
+		<div class="carousel-inner" role="listbox"
+			style="height: 350px !important;">
+			<div class="carousel-item active">
+				<img class="d-block w-100" src="/images/d.jpg" alt="First slide" />
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100" src="/images/a.jpg" alt="Second slide" />
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100" src="/images/b.jpg" alt="Third slide" />
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100" src="/images/deer.jpg" alt="Fourth slide" />
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleControls"
+			role="button" data-slide="prev"> <span
+			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleControls"
+			role="button" data-slide="next"> <span
+			class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="sr-only">Next</span>
+		</a>
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand"> <img src="/images/Logo.png" width="30"
+			height="30" class="d-inline-block align-top" alt="" /> AniTrans
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/planner/list">Trips</a>
+				</li>
+				<li class="nav-item"><a class="nav-link"
+					href="/planner/driver/list">Drivers</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="/planner/vehicle/list">Vehicles <span class="sr-only">(current)</span></a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<a href="/user/logout" class="btn btn-outline-danger my-2 my-sm-0">Logout</a>
+			</form>
+		</div>
+	</nav>
+	<br />
 
 	<!-- Hide errorModal if there is no error: -->
 	<div th:remove="${error} == null ? all : none">
@@ -68,77 +125,71 @@
 	</div>
 
 
-	<div th:remove="${vehicle} == null ? all : none"
-		class="row justify-content-center align-right">
-
-		<div class="container">
-			<div class="row">
-				<div class="container" id="formContainer">
-
-					<form th:object="${vehicle}" enctype="multipart/form-data"
-						method="post" class="border-class"
-						style="background-color: white;">
+	<div th:remove="${vehicle} == null ? all : none">
 
 
-						<h1 align="center"
-							th:text="${create} ? 'Create Vehicle' : 'Edit Vehicle'">Edit
-							Vehicle</h1>
 
-						<div class="form-row">
-							<div class="col-4">
-								<label>Name:</label> <input class="form-control" type="text"
-									th:field="*{name}" /> <label
-									th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
-									Error</label>
-							</div>
-							<div class="col-4"></div>
-						</div>
+		<form th:object="${vehicle}" enctype="multipart/form-data"
+			method="post" class="border-class" style="background-color: white;">
 
-						<div class="form-row">
-							<div class="col-2">
-								<label>Width in cm:</label> <input class="form-control"
-									type="number" min="1" th:field="*{width}" /> <label
-									th:if="${#fields.hasErrors('width')}" th:errors="*{width}">Width
-									Error> </label>
-							</div>
-							<div class="col-2">
-								<label>Length in cm:</label> <input class="form-control"
-									type="number" min="1" th:field="*{length}" /> <label
-									th:if="${#fields.hasErrors('length')}" th:errors="*{length}">Length
-									Error> </label>
-							</div>
-						</div>
+			<div class="underline">
+				<h1 align="center"
+					th:text="${create} ? 'Create Vehicle' : 'Edit Vehicle'">Edit
+					Vehicle</h1>
+			</div>
 
-						<div class="form-row">
-							<div class="col-1">
-								<label>Count:</label> <input class="form-control" type="number"
-									min="1" th:field="*{count}" /> <label
-									th:if="${#fields.hasErrors('count')}" th:errors="*{count}">Count
-									Error> </label>
-							</div>
+			<div class="form-row">
+				<div class="col-4">
+					<label><b>Name:</b></label> <input class="form-control" type="text"
+						th:field="*{name}" placeholder="Name" /> <label
+						th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
+						Error</label>
+				</div>
+				<div class="col-4"></div>
+			</div>
 
-							<div class="col-4"></div>
-						</div>
-
-						<div class="form-row">
-							<div class="col-4">
-								<label>Image:</label> <input class="filestyle" type="file"
-									name="file" accept="image/*" /><label
-									th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Image
-									Error> </label>
-							</div>
-							<div class="col-4"></div>
-						</div>
-
-
-						<br /> <br />
-						<button type="submit" class="btn btn-outline-success">Save</button>
-						<a href="/planner/vehicle/list" class="btn btn-outline-danger">Cancel</a>
-
-					</form>
+			<div class="form-row">
+				<div class="col-2">
+					<label><b>Width in cm:</b></label> <input class="form-control"
+						type="number" min="1" th:field="*{width}" placeholder="cm" /> <label
+						th:if="${#fields.hasErrors('width')}" th:errors="*{width}">Width
+						Error> </label>
+				</div>
+				<div class="col-2">
+					<label><b>Length in cm:</b></label> <input class="form-control"
+						type="number" min="1" th:field="*{length}" placeholder="cm" /> <label
+						th:if="${#fields.hasErrors('length')}" th:errors="*{length}">Length
+						Error> </label>
 				</div>
 			</div>
-		</div>
+
+			<div class="form-row">
+				<div class="col-1">
+					<label><b>Count:</b></label> <input class="form-control"
+						type="number" min="1" th:field="*{count}" placeholder="Count" /> <label
+						th:if="${#fields.hasErrors('count')}" th:errors="*{count}">Count
+						Error> </label>
+				</div>
+
+				<div class="col-4"></div>
+			</div>
+
+			<div class="form-row">
+				<div class="col-4">
+					<label><b>Image:</b></label><br /> <input class="filestyle"
+						type="file" name="file" accept="image/*" /><label
+						th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Image
+						Error> </label>
+				</div>
+				<div class="col-4"></div>
+			</div>
+
+
+			<br /> <br />
+			<button type="submit" class="btn btn-outline-success">Save</button>
+			<a href="/planner/vehicle/list" class="btn btn-outline-danger">Cancel</a>
+
+		</form>
 	</div>
 </body>
 </html>

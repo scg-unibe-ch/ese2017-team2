@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 06. Dez 2017 um 20:32
+-- Erstellungszeit: 10. Dez 2017 um 15:27
 -- Server-Version: 10.1.26-MariaDB
 -- PHP-Version: 7.1.9
 
@@ -13,6 +13,10 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Datenbank: `ese`
@@ -50,7 +54,9 @@ INSERT INTO `address` (`id`, `city`, `firstname`, `lastname`, `number`, `plz`, `
 (9, 'Biel', 'Noah', 'Koch', '50a', 2502, 'Gartenstrasse'),
 (10, 'Zürich', 'Karolina', 'Fischer', '1', 8008, 'Krezstrasse'),
 (11, 'Heimberg', 'Larissa', 'Schwarz', '80', 3627, 'Stationsweg'),
-(12, 'Bern', 'Dario', 'Hofer', '3b', 3027, 'Holmackerstrasse');
+(12, 'Bern', 'Dario', 'Hofer', '3b', 3027, 'Holenackerstrasse'),
+(15, 'Genf', 'Lennja', 'Brandt', '6d', 1201, 'Rue de Lyon'),
+(16, 'Solothurn', 'Lucas', 'Herrmann', '7g', 4500, 'Brühlstrasse');
 
 -- --------------------------------------------------------
 
@@ -114,20 +120,24 @@ CREATE TABLE `trip` (
   `feedback` varchar(255) DEFAULT NULL,
   `vehicle_id` bigint(20) DEFAULT NULL,
   `address1_id` bigint(20) DEFAULT NULL,
-  `address2_id` bigint(20) DEFAULT NULL
+  `address2_id` bigint(20) DEFAULT NULL,
+  `estimate_hours` int(11) DEFAULT NULL,
+  `estimate_minutes` int(11) DEFAULT NULL,
+  `used_hours` bigint(20) DEFAULT NULL,
+  `used_minutes` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `trip`
 --
 
-INSERT INTO `trip` (`id`, `animal`, `animal_count`, `customer`, `date`, `trip_state`, `driver_id`, `feedback`, `vehicle_id`, `address1_id`, `address2_id`) VALUES
-(2, 'horse', 2, 'Josef Jäger', NULL, 1, 3, NULL, 2, 1, 2),
-(3, 'cow', 3, 'Lara Keller', '2017-10-29 15:04:00', 4, 6, 'Test test test', NULL, 3, 4),
-(4, 'monkey', 1, 'Sören Lang', '2017-10-22 10:30:00', 3, NULL, NULL, NULL, 5, 6),
-(5, 'sheep', 5, 'Lennja Brandt', '2018-01-10 12:00:00', 0, NULL, NULL, NULL, 7, 8),
-(7, 'deer', 2, 'Karolina Fischer', '2017-10-31 16:15:00', 3, NULL, NULL, NULL, 9, 10),
-(8, 'Cow', 2, 'Dario Steiner', '2017-11-17 10:30:00', 2, 6, NULL, NULL, 11, 12);
+INSERT INTO `trip` (`id`, `animal`, `animal_count`, `customer`, `date`, `trip_state`, `driver_id`, `feedback`, `vehicle_id`, `address1_id`, `address2_id`, `estimate_hours`, `estimate_minutes`, `used_hours`, `used_minutes`) VALUES
+(2, 'horse', 2, 'Josef Jäger', '2017-12-07 00:00:00', 2, 3, NULL, 2, 1, 2, NULL, NULL, NULL, NULL),
+(3, 'cow', 3, 'Lara Keller', '2017-10-29 15:04:00', 4, 6, 'Test test test', NULL, 3, 4, NULL, NULL, NULL, NULL),
+(4, 'monkey', 1, 'Sören Lang', '2017-10-22 10:30:00', 3, NULL, NULL, NULL, 5, 6, NULL, NULL, NULL, NULL),
+(5, 'sheep', 5, 'Lennja Brandt', '2018-01-10 12:00:00', 0, NULL, NULL, NULL, 15, 16, NULL, NULL, NULL, NULL),
+(7, 'deer', 2, 'Karolina Fischer', '2017-10-31 16:15:00', 3, NULL, NULL, NULL, 9, 10, NULL, NULL, NULL, NULL),
+(8, 'Cow', 2, 'Dario Steiner', '2017-11-17 10:30:00', 2, 6, NULL, 1, 11, 12, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -171,7 +181,7 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
-(1, 4, 'Big Transporter', 0, 400, 230, NULL);
+(1, 4, 'Big Transporter', 1, 400, 230, NULL);
 INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
 (2, 3, 'Medium Transporter', 1, 250, 200, NULL);
 INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
@@ -231,25 +241,25 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT für Tabelle `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT für Tabelle `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT für Tabelle `trip`
 --
 ALTER TABLE `trip`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT für Tabelle `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints der exportierten Tabellen
@@ -271,3 +281,7 @@ ALTER TABLE `trip`
   ADD CONSTRAINT `FKrji8htecrp06ao6s7nfubswnr` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`),
   ADD CONSTRAINT `FKsb6ucd0fdxh1inone0o83l6nq` FOREIGN KEY (`id`) REFERENCES `address` (`id`);
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

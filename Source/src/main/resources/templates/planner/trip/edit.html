@@ -214,7 +214,33 @@
 							th:errors="*{animalLength}">Animal Length Error </label>
 					</div>
 
-					<div>
+
+				</div>
+
+
+				<div class="form-row">
+					<div class="col-2">
+						<label><b>Driver:</b></label> <select th:field="*{driverId}"
+							class="form-control">
+							<option th:value="null"
+								th:selected="*{driverId} == null ? true : false">none</option>
+							<option th:each="d : ${driverList}" th:value="${d.id}"
+								th:text="${d.name}"
+								th:selected=" (*{driverId} != null) ? (${d.id} == *{driverId} ? true : false) : false"></option>
+						</select> <label th:if="${#fields.hasErrors('driverId')}"
+							th:errors="*{driverId}">Driver Error </label>
+					</div>
+					<div class="col-2">
+						<label><b>Vehicle:</b></label> <select th:field="*{vehicleId}"
+							class="form-control">
+							<option th:value="null">none</option>
+							<option th:each="vehicle : ${vehicleList}"
+								th:value="${vehicle.id}" th:text="${vehicle.name}"></option>
+						</select> <label th:if="${#fields.hasErrors('vehicleId')}"
+							th:errors="*{vehicleId}">Vehicle Error </label> <br /> <br />
+					</div>
+					<div class="col-1">
+						<label>&nbsp;</label>
 						<button type="submit" name="action" value="suggest"
 							class="btn btn-outline-success">Suggest Vehicle</button>
 					</div>
@@ -244,32 +270,7 @@
 				</div>
 
 
-				<div class="form-row">
-					<div class="col-2">
-						<label><b>Driver:</b></label> <select th:field="*{driverId}"
-							class="form-control">
-							<option th:value="null"
-								th:selected="*{driverId} == null ? true : false">none</option>
-							<option th:each="d : ${driverList}" th:value="${d.id}"
-								th:text="${d.name}"
-								th:selected=" (*{driverId} != null) ? (${d.id} == *{driverId} ? true : false) : false"></option>
-						</select> <label th:if="${#fields.hasErrors('driverId')}"
-							th:errors="*{driverId}">Driver Error </label>
-					</div>
-					<div class="col-2">
-						<label><b>Vehicle:</b></label> <select th:field="*{vehicleId}"
-							class="form-control">
-							<option th:value="null">none</option>
-							<option th:each="vehicle : ${vehicleList}"
-								th:value="${vehicle.id}" th:text="${vehicle.name}"></option>
-						</select> <label th:if="${#fields.hasErrors('vehicleId')}"
-							th:errors="*{vehicleId}">Vehicle Error </label> <br /> <br />
-					</div>
-				</div>
-
-
-
-
+				<br /> <br />
 				<div class="row">
 					<div class="col">
 

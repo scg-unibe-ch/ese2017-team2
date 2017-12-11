@@ -84,6 +84,7 @@ public class Trip {
 	@Column(name = "used_minutes")
 	private Long usedMinutes;
 
+	@Column(name = "feedback")
 	private String feedback;
 
 	public Trip(String customer, String animal, int animalLength, int animalWidth, int animalCount, Address address1, Address address2, Date date) {

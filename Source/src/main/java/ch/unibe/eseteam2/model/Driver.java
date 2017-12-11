@@ -1,30 +1,41 @@
 package ch.unibe.eseteam2.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "driver")
 public class Driver {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Long id;
 
+	@Column(name = "email")
 	private String email;
 
-	//TODO use address instead
-	
+	// TODO use address instead
+
+	@Column(name = "firstname")
 	private String firstname;
+	@Column(name = "lastname")
 	private String lastname;
+	@Column(name = "street")
 	private String street;
+	@Column(name = "number")
 	private String number;
+	@Column(name = "plz")
 	private int plz;
+	@Column(name = "city")
 	private String city;
-	
+
 	public Driver() {
-		
+
 	}
 
 	public Driver(String email, String firstname, String lastname, String street, String number, int plz, String city) {

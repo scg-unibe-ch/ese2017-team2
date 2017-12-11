@@ -17,25 +17,19 @@ public class VehicleService {
 	private TripService tripService;
 
 	public Vehicle findBestVehicle(Trip trip, int animaLength, int animalWidth, int animalCount) {
-		Vehicle best = null;
-		int maxCount = 0;
-		int count;
-		for (Vehicle current : findAvailableVehicles(trip)) {
-			count = current.getMaxAnimals(animaLength, animalWidth);
-			if (count > maxCount) {
-				maxCount = count;
-				best = current;
-			}
-		}
-
-		return best;
+		return findBest(findAvailableVehicles(trip), animaLength, animalWidth, animalCount);
 	}
 
 	public Vehicle findBestVehicle(int animaLength, int animalWidth, int animalCount) {
+		return findBest(findAvailableVehicles(), animaLength, animalWidth, animalCount);
+	}
+
+	private Vehicle findBest(Iterable<Vehicle> iter, int animaLength, int animalWidth, int animalCount) {
 		Vehicle best = null;
 		int bestCount = 0;
 		int count;
-		for (Vehicle current : findAvailableVehicles()) {
+		
+		for (Vehicle current : iter) {
 			count = current.getMaxAnimals(animaLength, animalWidth);
 
 			if (count >= animalCount) {

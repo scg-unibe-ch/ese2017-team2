@@ -34,8 +34,10 @@ public class Driver {
 	@Column(name = "city")
 	private String city;
 
-	public Driver() {
+	@Column(name = "active")
+	private Boolean active;
 
+	public Driver() {
 	}
 
 	public Driver(String email, String firstname, String lastname, String street, String number, int plz, String city) {
@@ -46,6 +48,7 @@ public class Driver {
 		this.setNumber(number);
 		this.setPlz(plz);
 		this.setCity(city);
+		this.setActive(true);
 	}
 
 	public Long getId() {
@@ -114,6 +117,14 @@ public class Driver {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public Boolean isActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 }

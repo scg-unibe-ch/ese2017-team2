@@ -23,7 +23,7 @@ public class PlannerDriverController {
 
 	@GetMapping("/list")
 	private String listDrivers(Model model) {
-		model.addAttribute("driverList", driverService.findDrivers());
+		model.addAttribute("driverList", driverService.findActiveDrivers());
 		return "/planner/driver/list";
 	}
 
@@ -47,7 +47,7 @@ public class PlannerDriverController {
 
 		}
 
-		model.addAttribute("driverList", driverService.findDrivers());
+		model.addAttribute("driverList", driverService.findActiveDrivers());
 		return "/planner/driver/list";
 	}
 

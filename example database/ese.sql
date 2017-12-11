@@ -92,7 +92,8 @@ CREATE TABLE `driver` (
   `lastname` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
   `plz` int(11) NOT NULL,
-  `street` varchar(255) DEFAULT NULL
+  `street` varchar(255) DEFAULT NULL,
+  `active` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -100,8 +101,8 @@ CREATE TABLE `driver` (
 --
 
 INSERT INTO `driver` (`id`, `email`, `city`, `firstname`, `lastname`, `number`, `plz`, `street`) VALUES
-(3, 'kai.wagner@hotmail.com', 'Bern', 'Kai', 'Wagner', '12a', 3001, 'Bahnstrasse'),
-(6, 'k.becker@gmail.com', 'Basel', 'Krisina', 'Becker', '12b', 4001, 'Bachweg');
+(3, 'kai.wagner@hotmail.com', 'Bern', 'Kai', 'Wagner', '12a', 3001, 'Bahnstrasse', b'1111111111111111111111111111111'),
+(6, 'k.becker@gmail.com', 'Basel', 'Krisina', 'Becker', '12b', 4001, 'Bachweg', b'1111111111111111111111111111111');
 
 -- --------------------------------------------------------
 

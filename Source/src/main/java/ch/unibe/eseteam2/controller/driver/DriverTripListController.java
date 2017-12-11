@@ -16,7 +16,7 @@ import ch.unibe.eseteam2.service.TripService;
 
 @Controller
 @RequestMapping("/driver")
-public class DriverListController {
+public class DriverTripListController {
 	@Autowired
 	private TripService tripService;
 
@@ -74,7 +74,8 @@ public class DriverListController {
 
 	private Model addTripLists(Model model) {
 
-		Driver driver = driverService.findDriver(userSecurityService.getAuthenticatedUser().getUsername());
+		String email = userSecurityService.getAuthenticatedUser().getUsername();
+		Driver driver = driverService.findActiveDriver(email);
 
 		model.addAttribute("tripsAssigned", tripService.findTrips(driver, TripState.assigned));
 		model.addAttribute("tripsActive", tripService.findTrips(driver, TripState.active));

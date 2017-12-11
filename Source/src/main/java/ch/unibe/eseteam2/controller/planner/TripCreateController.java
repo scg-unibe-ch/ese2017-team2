@@ -147,7 +147,7 @@ public class TripCreateController {
 
 	private void addModelAttributes(Model model) {
 		model.addAttribute("create", true);
-		model.addAttribute("driverList", driverService.findDrivers());
+		model.addAttribute("driverList", driverService.findActiveDrivers());
 		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
 	}
 
@@ -202,7 +202,7 @@ public class TripCreateController {
 		if (driverId == null) {
 			return;
 		}
-		Driver driver = driverService.findDriver(driverId);
+		Driver driver = driverService.findActiveDriver(driverId);
 		if (driver == null) {
 			bindingResult.addError(new FieldError("trip", "driverId", "Could not find selected driver in the database."));
 			return;

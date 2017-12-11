@@ -20,8 +20,16 @@ public class DriverService {
 	@Autowired
 	private UserDetailsManager userDetailsManager;
 
+	public Driver findActiveDriver(Long id) {
+		return driverRepository.findByIdAndActive(id, true);
+	}
+
 	public Driver findDriver(Long id) {
 		return driverRepository.findOne(id);
+	}
+
+	public Iterable<Driver> findActiveDrivers() {
+		return driverRepository.findByActive(true);
 	}
 
 	public Iterable<Driver> findDrivers() {
@@ -32,20 +40,23 @@ public class DriverService {
 		if (tripService.findTrips(driver, TripState.active).iterator().hasNext()) {
 			throw new Exception("This driver is assigned to an active trip and can not be fired.");
 		}
-		//TODO don't remove driver from trips in successful state 
+		// TODO don't remove driver from trips in successful state
 		for (Trip trip : tripService.findTrips(driver)) {
-			trip.setDriver(null);
-			tripService.save(trip);
+			if (trip.getTripState() != TripState.successful) {
+				trip.setDriver(null);
+				tripService.save(trip);
+			}
 		}
 		userDetailsManager.deleteUser(driver.getEmail());
-		driverRepository.delete(driver);
+		driver.setActive(false);
+		driverRepository.save(driver);
 	}
 
 	public void save(Driver driver) {
 		driverRepository.save(driver);
 	}
 
-	public Driver findDriver(String email) {
-		return driverRepository.findByEmail(email);
+	public Driver findActiveDriver(String email) {
+		return driverRepository.findByEmailAndActive(email, true);
 	}
 }

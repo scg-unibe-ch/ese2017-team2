@@ -186,7 +186,7 @@ public class TripEditController {
 	private void addModelAttributes(Model model, Trip trip) {
 		model.addAttribute("create", false);
 		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles(trip));
-		model.addAttribute("driverList", driverService.findDrivers());
+		model.addAttribute("driverList", driverService.findActiveDrivers());
 	}
 
 	private void updateTrip(Trip trip, TripEditForm form, BindingResult bindingResult, Model model, boolean checkIfAllAnimalsFit) {
@@ -253,7 +253,7 @@ public class TripEditController {
 		if (driverId == null) {
 			return;
 		}
-		Driver driver = driverService.findDriver(driverId);
+		Driver driver = driverService.findActiveDriver(driverId);
 		if (driver == null) {
 			bindingResult.addError(new FieldError("trip", "driver", "Could not find selected driver in the database."));
 			return;

@@ -40,7 +40,6 @@ public class DriverService {
 		if (tripService.findTrips(driver, TripState.active).iterator().hasNext()) {
 			throw new Exception("This driver is assigned to an active trip and can not be fired.");
 		}
-		// TODO don't remove driver from trips in successful state
 		for (Trip trip : tripService.findTrips(driver)) {
 			if (trip.getTripState() != TripState.successful) {
 				trip.setDriver(null);

@@ -32,7 +32,7 @@ public class VehicleEditController {
 
 	@GetMapping("/edit/{id}")
 	public String getMappingEdit(@PathVariable Long id, Model model) {
-		Vehicle vehicle = this.vehicleService.findVehicle(id);
+		Vehicle vehicle = this.vehicleService.findActiveVehicle(id);
 
 		if (vehicle != null) {
 			model.addAttribute("vehicle", new VehicleEditForm(vehicle));
@@ -48,7 +48,7 @@ public class VehicleEditController {
 	public String editVehicle(@RequestParam(name = "file", required = false) MultipartFile file, @Valid @ModelAttribute("vehicle") VehicleEditForm form, BindingResult bindingResult,
 			@PathVariable Long id, Model model, RedirectAttributes redirectAttrs) {
 
-		Vehicle vehicle = this.vehicleService.findVehicle(id);
+		Vehicle vehicle = this.vehicleService.findActiveVehicle(id);
 
 		if (vehicle == null) {
 			model.addAttribute("error", "Vehicle can not be found in database.");

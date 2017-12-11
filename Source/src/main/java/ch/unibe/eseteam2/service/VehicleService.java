@@ -84,7 +84,7 @@ public class VehicleService {
 	}
 
 	public Iterable<Vehicle> findVehicles() {
-		return vehicleRepository.findAll();
+		return vehicleRepository.findByActive(true);
 	}
 
 	public Iterable<Vehicle> findAvailableVehicles() {
@@ -99,8 +99,8 @@ public class VehicleService {
 		return findAvailableVehicles();
 	}
 
-	public Vehicle findVehicle(Long vehicleId) {
-		return vehicleRepository.findOne(vehicleId);
+	public Vehicle findActiveVehicle(Long vehicleId) {
+		return vehicleRepository.findByIdAndActive(vehicleId, true);
 	}
 
 	public void save(Vehicle vehicle) {
@@ -112,12 +112,14 @@ public class VehicleService {
 			throw new Exception("This vehicle is assigned to an active trip and can not be fired.");
 		}
 
-		// TODO don't remove vehicle from trips in successful state
 		for (Trip trip : tripService.findTrips(vehicle)) {
-			trip.setVehicle(null);
-			tripService.save(trip);
+			if (trip.getTripState() != TripState.successful) {
+				trip.setVehicle(null);
+				tripService.save(trip);
+			}
 		}
 
-		vehicleRepository.delete(vehicle);
+		vehicle.setActive(false);
+		vehicleRepository.save(vehicle);
 	}
 }

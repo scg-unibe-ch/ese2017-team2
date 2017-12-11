@@ -64,7 +64,7 @@ public class VehicleListController {
 
 	@RequestMapping(path = "/image/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 	public ResponseEntity<byte[]> getVehicleImage(@PathVariable("id") Long id, HttpServletResponse response) {
-		Vehicle vehicle = vehicleService.findVehicle(id);
+		Vehicle vehicle = vehicleService.findActiveVehicle(id);
 		if (vehicle != null) {
 			return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(vehicle.getImageData());
 		}
@@ -81,7 +81,7 @@ public class VehicleListController {
 			throw new Exception("No vehicle selected.");
 		}
 
-		Vehicle vehicle = this.vehicleService.findVehicle(id);
+		Vehicle vehicle = this.vehicleService.findActiveVehicle(id);
 
 		if (vehicle == null) {
 			throw new Exception("Vehicle could not be found in database.");
@@ -95,7 +95,7 @@ public class VehicleListController {
 			throw new Exception("No vehicle selected.");
 		}
 
-		Vehicle vehicle = vehicleService.findVehicle(id);
+		Vehicle vehicle = vehicleService.findActiveVehicle(id);
 
 		if (vehicle == null) {
 			throw new Exception("Vehicle could not be found in database.");

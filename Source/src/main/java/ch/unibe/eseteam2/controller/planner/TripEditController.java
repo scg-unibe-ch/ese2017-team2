@@ -224,7 +224,7 @@ public class TripEditController {
 			}
 			return;
 		}
-		Vehicle vehicle = vehicleService.findVehicle(vehicleId);
+		Vehicle vehicle = vehicleService.findActiveVehicle(vehicleId);
 		if (vehicle == null) {
 			bindingResult.addError(new FieldError("trip", "vehicle", "Could not find selected vehicle in the database."));
 			return;

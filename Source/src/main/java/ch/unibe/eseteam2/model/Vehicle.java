@@ -51,6 +51,9 @@ public class Vehicle {
 	@Column(name = "image_data")
 	private byte[] imageData;
 
+	@Column(name = "active")
+	private Boolean active;
+
 	public Vehicle() {
 
 	}
@@ -62,6 +65,7 @@ public class Vehicle {
 
 		this.setWidth(width);
 		this.setLength(length);
+		this.setActive(true);
 	}
 
 	public int getMaxAnimals(int animalLength, int animalWidth) {
@@ -196,6 +200,14 @@ public class Vehicle {
 
 	public void setImageData(byte[] imageData) {
 		this.imageData = imageData;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 }

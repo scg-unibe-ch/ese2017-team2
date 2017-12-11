@@ -173,7 +173,7 @@ public class TripCreateController {
 		if (vehicleId == null) {
 			return;
 		}
-		Vehicle vehicle = vehicleService.findVehicle(vehicleId);
+		Vehicle vehicle = vehicleService.findActiveVehicle(vehicleId);
 		if (vehicle == null) {
 			bindingResult.addError(new FieldError("trip", "vehicleId", "Could not find selected vehicle in the database."));
 			return;

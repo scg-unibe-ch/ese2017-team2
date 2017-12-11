@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 10. Dez 2017 um 15:27
+-- Erstellungszeit: 11. Dez 2017 um 21:52
 -- Server-Version: 10.1.26-MariaDB
 -- PHP-Version: 7.1.9
 
@@ -56,7 +56,33 @@ INSERT INTO `address` (`id`, `city`, `firstname`, `lastname`, `number`, `plz`, `
 (11, 'Heimberg', 'Larissa', 'Schwarz', '80', 3627, 'Stationsweg'),
 (12, 'Bern', 'Dario', 'Hofer', '3b', 3027, 'Holenackerstrasse'),
 (15, 'Genf', 'Lennja', 'Brandt', '6d', 1201, 'Rue de Lyon'),
-(16, 'Solothurn', 'Lucas', 'Herrmann', '7g', 4500, 'Brühlstrasse');
+(16, 'Solothurn', 'Lucas', 'Herrmann', '7g', 4500, 'Brühlstrasse'),
+(17, 'Genf', 'Lennja', 'Brandt', '6d', 1201, 'Rue de Lyon'),
+(18, 'Solothurn', 'Lucas', 'Herrmann', '7g', 4500, 'Brühlstrasse'),
+(23, 'Genf', 'Lennja', 'Brandt', '6d', 1201, 'Rue de Lyon'),
+(24, 'Solothurn', 'Lucas', 'Herrmann', '7g', 4500, 'Brühlstrasse');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `animal`
+--
+
+CREATE TABLE `animal` (
+  `name` varchar(255) NOT NULL,
+  `length` int(11) DEFAULT NULL,
+  `width` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `animal`
+--
+
+INSERT INTO `animal` (`name`, `length`, `width`) VALUES
+('fsdklöaj', 100, 100),
+('ljfkas', 100, 100),
+('lkjfsaö', 100, 100),
+('sheep', 100, 100);
 
 -- --------------------------------------------------------
 
@@ -100,7 +126,7 @@ CREATE TABLE `driver` (
 -- Daten für Tabelle `driver`
 --
 
-INSERT INTO `driver` (`id`, `email`, `city`, `firstname`, `lastname`, `number`, `plz`, `street`) VALUES
+INSERT INTO `driver` (`id`, `email`, `city`, `firstname`, `lastname`, `number`, `plz`, `street`, `active`) VALUES
 (3, 'kai.wagner@hotmail.com', 'Bern', 'Kai', 'Wagner', '12a', 3001, 'Bahnstrasse', b'1111111111111111111111111111111'),
 (6, 'k.becker@gmail.com', 'Basel', 'Krisina', 'Becker', '12b', 4001, 'Bachweg', b'1111111111111111111111111111111');
 
@@ -125,20 +151,22 @@ CREATE TABLE `trip` (
   `estimate_hours` int(11) DEFAULT NULL,
   `estimate_minutes` int(11) DEFAULT NULL,
   `used_hours` bigint(20) DEFAULT NULL,
-  `used_minutes` bigint(20) DEFAULT NULL
+  `used_minutes` bigint(20) DEFAULT NULL,
+  `animal_length` int(11) NOT NULL,
+  `animal_width` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `trip`
 --
 
-INSERT INTO `trip` (`id`, `animal`, `animal_count`, `customer`, `date`, `trip_state`, `driver_id`, `feedback`, `vehicle_id`, `address1_id`, `address2_id`, `estimate_hours`, `estimate_minutes`, `used_hours`, `used_minutes`) VALUES
-(2, 'horse', 2, 'Josef Jäger', '2017-12-07 00:00:00', 2, 3, NULL, 2, 1, 2, NULL, NULL, NULL, NULL),
-(3, 'cow', 3, 'Lara Keller', '2017-10-29 15:04:00', 4, 6, 'Test test test', NULL, 3, 4, NULL, NULL, NULL, NULL),
-(4, 'monkey', 1, 'Sören Lang', '2017-10-22 10:30:00', 3, NULL, NULL, NULL, 5, 6, NULL, NULL, NULL, NULL),
-(5, 'sheep', 5, 'Lennja Brandt', '2018-01-10 12:00:00', 0, NULL, NULL, NULL, 15, 16, NULL, NULL, NULL, NULL),
-(7, 'deer', 2, 'Karolina Fischer', '2017-10-31 16:15:00', 3, NULL, NULL, NULL, 9, 10, NULL, NULL, NULL, NULL),
-(8, 'Cow', 2, 'Dario Steiner', '2017-11-17 10:30:00', 2, 6, NULL, 1, 11, 12, NULL, NULL, NULL, NULL);
+INSERT INTO `trip` (`id`, `animal`, `animal_count`, `customer`, `date`, `trip_state`, `driver_id`, `feedback`, `vehicle_id`, `address1_id`, `address2_id`, `estimate_hours`, `estimate_minutes`, `used_hours`, `used_minutes`, `animal_length`, `animal_width`) VALUES
+(2, 'horse', 2, 'Josef Jäger', '2017-12-07 00:00:00', 2, 3, NULL, 2, 1, 2, NULL, NULL, NULL, NULL, 150, 100),
+(3, 'cow', 3, 'Lara Keller', '2017-10-29 15:04:00', 4, 6, 'Test test test', 1, 3, 4, NULL, NULL, NULL, NULL, 140, 90),
+(4, 'monkey', 1, 'Sören Lang', '2017-10-22 10:30:00', 3, NULL, NULL, NULL, 5, 6, NULL, NULL, NULL, NULL, 50, 50),
+(5, 'sheep', 5, 'Lennja Brandt', '2018-01-10 12:00:00', 0, NULL, NULL, NULL, 23, 24, NULL, NULL, NULL, NULL, 100, 100),
+(7, 'deer', 2, 'Karolina Fischer', '2017-10-31 16:15:00', 3, NULL, NULL, NULL, 9, 10, NULL, NULL, NULL, NULL, 90, 60),
+(8, 'cow', 2, 'Dario Steiner', '2017-11-17 10:30:00', 2, 6, NULL, 1, 11, 12, NULL, NULL, NULL, NULL, 140, 90);
 
 -- --------------------------------------------------------
 
@@ -174,21 +202,22 @@ CREATE TABLE `vehicle` (
   `used` int(11) NOT NULL,
   `length` int(11) NOT NULL,
   `width` int(11) NOT NULL,
-  `image_data` longblob
+  `image_data` longblob,
+  `active` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `vehicle`
 --
 
-INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
-(1, 4, 'Big Transporter', 1, 400, 230, NULL);
-INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
-(2, 3, 'Medium Transporter', 1, 250, 200, NULL);
-INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
-(3, 5, 'Small Transporter', 0, 120, 100, NULL);
-INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`) VALUES
-(4, 7, 'Tiny Transporter', 0, 50, 50, NULL);
+INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`, `active`) VALUES
+(1, 4, 'Big Transporter', 1, 400, 230, NULL, b'1111111111111111111111111111111');
+INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`, `active`) VALUES
+(2, 3, 'Medium Transporter', 1, 250, 200, NULL, b'1111111111111111111111111111111');
+INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`, `active`) VALUES
+(3, 5, 'Small Transporter', 0, 120, 100, NULL, b'1111111111111111111111111111111');
+INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_data`, `active`) VALUES
+(4, 7, 'Tiny Transporter', 0, 50, 50, NULL, b'1111111111111111111111111111111');
 
 --
 -- Indizes der exportierten Tabellen
@@ -199,6 +228,12 @@ INSERT INTO `vehicle` (`id`, `count`, `name`, `used`, `length`, `width`, `image_
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `animal`
+--
+ALTER TABLE `animal`
+  ADD PRIMARY KEY (`name`);
 
 --
 -- Indizes für die Tabelle `authorities`
@@ -242,7 +277,7 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT für Tabelle `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT für Tabelle `driver`
@@ -254,13 +289,13 @@ ALTER TABLE `driver`
 -- AUTO_INCREMENT für Tabelle `trip`
 --
 ALTER TABLE `trip`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT für Tabelle `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints der exportierten Tabellen

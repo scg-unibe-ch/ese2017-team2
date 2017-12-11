@@ -3,7 +3,7 @@
 <head>
 <style>
 .border-class {
-	border: none;
+	border: outset;
 	margin: 20px;
 	padding: 20px;
 }
@@ -121,12 +121,12 @@
 	<div th:remove="${trip} == null ? all : none">
 
 		<form class="border-class">
+		<a href="/planner/list" class="close">X</a>
 			<h1 align="center">
 				<ins>Trip information</ins>
 			</h1>
 			<br />
-
-
+						
 			<div class="row">
 				<div class="col-sm-4">
 					<h5>
@@ -149,6 +149,15 @@
 							<p>
 								<b>Length: &nbsp;&nbsp;</b>
 							</p>
+
+							<p>
+								<b>Driver: &nbsp;&nbsp;</b>
+							</p>
+
+							<p>
+								<b>Vehicle: &nbsp;&nbsp;</b>
+							</p>
+
 							<p>
 								<b>Date: &nbsp;&nbsp;</b>
 							</p>
@@ -158,12 +167,7 @@
 							<p>
 								<b>Used Time: &nbsp;&nbsp;</b>
 							</p>
-							<p>
-								<b>Driver: &nbsp;&nbsp;</b>
-							</p>
-							<p>
-								<b>Vehicle: &nbsp;&nbsp;</b>
-							</p>
+
 							<p>
 								<b>State: &nbsp;&nbsp;</b>
 							</p>
@@ -185,6 +189,10 @@
 							<p
 								th:text='${trip.animalLength != null} ? ${trip.animalLength} : not set' />
 
+							<p th:text="${trip.driver != null} ?  ${trip.driver} : 'not set'" />
+							<p
+								th:text="${trip.vehicle != null} ? ${trip.vehicle} : 'not set'" />
+
 
 							<p th:text="${trip.date != null} ?  ${trip.date} : 'not set'" />
 
@@ -192,9 +200,7 @@
 								th:text="${trip.estimate != null} ?  ${trip.estimate} : 'not set'" />
 							<p th:text="${trip.used != null} ?  ${trip.used} : 'not set'" />
 
-							<p th:text="${trip.driver != null} ?  ${trip.driver} : 'not set'" />
-							<p
-								th:text="${trip.vehicle != null} ? ${trip.vehicle} : 'not set'" />
+
 							<p th:text="${trip.tripState}" />
 							<p
 								th:text="${trip.feedback != null} ? ${trip.feedback} : 'not set'" />
@@ -243,6 +249,18 @@
 							<p th:text="${trip.city_1 != null} ?  ${trip.city_1} : 'not set'" />
 						</div>
 					</div>
+					
+					<iframe width="600" height="450" frameborder="0" style="border: 0"
+				allowfullscreen="allowfullscreen"
+				th:src="@{https://www.google.com/maps/embed/v1/directions( 
+								key = 'AIzaSyD2RAChUrA-HRcSdeyZcIHK4ryu7trN8dU', 
+								origin = 'Uni+Engehalde,Neubrückstrasse+10,3012+Bern', 
+								waypoints = |${trip.street_1} ${trip.number_1} ${trip.plz_1} ${trip.city_1} Schweiz|,
+								destination = |${trip.street_2} ${trip.number_2} ${trip.plz_2} ${trip.city_2} Schweiz|,
+								mode = 'driving'
+							)}">
+			</iframe>
+										
 				</div>
 
 				<div class="col-sm-4">
@@ -289,22 +307,12 @@
 			</div>
 
 
-			<iframe width="600" height="450" frameborder="0" style="border: 0"
-				allowfullscreen="allowfullscreen"
-				th:src="@{https://www.google.com/maps/embed/v1/directions( 
-								key = 'AIzaSyD2RAChUrA-HRcSdeyZcIHK4ryu7trN8dU', 
-								origin = 'Uni+Engehalde,Neubrückstrasse+10,3012+Bern', 
-								waypoints = |${trip.street_1} ${trip.number_1} ${trip.plz_1} ${trip.city_1} Schweiz|,
-								destination = |${trip.street_2} ${trip.number_2} ${trip.plz_2} ${trip.city_2} Schweiz|,
-								mode = 'driving'
-							)}">
-			</iframe>
+			
 
 			<div class="text-right">
-				<a href="/planner/list" class="btn btn-outline-secondary pull-right">Back</a>
+				
 			</div>
 		</form>
 	</div>
-	s
 </body>
 </html>

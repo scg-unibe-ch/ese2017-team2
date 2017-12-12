@@ -149,6 +149,7 @@ public class TripCreateController {
 		model.addAttribute("create", true);
 		model.addAttribute("driverList", driverService.findActiveDrivers());
 		model.addAttribute("vehicleList", vehicleService.findAvailableVehicles());
+		model.addAttribute("animalList", animalService.findAnimals());
 	}
 
 	private Trip createTrip(TripEditForm form, BindingResult bindingResult, Model model, boolean checkIfAllAnimalsFit) {
